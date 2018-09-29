@@ -19,27 +19,31 @@ void prompt(WINDOW* window, unsigned int x, unsigned int y, const char* str) {
 }
 
 int main() {
-	init();
+	// viewManager.presentView(authenticationViewIdentifier);
+	// viewManager.refreshView(authenticationViewIdentifier);
 
-	WINDOW* loginWindow = newwin(10, 36,( (screenHeight / 2) - 5) - 10, (screenWidth / 2) - 13);
+	viewManager.presentView(playerViewIdentifier);
+	viewManager.refreshView(playerViewIdentifier);
 
-	box(loginWindow, 0, 0);
+	// init();
 
-	getmaxyx(loginWindow, loginWindowHeight, loginWindowWidth);
+	// WINDOW* loginWindow = newwin(10, 36,( (screenHeight / 2) - 5) - 10, (screenWidth / 2) - 13);
 
-	prompt(loginWindow, (loginWindowWidth / 2) - 4, 0, loginPrompt);
-	prompt(loginWindow, loginWindowWidth / 10, loginWindowHeight / 5, emailPrompt);
-	wgetstr(loginWindow, email);
+	// box(loginWindow, 0, 0);
 
-	prompt(loginWindow, loginWindowWidth / 10, loginWindowHeight / 4, passwordPrompt);
-	wgetstr(loginWindow, password);
+	// getmaxyx(loginWindow, loginWindowHeight, loginWindowWidth);
 
-	refresh();
-	wrefresh(loginWindow);
+	// prompt(loginWindow, (loginWindowWidth / 2) - 4, 0, loginPrompt);
+	// prompt(loginWindow, loginWindowWidth / 10, loginWindowHeight / 5, emailPrompt);
+	// // wgetstr(loginWindow, email);
 
-	deinit();
+	// prompt(loginWindow, loginWindowWidth / 10, loginWindowHeight / 4, passwordPrompt);
+	// // wgetstr(loginWindow, password);
 
-	SpotifyAPI sapi = SpotifyAPI();
+	// refresh();
+	// wrefresh(loginWindow);
+
+	// deinit();
 
 	return 0;
 }

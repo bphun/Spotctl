@@ -4,9 +4,11 @@
 #include <iostream>
 #include <ncurses.h>
 #include <string>
-// #include <spotify-api-plusplus/SpotifyAPI.h>
-#include "../include/spotifyapi/SpotifyAPI.h"
+
 #include "Constants.h"
+#include "Terminal_UI/ViewManager.h"
+
+ViewManager viewManager;
 
 unsigned int screenWidth;
 unsigned int screenHeight;

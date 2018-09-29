@@ -1,5 +1,5 @@
 SRCS:=src/spotifycli
-EXTRA_SRCS:= src/*.cpp include/spotifyapi/Models/*.cpp include/spotifyapi/SpotifyAPI.cpp
+EXTRA_SRCS:= src/*.cpp src/api/*.cpp src/Terminal_UI/*.cpp
 CFLAGS:= -c -g -Wall -std=c++11
 INCLUDE:=-I. -lncurses
 
