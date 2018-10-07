@@ -1,5 +1,6 @@
-#include "ViewManager.h"
 #include <stdio.h>
+
+#include "ViewManager.h"
 
 ViewManager::ViewManager() {
 	init();
@@ -25,13 +26,14 @@ void ViewManager::deinit() {
 }
 
 void ViewManager::presentView(std::string viewIdentifier) {
-	clear();
+	// clear();
 	if (views.find(viewIdentifier) == views.end()) {
-		if (viewIdentifier.compare(authenticationViewIdentifier) == 0) {
-			views[viewIdentifier] = new AuthenticationView(terminalScreenWidth, terminalScreenHeight);
-		} else if (viewIdentifier.compare(playerViewIdentifier) == 0) {
+		/*if (viewIdentifier.compare(authenticationViewIdentifier) == 0) {
+			// views[viewIdentifier] = new AuthenticationView(terminalScreenWidth, terminalScreenHeight);
+		} else*/ 
+		if (viewIdentifier.compare(playerViewIdentifier) == 0) {
 			views[viewIdentifier] = new PlayerView(terminalScreenWidth, terminalScreenHeight);
-		}	/*	Add in statements for other views 	*/
+		}
 	}
 	views[viewIdentifier]->initialize();
 	refresh();

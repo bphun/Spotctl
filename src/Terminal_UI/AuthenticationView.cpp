@@ -3,19 +3,17 @@
 
 class AuthenticationView: public View {
 private:
-	// int loginWindowWidth, authenticationViewInputFrameHeight;
-	// string email, password;
+
 	char email[64];
 	char password[64];
-	// int terminalScreenWidth, terminalScreenHeight;
 
 	bool userAuthenticated;
 
 	void presentEmailView() {
-		box(window, 0, 0);
-		prompt(window, (authenticationViewInputFrameWidth / 2) - 4, 0, loginPrompt);
-		prompt(window, authenticationViewInputFrameWidth / 10, authenticationViewInputFrameHeight / 5, emailPrompt);
-		wgetstr(window, email);
+		box(parentWindow, 0, 0);
+		prompt(parentWindow, (authenticationViewInputFrameWidth / 2) - 4, 0, loginPrompt);
+		prompt(parentWindow, authenticationViewInputFrameWidth / 10, authenticationViewInputFrameHeight / 5, emailPrompt);
+		wgetstr(parentWindow, email);
 		if (email[0] == 0) { 
 			clear();
 			presentEmailView();
@@ -23,10 +21,10 @@ private:
 	}
 
 	void presentPasswordView() {
-		box(window, 0, 0);
-		prompt(window, (authenticationViewInputFrameWidth / 2) - 4, 0, loginPrompt);
-		prompt(window, authenticationViewInputFrameWidth / 10, authenticationViewInputFrameHeight / 4, passwordPrompt);
-		wgetstr(window, password);
+		box(parentWindow, 0, 0);
+		prompt(parentWindow, (authenticationViewInputFrameWidth / 2) - 4, 0, loginPrompt);
+		prompt(parentWindow, authenticationViewInputFrameWidth / 10, authenticationViewInputFrameHeight / 4, passwordPrompt);
+		wgetstr(parentWindow, password);
 		if (password[0] == 0) { 
 			clear();
 			presentPasswordView();
@@ -44,7 +42,7 @@ public:
 	}
 
 	void initialize() override {
-		window = newwin(authenticationViewInputFrameHeight, 
+		parentWindow = newwin(authenticationViewInputFrameHeight, 
 		                     authenticationViewInputFrameWidth,
 		                     (View::terminalScreenHeight / 2) - (authenticationViewInputFrameHeight / 2), 
 		                     (View::terminalScreenWidth / 2) - (authenticationViewInputFrameWidth / 2));
@@ -52,18 +50,18 @@ public:
 		while (!userAuthenticated) {
 			presentEmailView();
 
-			wclear(window);
+			wclear(parentWindow);
 
 			presentPasswordView();
 
 			authenticateUser(email, password);
 		}
 
-		wclear(window);
+		wclear(parentWindow);
 	}
 
 	void refresh() override {
-		wrefresh(window);
+		wrefresh(parentWindow);
 	}
 
 };

@@ -1,14 +1,16 @@
 #ifndef SPOTIFYCLI_H
 #define SPOTIFYCLI_H
 
+#include <string>
 #include <iostream>
 #include <ncurses.h>
-#include <string>
+
+#include "api/SpotifyAPI.h"
 
 #include "Constants.h"
 #include "Terminal_UI/ViewManager.h"
 
-ViewManager viewManager;
+// ViewManager viewManager;
 
 unsigned int screenWidth;
 unsigned int screenHeight;

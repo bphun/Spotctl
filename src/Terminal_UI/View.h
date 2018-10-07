@@ -9,15 +9,17 @@
 class View {
 
 protected:
+	WINDOW* parentWindow;
+
 	SpotifyAPI spotifyAPI;
+
 	int terminalScreenWidth, terminalScreenHeight;
 
-	WINDOW* window;
 
 public:
-	
-	virtual void initialize() = 0;
+		
 	virtual void refresh() = 0;
+	virtual void initialize() = 0;
 
 	void prompt(WINDOW* window, unsigned int x, unsigned int y, const char* str) {
 		mvwprintw(window, y, x, str);

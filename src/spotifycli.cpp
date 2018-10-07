@@ -1,29 +1,15 @@
+#ifndef SPOTIFYCLI_H
 #include "Spotifycli.h"
-
-void init() {
-	initscr();
-	cbreak();
-	keypad(stdscr, TRUE);
-	// noecho();
-
-	getmaxyx(stdscr, screenHeight, screenWidth);
-}
-
-void deinit() {
-	getch();
-	endwin();
-}
-
-void prompt(WINDOW* window, unsigned int x, unsigned int y, const char* str) {
-	mvwprintw(window, y, x, str);
-}
+#endif
 
 int main() {
 	// viewManager.presentView(authenticationViewIdentifier);
 	// viewManager.refreshView(authenticationViewIdentifier);
+	
+	SpotifyAPI spotifyAPI;
 
-	viewManager.presentView(playerViewIdentifier);
-	viewManager.refreshView(playerViewIdentifier);
+	// viewManager.presentView(playerViewIdentifier);
+	// viewManager.refreshView(playerViewIdentifier);
 
 	// init();
 

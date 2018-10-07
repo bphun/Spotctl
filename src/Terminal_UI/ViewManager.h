@@ -1,10 +1,10 @@
 #ifndef VIEW_MANAGER_H
 #define VIEW_MANAGER_H
 
-#include "AuthenticationView.cpp"
-#include "PlayerView.cpp"
 #include "View.h"
+#include "PlayerView.cpp"
 #include "../Constants.h"
+// #include "AuthenticationView.cpp"
 
 #include <map>
 #include <string.h>
