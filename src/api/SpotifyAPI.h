@@ -10,7 +10,7 @@
 #include <curl/curl.h>
 
 #include "utils/json.h"
-#include "utils/curlUtils.h"
+#include "utils/CurlUtils.h"
 
 typedef std::map<std::string, std::string> options_t;
 class SpotifyAPI {

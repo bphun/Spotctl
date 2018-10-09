@@ -2,10 +2,17 @@
 
 SpotifyAPI::SpotifyAPI() {
 	loadConfig();
+
+	// printf("ClientID: %s\nRefresh Token: %s", clientID.c_str(), refreshToken.c_str());
+
 	curl_global_init(CURL_GLOBAL_ALL);
 
+
+	CurlUtils curlUtils;
+
 	options_t options;
-	nlohmann::json albumJSON = GET("/v1/albums/41MnTivkwTO3UUJ8DrqEJJ", options, refreshToken);
+	printf("refreshToken: %s\n", refreshToken.c_str());
+	nlohmann::json albumJSON = curlUtils.GET("/v1/albums/41MnTivkwTO3UUJ8DrqEJJ", options, refreshToken);
 }
 
 SpotifyAPI::~SpotifyAPI() {
@@ -27,8 +34,8 @@ void SpotifyAPI::loadConfig() {
 
 	delimiterIndex = configStr.find("|");
 	
-	clientID = configStr.substr(0, delimiterIndex);
-	refreshToken = configStr.substr(delimiterIndex + 1, configStr.size() - 1);
+	this->clientID = configStr.substr(0, delimiterIndex);
+	this->refreshToken = configStr.substr(delimiterIndex + 1, configStr.size() - 1);
 }
 
 bool SpotifyAPI::authenticateUser(char email[], char password[]) {
