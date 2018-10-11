@@ -1,41 +1,79 @@
 #include "SpotifyAPI.h"
 
 SpotifyAPI::SpotifyAPI() {
-	loadConfig();
+	this->clientID = readFileAt("src/api/vars/id.txt");
+	this->clientSecret = readFileAt("src/api/vars/secret.txt");
+	this->authorizationCode = readFileAt("src/api/vars/authorizationCode.txt");
 
-	// printf("ClientID: %s\nRefresh Token: %s", clientID.c_str(), refreshToken.c_str());
+	CURL* curl;
+	curl = curl_easy_init();
+
+	if(!curl) {
+		std::cerr << "Could not initiate cURL" << std::endl;
+		return;
+	}
+
+	requestAccessToken(curl);
+	// authorizeUser(curl);
 
 	curl_global_init(CURL_GLOBAL_ALL);
 
-
 	CurlUtils curlUtils;
-
-	options_t options;
-	printf("refreshToken: %s\n", refreshToken.c_str());
-	nlohmann::json albumJSON = curlUtils.GET("/v1/albums/41MnTivkwTO3UUJ8DrqEJJ", options, refreshToken);
-}
-
-SpotifyAPI::~SpotifyAPI() {
 	
+	options_t options;
+	nlohmann::json albumJSON = curlUtils.GET("/v1/me", options, accessToken);
+	std::cout << albumJSON.dump() << std::endl;
 }
 
-void SpotifyAPI::loadConfig() {
-	std::ifstream configFile;
-	std::string configStr;
-	int delimiterIndex;
+std::string SpotifyAPI::readFileAt(std::string path) {
+	std::ifstream file;
+	std::string str;
 
-	configFile.open("dontopen.txt");
-	if (!configFile) {
+	file.open(path);
+	if (!file) {
 		printf("Error opening file\n");
 		exit(-1);
 	}
 
-	configFile >> configStr;
+	file >> str;
 
-	delimiterIndex = configStr.find("|");
-	
-	this->clientID = configStr.substr(0, delimiterIndex);
-	this->refreshToken = configStr.substr(delimiterIndex + 1, configStr.size() - 1);
+	file.close();
+	return str;
+}
+
+void SpotifyAPI::requestAccessToken(CURL* curl) {
+
+	std::string writeBuffer;
+	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, CurlUtils::writeCallback);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &writeBuffer);
+
+	curl_easy_setopt(curl, CURLOPT_URL, "https://accounts.spotify.com/api/token");
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);  // Can't authenticate the certificate, so disable authentication.
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+    std::string postData = "grant_type=authorization_code&code=" + authorizationCode+ "&client_id=" + clientID + "&client_secret=" + clientSecret + "&redirect_uri=https://bphun.github.io";
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postData.c_str());
+
+    int responseCode = curl_easy_perform(curl);
+    if (responseCode != CURLE_OK) {
+    	throw CurlException("Error: \n" + std::to_string(responseCode));
+    }
+    curl_easy_cleanup(curl);
+
+    nlohmann::json json = nlohmann::json::parse(writeBuffer);
+
+   	// if (json["error"] != "") {
+   	// 	const std::string err = json["error"];
+   	// 	throw SpotifyException(err);
+   	// }
+
+    this->accessToken = json["access_token"];
+    this->refreshToken = json["refresh_token"];
+
+    // std::cout << json << std::endl;
+}
+
+void SpotifyAPI::authorizeUser(CURL* curl) {
+
 }
 
 bool SpotifyAPI::authenticateUser(char email[], char password[]) {

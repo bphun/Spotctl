@@ -11,20 +11,25 @@
 
 #include "utils/json.h"
 #include "utils/CurlUtils.h"
+#include "utils/CurlException.h"
+#include "utils/SpotifyException.h"
+
+#include "models/Album.h"
 
 typedef std::map<std::string, std::string> options_t;
 class SpotifyAPI {
 
 private:
 
-	std::string refreshToken, clientID;
+	std::string authorizationCode, clientID, clientSecret, accessToken, refreshToken;
 
-	void loadConfig();
+	std::string readFileAt(std::string path);
+	void requestAccessToken(CURL* curl);
+	void authorizeUser(CURL* curl);
 
 public:
 
 	SpotifyAPI();
-	~SpotifyAPI();
 
 	void fetchUserPlaylists(std::vector<std::string> &playlists);
 	bool authenticateUser(char email[], char password[]);

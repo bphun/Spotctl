@@ -14,7 +14,7 @@ std::string CurlUtils::replaceAll(std::string str, const std::string& from, cons
     return str;
 }
 
-nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, std::map<std::string, std::string> options, std::string refreshToken, std::string body) {
+nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
 	CURL* curl;
 
 	curl = curl_easy_init();
@@ -42,8 +42,8 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, false);
 	curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, request.c_str());
 
-	if (!refreshToken.empty()) {
-		std::string header = "Authorization: Bearer " + refreshToken;
+	if (!authorizationToken.empty()) {
+		std::string header = "Authorization: Bearer " + authorizationToken;
 		struct curl_slist* headers = NULL;
 		headers = curl_slist_append(headers, header.c_str());
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
@@ -74,18 +74,18 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 	return nlohmann::json(writeBuffer);
 }
 
-nlohmann::json CurlUtils::GET(std::string endpoint, std::map<std::string, std::string> options, std::string refreshToken, std::string body) {
-	return runRequest("GET", endpoint, options, refreshToken, body);
+nlohmann::json CurlUtils::GET(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
+	return runRequest("GET", endpoint, options, authorizationToken, body);
 }
 
-nlohmann::json CurlUtils::POST(std::string endpoint, std::map<std::string, std::string> options, std::string refreshToken, std::string body) {
-	return runRequest("POST", endpoint, options, refreshToken, body);
+nlohmann::json CurlUtils::POST(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
+	return runRequest("POST", endpoint, options, authorizationToken, body);
 }
 
-nlohmann::json CurlUtils::PUT(std::string endpoint, std::map<std::string, std::string> options, std::string refreshToken, std::string body) {
-	return runRequest("PUT", endpoint, options, refreshToken, body);
+nlohmann::json CurlUtils::PUT(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
+	return runRequest("PUT", endpoint, options, authorizationToken, body);
 }
 
-nlohmann::json CurlUtils::DELETE(std::string endpoint, std::map<std::string, std::string> options, std::string refreshToken, std::string body) {
-	return runRequest("DELETE", endpoint, options, refreshToken, body);
+nlohmann::json CurlUtils::DELETE(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
+	return runRequest("DELETE", endpoint, options, authorizationToken, body);
 }
