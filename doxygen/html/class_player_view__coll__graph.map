@@ -1,0 +1,6 @@
+<map id="PlayerView" name="PlayerView">
+<area shape="rect" id="node2" href="$class_view.html" title="View" alt="" coords="5,179,55,204"/>
+<area shape="rect" id="node3" href="$class_spotify_a_p_i.html" title="SpotifyAPI" alt="" coords="37,92,120,117"/>
+<area shape="rect" id="node5" href="$class_media_player.html" title="MediaPlayer" alt="" coords="80,179,175,204"/>
+<area shape="rect" id="node4" href="$class_curl_utils.html" title="CurlUtils" alt="" coords="42,5,114,31"/>
+</map>

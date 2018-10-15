@@ -1,0 +1,26 @@
+<map id="SpotifyAPI.h" name="SpotifyAPI.h">
+<area shape="rect" id="node9" href="$_pager_8h.html" title="models/Pager.h" alt="" coords="856,299,970,324"/>
+<area shape="rect" id="node11" href="$_track_8h.html" title="models/Track.h" alt="" coords="1264,225,1376,251"/>
+<area shape="rect" id="node14" href="$_user_public_8h.html" title="UserPublic.h" alt="" coords="317,372,414,397"/>
+<area shape="rect" id="node16" href="$_artist_8h.html" title="Artist.h" alt="" coords="654,372,717,397"/>
+<area shape="rect" id="node17" href="$_album_8h.html" title="models/Album.h" alt="" coords="856,152,973,177"/>
+<area shape="rect" id="node19" href="$_device_8h.html" title="models/Device.h" alt="" coords="1844,299,1964,324"/>
+<area shape="rect" id="node20" href="$_playlist_8h.html" title="models/Playlist.h" alt="" coords="582,79,703,104"/>
+<area shape="rect" id="node21" href="$_playlist_track_8h.html" title="PlaylistTrack.h" alt="" coords="237,152,344,177"/>
+<area shape="rect" id="node22" href="$_saved_album_8h.html" title="models/SavedAlbum.h" alt="" coords="1048,79,1203,104"/>
+<area shape="rect" id="node23" href="$_saved_track_8h.html" title="models/SavedTrack.h" alt="" coords="1429,152,1579,177"/>
+<area shape="rect" id="node24" href="$_cursor_pager_8h.html" title="models/CursorPager.h" alt="" coords="1455,372,1609,397"/>
+<area shape="rect" id="node26" href="$_play_history_8h.html" title="models/PlayHistory.h" alt="" coords="1755,152,1901,177"/>
+<area shape="rect" id="node28" href="$_recommendations_8h.html" title="models/Recommendations.h" alt="" coords="1214,152,1404,177"/>
+<area shape="rect" id="node30" href="$_currently_playing_track_8h.html" title="models/CurrentlyPlayingTrack.h" alt="" coords="1924,152,2134,177"/>
+<area shape="rect" id="node31" href="$_currently_playing_context_8h.html" title="models/CurrentlyPlayingContext.h" alt="" coords="2158,152,2381,177"/>
+<area shape="rect" id="node33" href="$_curl_utils_8h.html" title="utils/CurlUtils.h" alt="" coords="2481,79,2591,104"/>
+<area shape="rect" id="node35" href="$_spotify_exception_8h.html" title="SpotifyException.h" alt="" coords="2589,152,2721,177"/>
+<area shape="rect" id="node37" href="$_curl_exception_8h.html" title="CurlException.h" alt="" coords="2745,152,2860,177"/>
+<area shape="rect" id="node13" href="$_user_8h.html" title="User.h" alt="" coords="418,299,478,324"/>
+<area shape="rect" id="node15" href="$_followers_8h.html" title="Followers.h" alt="" coords="470,445,559,471"/>
+<area shape="rect" id="node18" href="$_copyright_8h.html" title="Copyright.h" alt="" coords="1123,445,1213,471"/>
+<area shape="rect" id="node25" href="$_cursor_8h.html" title="Cursor.h" alt="" coords="1487,445,1559,471"/>
+<area shape="rect" id="node27" href="$_context_8h.html" title="Context.h" alt="" coords="2089,225,2167,251"/>
+<area shape="rect" id="node29" href="$_recommendations_seed_8h.html" title="RecommendationsSeed.h" alt="" coords="1289,445,1463,471"/>
+</map>

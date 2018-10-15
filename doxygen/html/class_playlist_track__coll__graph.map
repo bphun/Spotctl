@@ -1,0 +1,5 @@
+<map id="PlaylistTrack" name="PlaylistTrack">
+<area shape="rect" id="node2" href="$class_user_public.html" title="UserPublic" alt="" coords="5,92,91,117"/>
+<area shape="rect" id="node3" href="$class_followers.html" title="Followers" alt="" coords="9,5,87,31"/>
+<area shape="rect" id="node4" href="$class_track.html" title="Track" alt="" coords="114,92,169,117"/>
+</map>

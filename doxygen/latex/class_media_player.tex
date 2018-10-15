@@ -1,0 +1,264 @@
+\hypertarget{class_media_player}{}\section{Media\+Player Class Reference}
+\label{class_media_player}\index{Media\+Player@{Media\+Player}}
+
+
+{\ttfamily \#include $<$Media\+Player.\+h$>$}
+
+
+
+Collaboration diagram for Media\+Player\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{class_media_player__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_media_player_a7f93c5a1a991ed298828f93524ddfc2c}{Media\+Player}} (\mbox{\hyperlink{class_spotify_a_p_i}{Spotify\+A\+PI}} \mbox{\hyperlink{class_media_player_a1aa28d49d3a69b24d23e7564d00ecb89}{spotify\+A\+PI}})
+\item 
+\mbox{\hyperlink{class_media_player_a93f1f35c22c8195c6786d26f944eef51}{Media\+Player}} (\mbox{\hyperlink{class_spotify_a_p_i}{Spotify\+A\+PI}} \mbox{\hyperlink{class_media_player_a1aa28d49d3a69b24d23e7564d00ecb89}{spotify\+A\+PI}}, std\+::string \mbox{\hyperlink{class_media_player_ae236af5daf2a13066c3f21c4b4137ade}{stream\+U\+RL}})
+\item 
+\mbox{\hyperlink{class_media_player_accc0b8e6669a8ec0842aa906a9da1511}{$\sim$\+Media\+Player}} ()
+\item 
+void \mbox{\hyperlink{class_media_player_a64c608f3b47cafae19ec60c9435df099}{play}} ()
+\item 
+void \mbox{\hyperlink{class_media_player_a790f3b46f3961771fe67ce57591eb9d1}{pause}} ()
+\item 
+void \mbox{\hyperlink{class_media_player_a7c3d40399fc3b366a1f6324e8be1f4e5}{set\+Song}} (std\+::string id)
+\item 
+void \mbox{\hyperlink{class_media_player_a2d0b6e0f85f3f8a87d0ff8de04b44cc7}{scrub\+To\+Position}} (double \mbox{\hyperlink{class_media_player_a7fae8625cd922cc1059427d7c74d4fdf}{position}})
+\item 
+double \mbox{\hyperlink{class_media_player_a12c176a856cba35eff631cca707bd97b}{current\+Song\+Duration}} ()
+\item 
+double \mbox{\hyperlink{class_media_player_abe3dbd56c114f320b5bd3e293f55f246}{current\+Song\+Position}} ()
+\item 
+bool \mbox{\hyperlink{class_media_player_a1a0c1276e6c3d5954dc80a00787e8568}{is\+Playing}} ()
+\item 
+bool \mbox{\hyperlink{class_media_player_a435a05fd0a11295f8c9be09d7b82abe8}{is\+Paused}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_media_player_aa533b394a2366f49cabcb60562ef6a6c}{playing}}
+\item 
+\mbox{\hyperlink{class_spotify_a_p_i}{Spotify\+A\+PI}} \mbox{\hyperlink{class_media_player_a1aa28d49d3a69b24d23e7564d00ecb89}{spotify\+A\+PI}}
+\item 
+double \mbox{\hyperlink{class_media_player_a4d2803d894f3fa699f281b46fdbe4f27}{duration}}
+\item 
+double \mbox{\hyperlink{class_media_player_a7fae8625cd922cc1059427d7c74d4fdf}{position}}
+\item 
+std\+::string \mbox{\hyperlink{class_media_player_ae236af5daf2a13066c3f21c4b4137ade}{stream\+U\+RL}}
+\item 
+std\+::string \mbox{\hyperlink{class_media_player_a28a6b20199f2c144a78b7e91a6b65bf2}{curr\+Song\+Id}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 8 of file Media\+Player.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_media_player_a7f93c5a1a991ed298828f93524ddfc2c}\label{class_media_player_a7f93c5a1a991ed298828f93524ddfc2c}} 
+\index{Media\+Player@{Media\+Player}!Media\+Player@{Media\+Player}}
+\index{Media\+Player@{Media\+Player}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{Media\+Player()}{MediaPlayer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Media\+Player\+::\+Media\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_spotify_a_p_i}{Spotify\+A\+PI}}}]{spotify\+A\+PI }\end{DoxyParamCaption})}
+
+
+
+Definition at line 3 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_a93f1f35c22c8195c6786d26f944eef51}\label{class_media_player_a93f1f35c22c8195c6786d26f944eef51}} 
+\index{Media\+Player@{Media\+Player}!Media\+Player@{Media\+Player}}
+\index{Media\+Player@{Media\+Player}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{Media\+Player()}{MediaPlayer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Media\+Player\+::\+Media\+Player (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_spotify_a_p_i}{Spotify\+A\+PI}}}]{spotify\+A\+PI,  }\item[{std\+::string}]{stream\+U\+RL }\end{DoxyParamCaption})}
+
+
+
+Definition at line 10 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_accc0b8e6669a8ec0842aa906a9da1511}\label{class_media_player_accc0b8e6669a8ec0842aa906a9da1511}} 
+\index{Media\+Player@{Media\+Player}!````~Media\+Player@{$\sim$\+Media\+Player}}
+\index{````~Media\+Player@{$\sim$\+Media\+Player}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{$\sim$\+Media\+Player()}{~MediaPlayer()}}
+{\footnotesize\ttfamily Media\+Player\+::$\sim$\+Media\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 15 of file Media\+Player.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_media_player_a12c176a856cba35eff631cca707bd97b}\label{class_media_player_a12c176a856cba35eff631cca707bd97b}} 
+\index{Media\+Player@{Media\+Player}!current\+Song\+Duration@{current\+Song\+Duration}}
+\index{current\+Song\+Duration@{current\+Song\+Duration}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{current\+Song\+Duration()}{currentSongDuration()}}
+{\footnotesize\ttfamily double Media\+Player\+::current\+Song\+Duration (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file Media\+Player.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_media_player_a12c176a856cba35eff631cca707bd97b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_media_player_abe3dbd56c114f320b5bd3e293f55f246}\label{class_media_player_abe3dbd56c114f320b5bd3e293f55f246}} 
+\index{Media\+Player@{Media\+Player}!current\+Song\+Position@{current\+Song\+Position}}
+\index{current\+Song\+Position@{current\+Song\+Position}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{current\+Song\+Position()}{currentSongPosition()}}
+{\footnotesize\ttfamily double Media\+Player\+::current\+Song\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file Media\+Player.\+cpp.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_media_player_abe3dbd56c114f320b5bd3e293f55f246_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_media_player_a435a05fd0a11295f8c9be09d7b82abe8}\label{class_media_player_a435a05fd0a11295f8c9be09d7b82abe8}} 
+\index{Media\+Player@{Media\+Player}!is\+Paused@{is\+Paused}}
+\index{is\+Paused@{is\+Paused}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{is\+Paused()}{isPaused()}}
+{\footnotesize\ttfamily bool Media\+Player\+::is\+Paused (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 48 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_a1a0c1276e6c3d5954dc80a00787e8568}\label{class_media_player_a1a0c1276e6c3d5954dc80a00787e8568}} 
+\index{Media\+Player@{Media\+Player}!is\+Playing@{is\+Playing}}
+\index{is\+Playing@{is\+Playing}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{is\+Playing()}{isPlaying()}}
+{\footnotesize\ttfamily bool Media\+Player\+::is\+Playing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 44 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_a790f3b46f3961771fe67ce57591eb9d1}\label{class_media_player_a790f3b46f3961771fe67ce57591eb9d1}} 
+\index{Media\+Player@{Media\+Player}!pause@{pause}}
+\index{pause@{pause}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{pause()}{pause()}}
+{\footnotesize\ttfamily void Media\+Player\+::pause (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_a64c608f3b47cafae19ec60c9435df099}\label{class_media_player_a64c608f3b47cafae19ec60c9435df099}} 
+\index{Media\+Player@{Media\+Player}!play@{play}}
+\index{play@{play}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily void Media\+Player\+::play (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 19 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_a2d0b6e0f85f3f8a87d0ff8de04b44cc7}\label{class_media_player_a2d0b6e0f85f3f8a87d0ff8de04b44cc7}} 
+\index{Media\+Player@{Media\+Player}!scrub\+To\+Position@{scrub\+To\+Position}}
+\index{scrub\+To\+Position@{scrub\+To\+Position}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{scrub\+To\+Position()}{scrubToPosition()}}
+{\footnotesize\ttfamily void Media\+Player\+::scrub\+To\+Position (\begin{DoxyParamCaption}\item[{double}]{position }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file Media\+Player.\+cpp.
+
+\mbox{\Hypertarget{class_media_player_a7c3d40399fc3b366a1f6324e8be1f4e5}\label{class_media_player_a7c3d40399fc3b366a1f6324e8be1f4e5}} 
+\index{Media\+Player@{Media\+Player}!set\+Song@{set\+Song}}
+\index{set\+Song@{set\+Song}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{set\+Song()}{setSong()}}
+{\footnotesize\ttfamily void Media\+Player\+::set\+Song (\begin{DoxyParamCaption}\item[{std\+::string}]{id }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file Media\+Player.\+cpp.
+
+
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{class_media_player_a28a6b20199f2c144a78b7e91a6b65bf2}\label{class_media_player_a28a6b20199f2c144a78b7e91a6b65bf2}} 
+\index{Media\+Player@{Media\+Player}!curr\+Song\+Id@{curr\+Song\+Id}}
+\index{curr\+Song\+Id@{curr\+Song\+Id}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{curr\+Song\+Id}{currSongId}}
+{\footnotesize\ttfamily std\+::string Media\+Player\+::curr\+Song\+Id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Media\+Player.\+h.
+
+\mbox{\Hypertarget{class_media_player_a4d2803d894f3fa699f281b46fdbe4f27}\label{class_media_player_a4d2803d894f3fa699f281b46fdbe4f27}} 
+\index{Media\+Player@{Media\+Player}!duration@{duration}}
+\index{duration@{duration}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{duration}{duration}}
+{\footnotesize\ttfamily double Media\+Player\+::duration\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Media\+Player.\+h.
+
+\mbox{\Hypertarget{class_media_player_aa533b394a2366f49cabcb60562ef6a6c}\label{class_media_player_aa533b394a2366f49cabcb60562ef6a6c}} 
+\index{Media\+Player@{Media\+Player}!playing@{playing}}
+\index{playing@{playing}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{playing}{playing}}
+{\footnotesize\ttfamily bool Media\+Player\+::playing\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 11 of file Media\+Player.\+h.
+
+\mbox{\Hypertarget{class_media_player_a7fae8625cd922cc1059427d7c74d4fdf}\label{class_media_player_a7fae8625cd922cc1059427d7c74d4fdf}} 
+\index{Media\+Player@{Media\+Player}!position@{position}}
+\index{position@{position}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily double Media\+Player\+::position\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Media\+Player.\+h.
+
+\mbox{\Hypertarget{class_media_player_a1aa28d49d3a69b24d23e7564d00ecb89}\label{class_media_player_a1aa28d49d3a69b24d23e7564d00ecb89}} 
+\index{Media\+Player@{Media\+Player}!spotify\+A\+PI@{spotify\+A\+PI}}
+\index{spotify\+A\+PI@{spotify\+A\+PI}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{spotify\+A\+PI}{spotifyAPI}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_spotify_a_p_i}{Spotify\+A\+PI}} Media\+Player\+::spotify\+A\+PI\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Media\+Player.\+h.
+
+\mbox{\Hypertarget{class_media_player_ae236af5daf2a13066c3f21c4b4137ade}\label{class_media_player_ae236af5daf2a13066c3f21c4b4137ade}} 
+\index{Media\+Player@{Media\+Player}!stream\+U\+RL@{stream\+U\+RL}}
+\index{stream\+U\+RL@{stream\+U\+RL}!Media\+Player@{Media\+Player}}
+\subsubsection{\texorpdfstring{stream\+U\+RL}{streamURL}}
+{\footnotesize\ttfamily std\+::string Media\+Player\+::stream\+U\+RL\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Media\+Player.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_media_player_8h}{Media\+Player.\+h}}\item 
+\mbox{\hyperlink{_media_player_8cpp}{Media\+Player.\+cpp}}\end{DoxyCompactItemize}

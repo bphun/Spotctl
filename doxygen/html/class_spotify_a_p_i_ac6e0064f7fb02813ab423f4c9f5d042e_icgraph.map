@@ -1,0 +1,11 @@
+<map id="SpotifyAPI::insertOptions" name="SpotifyAPI::insertOptions">
+<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#abcf8490d7729c7c620fbdc42faf94c3a" title="SpotifyAPI::saveAlbums" alt="" coords="250,5,414,31"/>
+<area shape="rect" id="node3" href="$class_spotify_a_p_i.html#ac17d1f6b822fcdf9c6ab6153ae8df6c3" title="SpotifyAPI::removeSavedAlbums" alt="" coords="223,55,441,80"/>
+<area shape="rect" id="node4" href="$class_spotify_a_p_i.html#a4a32dc278f53d67df8037b9a57b9d776" title="SpotifyAPI::checkSavedAlbums" alt="" coords="228,104,436,129"/>
+<area shape="rect" id="node5" href="$class_spotify_a_p_i.html#a045a3f9378e1fe18372e38ad58f86c91" title="SpotifyAPI::addTracksToPlaylist" alt="" coords="227,153,436,179"/>
+<area shape="rect" id="node6" href="$class_spotify_a_p_i.html#a5a5d099d9be138440ad095cf8d7e6a96" title="SpotifyAPI::replacePlaylist\lTracks" alt="" coords="243,203,420,241"/>
+<area shape="rect" id="node7" href="$class_spotify_a_p_i.html#a7eb589d3b0696f9c9cf4a196cef1c627" title="SpotifyAPI::checkUserFollowing\lPlaylist" alt="" coords="227,265,437,304"/>
+<area shape="rect" id="node8" href="$class_spotify_a_p_i.html#a385e1e97af9b2f8b22ac0538c6f410a1" title="SpotifyAPI::saveTracks" alt="" coords="252,328,411,353"/>
+<area shape="rect" id="node9" href="$class_spotify_a_p_i.html#af844cb101057f17077fe1cfdd2d77c3b" title="SpotifyAPI::removeSavedTracks" alt="" coords="225,377,438,403"/>
+<area shape="rect" id="node10" href="$class_spotify_a_p_i.html#a455d2433471b1bbeedcf1003e56c3381" title="SpotifyAPI::checkSavedTracks" alt="" coords="230,427,433,452"/>
+</map>

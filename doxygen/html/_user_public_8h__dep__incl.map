@@ -1,0 +1,35 @@
+<map id="UserPublic.h" name="UserPublic.h">
+<area shape="rect" id="node2" href="$_user_8h.html" title="User.h" alt="" coords="1455,79,1515,104"/>
+<area shape="rect" id="node8" href="$_spotify_a_p_i_8h.html" title="SpotifyAPI.h" alt="" coords="882,372,977,397"/>
+<area shape="rect" id="node25" href="$_playlist_8h.html" title="Playlist.h" alt="" coords="1707,299,1781,324"/>
+<area shape="rect" id="node34" href="$_user_public_8cpp.html" title="UserPublic.cpp" alt="" coords="1651,79,1762,104"/>
+<area shape="rect" id="node3" href="$_track_8h.html" title="Track.h" alt="" coords="766,152,831,177"/>
+<area shape="rect" id="node24" href="$_playlist_track_8h.html" title="PlaylistTrack.h" alt="" coords="1469,225,1576,251"/>
+<area shape="rect" id="node33" href="$_user_8cpp.html" title="User.cpp" alt="" coords="1411,152,1485,177"/>
+<area shape="rect" id="node4" href="$_album_8h.html" title="Album.h" alt="" coords="1236,225,1306,251"/>
+<area shape="rect" id="node18" href="$_currently_playing_context_8h.html" title="CurrentlyPlayingContext.h" alt="" coords="787,225,963,251"/>
+<area shape="rect" id="node20" href="$_currently_playing_track_8h.html" title="CurrentlyPlayingTrack.h" alt="" coords="986,225,1150,251"/>
+<area shape="rect" id="node22" href="$_play_history_8h.html" title="PlayHistory.h" alt="" coords="560,225,659,251"/>
+<area shape="rect" id="node28" href="$_recommendations_8h.html" title="Recommendations.h" alt="" coords="151,225,294,251"/>
+<area shape="rect" id="node30" href="$_saved_track_8h.html" title="SavedTrack.h" alt="" coords="383,225,486,251"/>
+<area shape="rect" id="node32" href="$_track_8cpp.html" title="Track.cpp" alt="" coords="683,225,762,251"/>
+<area shape="rect" id="node5" href="$_album_8cpp.html" title="Album.cpp" alt="" coords="1269,299,1353,324"/>
+<area shape="rect" id="node6" href="$_saved_album_8h.html" title="SavedAlbum.h" alt="" coords="1377,299,1485,324"/>
+<area shape="rect" id="node7" href="$_saved_album_8cpp.html" title="SavedAlbum.cpp" alt="" coords="1370,372,1492,397"/>
+<area shape="rect" id="node9" href="$_spotify_a_p_i_8cpp.html" title="SpotifyAPI.cpp" alt="" coords="735,445,844,471"/>
+<area shape="rect" id="node10" href="$_media_player_8h.html" title="MediaPlayer.h" alt="" coords="926,445,1032,471"/>
+<area shape="rect" id="node14" href="$_spotifycli_8h.html" title="Spotifycli.h" alt="" coords="892,665,978,691"/>
+<area shape="rect" id="node17" href="$_view_8h.html" title="View.h" alt="" coords="1088,445,1149,471"/>
+<area shape="rect" id="node11" href="$_media_player_8cpp.html" title="MediaPlayer.cpp" alt="" coords="919,519,1039,544"/>
+<area shape="rect" id="node12" href="$_player_view_8cpp.html" title="PlayerView.cpp" alt="" coords="1063,519,1175,544"/>
+<area shape="rect" id="node13" href="$_view_manager_8h.html" title="ViewManager.h" alt="" coords="1062,592,1175,617"/>
+<area shape="rect" id="node16" href="$_view_manager_8cpp.html" title="ViewManager.cpp" alt="" coords="1055,665,1182,691"/>
+<area shape="rect" id="node15" href="$_spotifycli_8cpp.html" title="Spotifycli.cpp" alt="" coords="885,739,985,764"/>
+<area shape="rect" id="node19" href="$_currently_playingcontext_8cpp.html" title="CurrentlyPlayingcontext.cpp" alt="" coords="705,299,892,324"/>
+<area shape="rect" id="node21" href="$_currently_playing_track_8cpp.html" title="CurrentlyPlayingTrack.cpp" alt="" coords="966,299,1143,324"/>
+<area shape="rect" id="node23" href="$_play_history_8cpp.html" title="PlayHistory.cpp" alt="" coords="568,299,680,324"/>
+<area shape="rect" id="node27" href="$_playlist_track_8cpp.html" title="PlaylistTrack.cpp" alt="" coords="1561,299,1682,324"/>
+<area shape="rect" id="node26" href="$_playlist_8cpp.html" title="Playlist.cpp" alt="" coords="1700,372,1788,397"/>
+<area shape="rect" id="node29" href="$_recommendations_8cpp.html" title="Recommendations.cpp" alt="" coords="144,299,302,324"/>
+<area shape="rect" id="node31" href="$_saved_track_8cpp.html" title="SavedTrack.cpp" alt="" coords="376,299,493,324"/>
+</map>

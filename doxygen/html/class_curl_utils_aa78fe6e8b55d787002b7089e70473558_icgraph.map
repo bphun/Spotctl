@@ -1,0 +1,7 @@
+<map id="CurlUtils::DELETE" name="CurlUtils::DELETE">
+<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#ac17d1f6b822fcdf9c6ab6153ae8df6c3" title="SpotifyAPI::removeSavedAlbums" alt="" coords="184,5,402,31"/>
+<area shape="rect" id="node3" href="$class_spotify_a_p_i.html#a1a89f73e8b0981a13970ed5788189a38" title="SpotifyAPI::unfollowPlaylist" alt="" coords="202,55,384,80"/>
+<area shape="rect" id="node4" href="$class_spotify_a_p_i.html#ae1ce0b86c79df5f09a8d752dffd512ec" title="SpotifyAPI::removeTracks\lFromPlaylist" alt="" coords="206,104,381,143"/>
+<area shape="rect" id="node5" href="$class_spotify_a_p_i.html#af844cb101057f17077fe1cfdd2d77c3b" title="SpotifyAPI::removeSavedTracks" alt="" coords="187,167,400,192"/>
+<area shape="rect" id="node6" href="$class_spotify_a_p_i.html#a7f8c5253bf0fc8cbe8944edfc96ff030" title="SpotifyAPI::unfollowUser" alt="" coords="209,216,377,241"/>
+</map>

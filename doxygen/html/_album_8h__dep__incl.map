@@ -1,0 +1,15 @@
+<map id="Album.h" name="Album.h">
+<area shape="rect" id="node2" href="$_album_8cpp.html" title="Album.cpp" alt="" coords="5,79,90,104"/>
+<area shape="rect" id="node3" href="$_saved_album_8h.html" title="SavedAlbum.h" alt="" coords="113,79,222,104"/>
+<area shape="rect" id="node5" href="$_spotify_a_p_i_8h.html" title="SpotifyAPI.h" alt="" coords="212,152,307,177"/>
+<area shape="rect" id="node4" href="$_saved_album_8cpp.html" title="SavedAlbum.cpp" alt="" coords="66,152,189,177"/>
+<area shape="rect" id="node6" href="$_spotify_a_p_i_8cpp.html" title="SpotifyAPI.cpp" alt="" coords="65,225,174,251"/>
+<area shape="rect" id="node7" href="$_media_player_8h.html" title="MediaPlayer.h" alt="" coords="256,225,362,251"/>
+<area shape="rect" id="node11" href="$_spotifycli_8h.html" title="Spotifycli.h" alt="" coords="222,445,308,471"/>
+<area shape="rect" id="node14" href="$_view_8h.html" title="View.h" alt="" coords="419,225,479,251"/>
+<area shape="rect" id="node8" href="$_media_player_8cpp.html" title="MediaPlayer.cpp" alt="" coords="249,299,369,324"/>
+<area shape="rect" id="node9" href="$_player_view_8cpp.html" title="PlayerView.cpp" alt="" coords="393,299,505,324"/>
+<area shape="rect" id="node10" href="$_view_manager_8h.html" title="ViewManager.h" alt="" coords="392,372,505,397"/>
+<area shape="rect" id="node13" href="$_view_manager_8cpp.html" title="ViewManager.cpp" alt="" coords="385,445,512,471"/>
+<area shape="rect" id="node12" href="$_spotifycli_8cpp.html" title="Spotifycli.cpp" alt="" coords="215,519,315,544"/>
+</map>

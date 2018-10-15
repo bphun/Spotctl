@@ -1,0 +1,8 @@
+<map id="SpotifyAPI::SpotifyAPI" name="SpotifyAPI::SpotifyAPI">
+<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#a0a20f7e551ea8c9bdd9046aecb56cf8f" title="SpotifyAPI::readFileAt" alt="" coords="207,5,358,31"/>
+<area shape="rect" id="node3" href="$class_spotify_a_p_i.html#ac7b630b1b98e6cfb047e7f107e862673" title="SpotifyAPI::requestAccess\lToken" alt="" coords="406,48,585,87"/>
+<area shape="rect" id="node5" href="$class_curl_utils.html#ac500280637c99900b1f1e64d5be58733" title="CurlUtils::GET" alt="" coords="229,108,336,133"/>
+<area shape="rect" id="node4" href="$class_curl_utils.html#a1e068c580af8fc71663e220c6b2128c3" title="CurlUtils::writeCallback" alt="" coords="633,59,791,84"/>
+<area shape="rect" id="node6" href="$class_curl_utils.html#a596d1f41d3e300c4c626b4e4f819c194" title="CurlUtils::runRequest" alt="" coords="422,111,570,136"/>
+<area shape="rect" id="node7" href="$class_curl_utils.html#a86211746c9f0981b56fd143996a10a4a" title="CurlUtils::replaceAll" alt="" coords="643,111,781,136"/>
+</map>

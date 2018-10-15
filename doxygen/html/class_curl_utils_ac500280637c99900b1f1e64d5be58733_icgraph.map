@@ -1,0 +1,33 @@
+<map id="CurlUtils::GET" name="CurlUtils::GET">
+<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#ab0d1896e2ab4c52f496eb494640a89b1" title="SpotifyAPI::SpotifyAPI" alt="" coords="199,5,352,31"/>
+<area shape="rect" id="node3" href="$class_spotify_a_p_i.html#a4a32dc278f53d67df8037b9a57b9d776" title="SpotifyAPI::checkSavedAlbums" alt="" coords="171,55,379,80"/>
+<area shape="rect" id="node4" href="$class_spotify_a_p_i.html#aea55f7caebed1664d2c39d1c3c4612ec" title="SpotifyAPI::fetchAlbum" alt="" coords="197,104,354,129"/>
+<area shape="rect" id="node6" href="$class_spotify_a_p_i.html#a04e6f0cef6120d389a29a760bb883ee0" title="SpotifyAPI::fetchNewReleases" alt="" coords="174,153,376,179"/>
+<area shape="rect" id="node7" href="$class_spotify_a_p_i.html#a3a1c8e4ea736afdb697560b0bd9783ef" title="SpotifyAPI::fetchSavedAlbums" alt="" coords="174,203,376,228"/>
+<area shape="rect" id="node8" href="$class_spotify_a_p_i.html#a3e007d4199f40cd6227613d28319c175" title="SpotifyAPI::fetchAlbumTracks" alt="" coords="177,252,374,277"/>
+<area shape="rect" id="node9" href="$class_spotify_a_p_i.html#ad0402c961ecee1c579204eb0d1945261" title="SpotifyAPI::searchAlbums" alt="" coords="188,301,363,327"/>
+<area shape="rect" id="node10" href="$class_spotify_a_p_i.html#a565dbf6b925da78ef7ef355447b61a9f" title="SpotifyAPI::fetchArtistAlbums" alt="" coords="178,351,373,376"/>
+<area shape="rect" id="node11" href="$class_spotify_a_p_i.html#a87a0c994f9f8349bc59db853224e33af" title="SpotifyAPI::checkFollowing\lArtist" alt="" coords="184,400,366,439"/>
+<area shape="rect" id="node12" href="$class_spotify_a_p_i.html#a6ef5675e1ace89ae83576e424f71c785" title="SpotifyAPI::fetchArtist" alt="" coords="200,463,351,488"/>
+<area shape="rect" id="node14" href="$class_spotify_a_p_i.html#ac505c806265073b2418691799e3573c2" title="SpotifyAPI::fetchUserTop\lArtists" alt="" coords="191,512,360,551"/>
+<area shape="rect" id="node15" href="$class_spotify_a_p_i.html#aae86009494fbfe39fb6c253acaeb5819" title="SpotifyAPI::searchArtists" alt="" coords="191,575,359,600"/>
+<area shape="rect" id="node16" href="$class_spotify_a_p_i.html#a1160dfb028f8d35e044016bfde9249db" title="SpotifyAPI::fetchArtistRelated\lArtists" alt="" coords="177,624,374,663"/>
+<area shape="rect" id="node17" href="$class_spotify_a_p_i.html#a29a225f2f09d8a189b9c6214423cfe7e" title="SpotifyAPI::fetchArtistTop\lTracks" alt="" coords="190,687,361,725"/>
+<area shape="rect" id="node18" href="$class_spotify_a_p_i.html#a7eb589d3b0696f9c9cf4a196cef1c627" title="SpotifyAPI::checkUserFollowing\lPlaylist" alt="" coords="170,749,381,788"/>
+<area shape="rect" id="node19" href="$class_spotify_a_p_i.html#a1d4dc0e62ce453938965fcbd4d6ddf8c" title="SpotifyAPI::fetchPlaylist" alt="" coords="194,812,356,837"/>
+<area shape="rect" id="node20" href="$class_spotify_a_p_i.html#a0093e71746beb4cae5cafec78db45267" title="SpotifyAPI::fetchPlaylist\lTracks" alt="" coords="194,861,356,900"/>
+<area shape="rect" id="node21" href="$class_spotify_a_p_i.html#a79f8d10db209ef00b17c0e7e0df750e8" title="SpotifyAPI::fetchUserPlaylists" alt="" coords="177,924,374,949"/>
+<area shape="rect" id="node22" href="$class_spotify_a_p_i.html#a74c7fb4877d5e5793110dca0e2fa9606" title="SpotifyAPI::fetchFeatured\lPlaylists" alt="" coords="189,973,362,1012"/>
+<area shape="rect" id="node23" href="$class_spotify_a_p_i.html#ab2f004b11a4179e588137fc3187f569c" title="SpotifyAPI::searchPlaylists" alt="" coords="185,1036,365,1061"/>
+<area shape="rect" id="node24" href="$class_spotify_a_p_i.html#a455d2433471b1bbeedcf1003e56c3381" title="SpotifyAPI::checkSavedTracks" alt="" coords="174,1085,377,1111"/>
+<area shape="rect" id="node25" href="$class_spotify_a_p_i.html#a3244fda7378b2315accdf00f2d22e40f" title="SpotifyAPI::fetchTrack" alt="" coords="199,1135,352,1160"/>
+<area shape="rect" id="node27" href="$class_spotify_a_p_i.html#a22c839c61fa06ac212d1c38a0ca5cd2f" title="SpotifyAPI::fetchRecommendations" alt="" coords="160,1184,391,1209"/>
+<area shape="rect" id="node28" href="$class_spotify_a_p_i.html#a2e725426d46ab8395940048e2acb9fbc" title="SpotifyAPI::fetchSavedTracks" alt="" coords="177,1233,374,1259"/>
+<area shape="rect" id="node29" href="$class_spotify_a_p_i.html#a6a15e5d679338e4bc8de8b6e74825d9c" title="SpotifyAPI::fetchUserTop\lTracks" alt="" coords="191,1283,360,1321"/>
+<area shape="rect" id="node30" href="$class_spotify_a_p_i.html#a0ff3c9b7fbf9e7a4a29c8a7f692daaf1" title="SpotifyAPI::searchTracks" alt="" coords="190,1345,361,1371"/>
+<area shape="rect" id="node31" href="$class_spotify_a_p_i.html#a05fc84c40326e8fed074dd640bc518fc" title="SpotifyAPI::checkFollowingUser" alt="" coords="170,1395,381,1420"/>
+<area shape="rect" id="node32" href="$class_spotify_a_p_i.html#aac12cdeda01f0a32a4faedf659ba178d" title="SpotifyAPI::fetchUser" alt="" coords="201,1444,349,1469"/>
+<area shape="rect" id="node5" href="$class_spotify_a_p_i.html#ac2ec43ab2e207f7422c59f235cb2831f" title="SpotifyAPI::fetchAlbums" alt="" coords="439,104,603,129"/>
+<area shape="rect" id="node13" href="$class_spotify_a_p_i.html#af0dbdda3a69fea10e88175e033884c8a" title="SpotifyAPI::fetchArtists" alt="" coords="443,463,600,488"/>
+<area shape="rect" id="node26" href="$class_spotify_a_p_i.html#aa075dad1790b6cdc0cbd29648b65bfef" title="SpotifyAPI::fetchTracks" alt="" coords="441,1135,601,1160"/>
+</map>

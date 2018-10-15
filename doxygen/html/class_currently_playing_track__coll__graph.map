@@ -1,0 +1,4 @@
+<map id="CurrentlyPlayingTrack" name="CurrentlyPlayingTrack">
+<area shape="rect" id="node2" href="$class_context.html" title="Context" alt="" coords="5,5,73,31"/>
+<area shape="rect" id="node3" href="$class_track.html" title="Track" alt="" coords="97,5,151,31"/>
+</map>

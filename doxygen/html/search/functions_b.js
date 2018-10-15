@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['savealbums',['saveAlbums',['../class_spotify_a_p_i.html#abcf8490d7729c7c620fbdc42faf94c3a',1,'SpotifyAPI']]],
+  ['savedalbum',['SavedAlbum',['../class_saved_album.html#a4bd0345472be84b862018e266f56ed7c',1,'SavedAlbum']]],
+  ['savedtrack',['SavedTrack',['../class_saved_track.html#aee98494de0777a97eecba292ac1ae1af',1,'SavedTrack']]],
+  ['savetracks',['saveTracks',['../class_spotify_a_p_i.html#a385e1e97af9b2f8b22ac0538c6f410a1',1,'SpotifyAPI']]],
+  ['scrubtoposition',['scrubToPosition',['../class_media_player.html#a2d0b6e0f85f3f8a87d0ff8de04b44cc7',1,'MediaPlayer']]],
+  ['searchalbums',['searchAlbums',['../class_spotify_a_p_i.html#ad0402c961ecee1c579204eb0d1945261',1,'SpotifyAPI']]],
+  ['searchartists',['searchArtists',['../class_spotify_a_p_i.html#aae86009494fbfe39fb6c253acaeb5819',1,'SpotifyAPI']]],
+  ['searchplaylists',['searchPlaylists',['../class_spotify_a_p_i.html#ab2f004b11a4179e588137fc3187f569c',1,'SpotifyAPI']]],
+  ['searchtracks',['searchTracks',['../class_spotify_a_p_i.html#a0ff3c9b7fbf9e7a4a29c8a7f692daaf1',1,'SpotifyAPI']]],
+  ['setrepeat',['setRepeat',['../class_spotify_a_p_i.html#ab800b2fa5d52fa5addb7b5f999392dd5',1,'SpotifyAPI']]],
+  ['setsong',['setSong',['../class_media_player.html#a7c3d40399fc3b366a1f6324e8be1f4e5',1,'MediaPlayer']]],
+  ['setvolume',['setVolume',['../class_spotify_a_p_i.html#adf7901eeb17f3b94ae8307aaf6ffe307',1,'SpotifyAPI']]],
+  ['skiptonext',['skipToNext',['../class_spotify_a_p_i.html#ad6eafc052686ba413aa37188882d72c8',1,'SpotifyAPI']]],
+  ['skiptoprevious',['skipToPrevious',['../class_spotify_a_p_i.html#acefe16c25aeac587c9f7bf533088394f',1,'SpotifyAPI']]],
+  ['spotifyapi',['SpotifyAPI',['../class_spotify_a_p_i.html#ab0d1896e2ab4c52f496eb494640a89b1',1,'SpotifyAPI']]],
+  ['spotifyexception',['SpotifyException',['../struct_spotify_exception.html#a803594eb661bfdbfb34afe22a9888f94',1,'SpotifyException']]]
+];

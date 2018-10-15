@@ -1,0 +1,7 @@
+<map id="SpotifyAPI::removeSavedAlbums" name="SpotifyAPI::removeSavedAlbums">
+<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#ac6e0064f7fb02813ab423f4c9f5d042e" title="SpotifyAPI::insertOptions" alt="" coords="271,5,441,31"/>
+<area shape="rect" id="node3" href="$class_curl_utils.html#aa78fe6e8b55d787002b7089e70473558" title="CurlUtils::DELETE" alt="" coords="290,55,421,80"/>
+<area shape="rect" id="node4" href="$class_curl_utils.html#a596d1f41d3e300c4c626b4e4f819c194" title="CurlUtils::runRequest" alt="" coords="489,55,637,80"/>
+<area shape="rect" id="node5" href="$class_curl_utils.html#a86211746c9f0981b56fd143996a10a4a" title="CurlUtils::replaceAll" alt="" coords="695,29,833,55"/>
+<area shape="rect" id="node6" href="$class_curl_utils.html#a1e068c580af8fc71663e220c6b2128c3" title="CurlUtils::writeCallback" alt="" coords="685,79,843,104"/>
+</map>

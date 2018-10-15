@@ -1,0 +1,198 @@
+\hypertarget{class_device}{}\section{Device Class Reference}
+\label{class_device}\index{Device@{Device}}
+
+
+{\ttfamily \#include $<$Device.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_device_a64ba12dcc5f4267486c5d545d04dcf68}{Device}} ()
+\item 
+\mbox{\hyperlink{class_device_a0956ff0cb54658d2b4cc43eaae1c0540}{Device}} (nlohmann\+::json device\+Json)
+\item 
+bool \mbox{\hyperlink{class_device_a6b2f2b45d71f1ecda445896e0429e22c}{is\+Active}} ()
+\item 
+bool \mbox{\hyperlink{class_device_a0ea3f1723c41ee958c753ef9b3b1a413}{is\+Restricted}} ()
+\item 
+int \mbox{\hyperlink{class_device_a13ffb336487ca8f938b1ad0f42259785}{get\+Volume\+Percent}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_device_aa356c49000a4a7eea1d014dd5245ff51}{get\+Id}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_device_a7e27b36eae579176707a47b682d84a22}{get\+Name}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_device_afc4d7d248d4ea70e69129c47d4ef1dc6}{get\+Type}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_device_ac6c8534a9c755b5ee9affc37771a301d}{active}}
+\item 
+bool \mbox{\hyperlink{class_device_a86832f8fbd54579dcce93c8470f27377}{restricted}}
+\item 
+int \mbox{\hyperlink{class_device_a4b984b16ab0c4ca441b531aee1c55ed4}{volume\+Percent}}
+\item 
+std\+::string \mbox{\hyperlink{class_device_aa07acb3cbc8c6e2cfcfbf1be7f79b4d1}{id}}
+\item 
+std\+::string \mbox{\hyperlink{class_device_ae779f5ee618677629b71287f3f77f8e8}{name}}
+\item 
+std\+::string \mbox{\hyperlink{class_device_a06b952ae4a767b7f8fc040915f34e148}{type}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 8 of file Device.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_device_a64ba12dcc5f4267486c5d545d04dcf68}\label{class_device_a64ba12dcc5f4267486c5d545d04dcf68}} 
+\index{Device@{Device}!Device@{Device}}
+\index{Device@{Device}!Device@{Device}}
+\subsubsection{\texorpdfstring{Device()}{Device()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Device\+::\+Device (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_device_a0956ff0cb54658d2b4cc43eaae1c0540}\label{class_device_a0956ff0cb54658d2b4cc43eaae1c0540}} 
+\index{Device@{Device}!Device@{Device}}
+\index{Device@{Device}!Device@{Device}}
+\subsubsection{\texorpdfstring{Device()}{Device()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Device\+::\+Device (\begin{DoxyParamCaption}\item[{nlohmann\+::json}]{device\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line 5 of file Device.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_device_aa356c49000a4a7eea1d014dd5245ff51}\label{class_device_aa356c49000a4a7eea1d014dd5245ff51}} 
+\index{Device@{Device}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!Device@{Device}}
+\subsubsection{\texorpdfstring{get\+Id()}{getId()}}
+{\footnotesize\ttfamily std\+::string Device\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 14 of file Device.\+cpp.
+
+\mbox{\Hypertarget{class_device_a7e27b36eae579176707a47b682d84a22}\label{class_device_a7e27b36eae579176707a47b682d84a22}} 
+\index{Device@{Device}!get\+Name@{get\+Name}}
+\index{get\+Name@{get\+Name}!Device@{Device}}
+\subsubsection{\texorpdfstring{get\+Name()}{getName()}}
+{\footnotesize\ttfamily std\+::string Device\+::get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 26 of file Device.\+cpp.
+
+\mbox{\Hypertarget{class_device_afc4d7d248d4ea70e69129c47d4ef1dc6}\label{class_device_afc4d7d248d4ea70e69129c47d4ef1dc6}} 
+\index{Device@{Device}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Device@{Device}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily std\+::string Device\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 30 of file Device.\+cpp.
+
+\mbox{\Hypertarget{class_device_a13ffb336487ca8f938b1ad0f42259785}\label{class_device_a13ffb336487ca8f938b1ad0f42259785}} 
+\index{Device@{Device}!get\+Volume\+Percent@{get\+Volume\+Percent}}
+\index{get\+Volume\+Percent@{get\+Volume\+Percent}!Device@{Device}}
+\subsubsection{\texorpdfstring{get\+Volume\+Percent()}{getVolumePercent()}}
+{\footnotesize\ttfamily int Device\+::get\+Volume\+Percent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 34 of file Device.\+cpp.
+
+\mbox{\Hypertarget{class_device_a6b2f2b45d71f1ecda445896e0429e22c}\label{class_device_a6b2f2b45d71f1ecda445896e0429e22c}} 
+\index{Device@{Device}!is\+Active@{is\+Active}}
+\index{is\+Active@{is\+Active}!Device@{Device}}
+\subsubsection{\texorpdfstring{is\+Active()}{isActive()}}
+{\footnotesize\ttfamily bool Device\+::is\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 18 of file Device.\+cpp.
+
+\mbox{\Hypertarget{class_device_a0ea3f1723c41ee958c753ef9b3b1a413}\label{class_device_a0ea3f1723c41ee958c753ef9b3b1a413}} 
+\index{Device@{Device}!is\+Restricted@{is\+Restricted}}
+\index{is\+Restricted@{is\+Restricted}!Device@{Device}}
+\subsubsection{\texorpdfstring{is\+Restricted()}{isRestricted()}}
+{\footnotesize\ttfamily bool Device\+::is\+Restricted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 22 of file Device.\+cpp.
+
+
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{class_device_ac6c8534a9c755b5ee9affc37771a301d}\label{class_device_ac6c8534a9c755b5ee9affc37771a301d}} 
+\index{Device@{Device}!active@{active}}
+\index{active@{active}!Device@{Device}}
+\subsubsection{\texorpdfstring{active}{active}}
+{\footnotesize\ttfamily bool Device\+::active\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 12 of file Device.\+h.
+
+\mbox{\Hypertarget{class_device_aa07acb3cbc8c6e2cfcfbf1be7f79b4d1}\label{class_device_aa07acb3cbc8c6e2cfcfbf1be7f79b4d1}} 
+\index{Device@{Device}!id@{id}}
+\index{id@{id}!Device@{Device}}
+\subsubsection{\texorpdfstring{id}{id}}
+{\footnotesize\ttfamily std\+::string Device\+::id\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 15 of file Device.\+h.
+
+\mbox{\Hypertarget{class_device_ae779f5ee618677629b71287f3f77f8e8}\label{class_device_ae779f5ee618677629b71287f3f77f8e8}} 
+\index{Device@{Device}!name@{name}}
+\index{name@{name}!Device@{Device}}
+\subsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily std\+::string Device\+::name\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Device.\+h.
+
+\mbox{\Hypertarget{class_device_a86832f8fbd54579dcce93c8470f27377}\label{class_device_a86832f8fbd54579dcce93c8470f27377}} 
+\index{Device@{Device}!restricted@{restricted}}
+\index{restricted@{restricted}!Device@{Device}}
+\subsubsection{\texorpdfstring{restricted}{restricted}}
+{\footnotesize\ttfamily bool Device\+::restricted\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 13 of file Device.\+h.
+
+\mbox{\Hypertarget{class_device_a06b952ae4a767b7f8fc040915f34e148}\label{class_device_a06b952ae4a767b7f8fc040915f34e148}} 
+\index{Device@{Device}!type@{type}}
+\index{type@{type}!Device@{Device}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily std\+::string Device\+::type\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Device.\+h.
+
+\mbox{\Hypertarget{class_device_a4b984b16ab0c4ca441b531aee1c55ed4}\label{class_device_a4b984b16ab0c4ca441b531aee1c55ed4}} 
+\index{Device@{Device}!volume\+Percent@{volume\+Percent}}
+\index{volume\+Percent@{volume\+Percent}!Device@{Device}}
+\subsubsection{\texorpdfstring{volume\+Percent}{volumePercent}}
+{\footnotesize\ttfamily int Device\+::volume\+Percent\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 14 of file Device.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_device_8h}{Device.\+h}}\item 
+\mbox{\hyperlink{_device_8cpp}{Device.\+cpp}}\end{DoxyCompactItemize}

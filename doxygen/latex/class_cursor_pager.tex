@@ -1,0 +1,225 @@
+\hypertarget{class_cursor_pager}{}\section{Cursor\+Pager$<$ T $>$ Class Template Reference}
+\label{class_cursor_pager}\index{Cursor\+Pager$<$ T $>$@{Cursor\+Pager$<$ T $>$}}
+
+
+{\ttfamily \#include $<$Cursor\+Pager.\+h$>$}
+
+
+
+Collaboration diagram for Cursor\+Pager$<$ T $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=176pt]{class_cursor_pager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cursor_pager_adb9af7ade4c6f7cc47f6176e6c3c8d3c}{Cursor\+Pager}} ()
+\item 
+\mbox{\hyperlink{class_cursor_pager_a945f2a56e865cd5fabb38ab674fa1999}{Cursor\+Pager}} (nlohmann\+::json pager\+Json)
+\item 
+int \mbox{\hyperlink{class_cursor_pager_a86d6a130611f6f35bc161a4bba7edba3}{get\+Limit}} ()
+\item 
+int \mbox{\hyperlink{class_cursor_pager_ad083974fd3d334f7133bc5b398d23ae2}{get\+Total}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_cursor_pager_a47e9d35657bb8dd1f9b774946e7d7bac}{get\+Href}} ()
+\item 
+std\+::string \mbox{\hyperlink{class_cursor_pager_a3f2c0a7c6a44b3316b85febdc50c45ed}{get\+Next}} ()
+\item 
+\mbox{\hyperlink{class_cursor}{Cursor}} \mbox{\hyperlink{class_cursor_pager_af019ca0742e31c7e5c41eb1baf7b71eb}{get\+Cursors}} ()
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{class_cursor_pager_a88246cd3876108a6483c10726d6f5682}{get\+Items}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_cursor_pager_aeb9a63e4c2d54f64c00fd95d02efc2f7}{limit}}
+\item 
+int \mbox{\hyperlink{class_cursor_pager_aae1bd2df9e1844beca1d12a590707fc3}{total}}
+\item 
+std\+::string \mbox{\hyperlink{class_cursor_pager_a0899805bbf2a0e7a1db0dce4eec79a11}{href}}
+\item 
+std\+::string \mbox{\hyperlink{class_cursor_pager_acc143185d46973f2733af18409c22ce8}{next}}
+\item 
+\mbox{\hyperlink{class_cursor}{Cursor}} \mbox{\hyperlink{class_cursor_pager_af7befd1981dba1c4da319b8fd40de6ed}{cursors}}
+\item 
+std\+::vector$<$ T $>$ \mbox{\hyperlink{class_cursor_pager_a086865ec09d59948bd89220d974023d3}{items}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Cursor\+Pager$<$ T $>$}
+
+
+
+Definition at line 12 of file Cursor\+Pager.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_cursor_pager_adb9af7ade4c6f7cc47f6176e6c3c8d3c}\label{class_cursor_pager_adb9af7ade4c6f7cc47f6176e6c3c8d3c}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!Cursor\+Pager@{Cursor\+Pager}}
+\index{Cursor\+Pager@{Cursor\+Pager}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{Cursor\+Pager()}{CursorPager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::\mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{class_cursor_pager_a945f2a56e865cd5fabb38ab674fa1999}\label{class_cursor_pager_a945f2a56e865cd5fabb38ab674fa1999}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!Cursor\+Pager@{Cursor\+Pager}}
+\index{Cursor\+Pager@{Cursor\+Pager}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{Cursor\+Pager()}{CursorPager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::\mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}} (\begin{DoxyParamCaption}\item[{nlohmann\+::json}]{pager\+Json }\end{DoxyParamCaption})}
+
+
+
+Definition at line 5 of file Cursor\+Pager.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_cursor_pager_af019ca0742e31c7e5c41eb1baf7b71eb}\label{class_cursor_pager_af019ca0742e31c7e5c41eb1baf7b71eb}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!get\+Cursors@{get\+Cursors}}
+\index{get\+Cursors@{get\+Cursors}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{get\+Cursors()}{getCursors()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{class_cursor}{Cursor}} \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::get\+Cursors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 36 of file Cursor\+Pager.\+cpp.
+
+\mbox{\Hypertarget{class_cursor_pager_a47e9d35657bb8dd1f9b774946e7d7bac}\label{class_cursor_pager_a47e9d35657bb8dd1f9b774946e7d7bac}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!get\+Href@{get\+Href}}
+\index{get\+Href@{get\+Href}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{get\+Href()}{getHref()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::string \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::get\+Href (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 20 of file Cursor\+Pager.\+cpp.
+
+\mbox{\Hypertarget{class_cursor_pager_a88246cd3876108a6483c10726d6f5682}\label{class_cursor_pager_a88246cd3876108a6483c10726d6f5682}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!get\+Items@{get\+Items}}
+\index{get\+Items@{get\+Items}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{get\+Items()}{getItems()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$ T $>$ \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::get\+Items (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 24 of file Cursor\+Pager.\+cpp.
+
+\mbox{\Hypertarget{class_cursor_pager_a86d6a130611f6f35bc161a4bba7edba3}\label{class_cursor_pager_a86d6a130611f6f35bc161a4bba7edba3}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!get\+Limit@{get\+Limit}}
+\index{get\+Limit@{get\+Limit}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{get\+Limit()}{getLimit()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::get\+Limit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 28 of file Cursor\+Pager.\+cpp.
+
+\mbox{\Hypertarget{class_cursor_pager_a3f2c0a7c6a44b3316b85febdc50c45ed}\label{class_cursor_pager_a3f2c0a7c6a44b3316b85febdc50c45ed}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!get\+Next@{get\+Next}}
+\index{get\+Next@{get\+Next}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{get\+Next()}{getNext()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::string \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::get\+Next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 32 of file Cursor\+Pager.\+cpp.
+
+\mbox{\Hypertarget{class_cursor_pager_ad083974fd3d334f7133bc5b398d23ae2}\label{class_cursor_pager_ad083974fd3d334f7133bc5b398d23ae2}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!get\+Total@{get\+Total}}
+\index{get\+Total@{get\+Total}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{get\+Total()}{getTotal()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+int \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::get\+Total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line 40 of file Cursor\+Pager.\+cpp.
+
+
+
+\subsection{Field Documentation}
+\mbox{\Hypertarget{class_cursor_pager_af7befd1981dba1c4da319b8fd40de6ed}\label{class_cursor_pager_af7befd1981dba1c4da319b8fd40de6ed}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!cursors@{cursors}}
+\index{cursors@{cursors}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{cursors}{cursors}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+\mbox{\hyperlink{class_cursor}{Cursor}} \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::cursors\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 20 of file Cursor\+Pager.\+h.
+
+\mbox{\Hypertarget{class_cursor_pager_a0899805bbf2a0e7a1db0dce4eec79a11}\label{class_cursor_pager_a0899805bbf2a0e7a1db0dce4eec79a11}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!href@{href}}
+\index{href@{href}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{href}{href}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+std\+::string \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::href\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 18 of file Cursor\+Pager.\+h.
+
+\mbox{\Hypertarget{class_cursor_pager_a086865ec09d59948bd89220d974023d3}\label{class_cursor_pager_a086865ec09d59948bd89220d974023d3}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!items@{items}}
+\index{items@{items}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{items}{items}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+std\+::vector$<$T$>$ \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::items\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 21 of file Cursor\+Pager.\+h.
+
+\mbox{\Hypertarget{class_cursor_pager_aeb9a63e4c2d54f64c00fd95d02efc2f7}\label{class_cursor_pager_aeb9a63e4c2d54f64c00fd95d02efc2f7}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!limit@{limit}}
+\index{limit@{limit}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{limit}{limit}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+int \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::limit\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 16 of file Cursor\+Pager.\+h.
+
+\mbox{\Hypertarget{class_cursor_pager_acc143185d46973f2733af18409c22ce8}\label{class_cursor_pager_acc143185d46973f2733af18409c22ce8}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!next@{next}}
+\index{next@{next}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+std\+::string \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::next\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 19 of file Cursor\+Pager.\+h.
+
+\mbox{\Hypertarget{class_cursor_pager_aae1bd2df9e1844beca1d12a590707fc3}\label{class_cursor_pager_aae1bd2df9e1844beca1d12a590707fc3}} 
+\index{Cursor\+Pager@{Cursor\+Pager}!total@{total}}
+\index{total@{total}!Cursor\+Pager@{Cursor\+Pager}}
+\subsubsection{\texorpdfstring{total}{total}}
+{\footnotesize\ttfamily template$<$class T$>$ \\
+int \mbox{\hyperlink{class_cursor_pager}{Cursor\+Pager}}$<$ T $>$\+::total\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line 17 of file Cursor\+Pager.\+h.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_cursor_pager_8h}{Cursor\+Pager.\+h}}\item 
+\mbox{\hyperlink{_cursor_pager_8cpp}{Cursor\+Pager.\+cpp}}\end{DoxyCompactItemize}

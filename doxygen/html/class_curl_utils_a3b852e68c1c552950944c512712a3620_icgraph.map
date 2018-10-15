@@ -1,0 +1,10 @@
+<map id="CurlUtils::PUT" name="CurlUtils::PUT">
+<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#abcf8490d7729c7c620fbdc42faf94c3a" title="SpotifyAPI::saveAlbums" alt="" coords="166,5,329,31"/>
+<area shape="rect" id="node3" href="$class_spotify_a_p_i.html#ae8eaa0d40f4a07af6354fac9f0452d47" title="SpotifyAPI::followArtist" alt="" coords="170,55,325,80"/>
+<area shape="rect" id="node4" href="$class_spotify_a_p_i.html#ae9364eeba6428a021dd34dd3976acc99" title="SpotifyAPI::editPlaylist" alt="" coords="170,104,325,129"/>
+<area shape="rect" id="node5" href="$class_spotify_a_p_i.html#abc2a6bac621bfc0e2301147a63d325e1" title="SpotifyAPI::followPlaylist" alt="" coords="164,153,331,179"/>
+<area shape="rect" id="node6" href="$class_spotify_a_p_i.html#aa9fcff75e9b8067c482306f0af0fc519" title="SpotifyAPI::reorderPlaylist\lTracks" alt="" coords="159,203,336,241"/>
+<area shape="rect" id="node7" href="$class_spotify_a_p_i.html#a5a5d099d9be138440ad095cf8d7e6a96" title="SpotifyAPI::replacePlaylist\lTracks" alt="" coords="159,265,336,304"/>
+<area shape="rect" id="node8" href="$class_spotify_a_p_i.html#a385e1e97af9b2f8b22ac0538c6f410a1" title="SpotifyAPI::saveTracks" alt="" coords="168,328,327,353"/>
+<area shape="rect" id="node9" href="$class_spotify_a_p_i.html#a9b47427d58da9c870860bf066430cb35" title="SpotifyAPI::followUser" alt="" coords="171,377,324,403"/>
+</map>
