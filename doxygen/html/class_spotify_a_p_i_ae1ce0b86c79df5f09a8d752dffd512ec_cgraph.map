@@ -1,6 +1,0 @@
-<map id="SpotifyAPI::removeTracksFromPlaylist" name="SpotifyAPI::removeTracksFromPlaylist">
-<area shape="rect" id="node2" href="$class_curl_utils.html#aa78fe6e8b55d787002b7089e70473558" title="CurlUtils::DELETE" alt="" coords="228,31,359,56"/>
-<area shape="rect" id="node3" href="$class_curl_utils.html#a596d1f41d3e300c4c626b4e4f819c194" title="CurlUtils::runRequest" alt="" coords="407,31,555,56"/>
-<area shape="rect" id="node4" href="$class_curl_utils.html#a86211746c9f0981b56fd143996a10a4a" title="CurlUtils::replaceAll" alt="" coords="614,5,751,31"/>
-<area shape="rect" id="node5" href="$class_curl_utils.html#a1e068c580af8fc71663e220c6b2128c3" title="CurlUtils::writeCallback" alt="" coords="603,55,762,80"/>
-</map>

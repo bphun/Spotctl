@@ -1,6 +1,0 @@
-<map id="View::prompt" name="View::prompt">
-<area shape="rect" id="node2" href="$class_player_view.html#ae054992ef7cb944201aa643ca73327aa" title="PlayerView::initializeWindows" alt="" coords="152,5,349,31"/>
-<area shape="rect" id="node3" href="$class_player_view.html#a8f41109707205d01009aab96f72d338f" title="PlayerView::initialize" alt="" coords="397,85,540,111"/>
-<area shape="rect" id="node4" href="$class_player_view.html#ab0056b8fbbab777cc0559425496f89c9" title="PlayerView::displaySidebar\lContents" alt="" coords="159,107,342,145"/>
-<area shape="rect" id="node5" href="$class_player_view.html#a1591b9bb3c762bc45af4aa2f35cb9c11" title="PlayerView::displayMedia\lPlayerContents" alt="" coords="164,169,337,208"/>
-</map>

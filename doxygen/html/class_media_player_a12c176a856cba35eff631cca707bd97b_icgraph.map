@@ -1,5 +1,0 @@
-<map id="MediaPlayer::currentSongDuration" name="MediaPlayer::currentSongDuration">
-<area shape="rect" id="node2" href="$class_player_view.html#aae1b5c77e61dfeebaa124b379206cfbc" title="PlayerView::newProgressBar\lString" alt="" coords="229,5,423,44"/>
-<area shape="rect" id="node3" href="$class_player_view.html#a1591b9bb3c762bc45af4aa2f35cb9c11" title="PlayerView::displayMedia\lPlayerContents" alt="" coords="471,5,644,44"/>
-<area shape="rect" id="node4" href="$class_player_view.html#a8f41109707205d01009aab96f72d338f" title="PlayerView::initialize" alt="" coords="692,12,834,37"/>
-</map>

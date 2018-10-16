@@ -1,6 +1,0 @@
-<map id="SpotifyAPI::fetchNewReleases" name="SpotifyAPI::fetchNewReleases">
-<area shape="rect" id="node2" href="$class_curl_utils.html#ac500280637c99900b1f1e64d5be58733" title="CurlUtils::GET" alt="" coords="255,31,362,56"/>
-<area shape="rect" id="node3" href="$class_curl_utils.html#a596d1f41d3e300c4c626b4e4f819c194" title="CurlUtils::runRequest" alt="" coords="410,31,558,56"/>
-<area shape="rect" id="node4" href="$class_curl_utils.html#a86211746c9f0981b56fd143996a10a4a" title="CurlUtils::replaceAll" alt="" coords="616,5,754,31"/>
-<area shape="rect" id="node5" href="$class_curl_utils.html#a1e068c580af8fc71663e220c6b2128c3" title="CurlUtils::writeCallback" alt="" coords="606,55,764,80"/>
-</map>

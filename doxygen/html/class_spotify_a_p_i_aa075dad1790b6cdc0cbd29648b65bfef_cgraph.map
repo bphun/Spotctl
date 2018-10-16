@@ -1,7 +1,0 @@
-<map id="SpotifyAPI::fetchTracks" name="SpotifyAPI::fetchTracks">
-<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#a3244fda7378b2315accdf00f2d22e40f" title="SpotifyAPI::fetchTrack" alt="" coords="213,31,365,56"/>
-<area shape="rect" id="node3" href="$class_curl_utils.html#ac500280637c99900b1f1e64d5be58733" title="CurlUtils::GET" alt="" coords="413,31,520,56"/>
-<area shape="rect" id="node4" href="$class_curl_utils.html#a596d1f41d3e300c4c626b4e4f819c194" title="CurlUtils::runRequest" alt="" coords="568,31,716,56"/>
-<area shape="rect" id="node5" href="$class_curl_utils.html#a86211746c9f0981b56fd143996a10a4a" title="CurlUtils::replaceAll" alt="" coords="774,5,912,31"/>
-<area shape="rect" id="node6" href="$class_curl_utils.html#a1e068c580af8fc71663e220c6b2128c3" title="CurlUtils::writeCallback" alt="" coords="764,55,922,80"/>
-</map>

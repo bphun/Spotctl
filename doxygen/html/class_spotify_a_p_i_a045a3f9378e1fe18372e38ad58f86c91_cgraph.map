@@ -1,7 +1,0 @@
-<map id="SpotifyAPI::addTracksToPlaylist" name="SpotifyAPI::addTracksToPlaylist">
-<area shape="rect" id="node2" href="$class_spotify_a_p_i.html#ac6e0064f7fb02813ab423f4c9f5d042e" title="SpotifyAPI::insertOptions" alt="" coords="262,5,432,31"/>
-<area shape="rect" id="node3" href="$class_curl_utils.html#ad923cee3ef19b5d7944f68ffb50b2fb3" title="CurlUtils::POST" alt="" coords="289,55,405,80"/>
-<area shape="rect" id="node4" href="$class_curl_utils.html#a596d1f41d3e300c4c626b4e4f819c194" title="CurlUtils::runRequest" alt="" coords="480,55,628,80"/>
-<area shape="rect" id="node5" href="$class_curl_utils.html#a86211746c9f0981b56fd143996a10a4a" title="CurlUtils::replaceAll" alt="" coords="686,29,824,55"/>
-<area shape="rect" id="node6" href="$class_curl_utils.html#a1e068c580af8fc71663e220c6b2128c3" title="CurlUtils::writeCallback" alt="" coords="676,79,834,104"/>
-</map>
