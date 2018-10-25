@@ -4,23 +4,27 @@
 #include <map>
 #include <string>
 
+#include "../utils/json/json.hpp"
+
 class TrackLink {
 
 private:
 
-	std::map<std::string, std::string> externalUrls;
-	std::string href;
-	std::string id;
-	std::string type;
+	std::string id;	
 	std::string uri;
+	std::string href;
+	std::string type;
+	std::map<std::string, std::string> externalUrls;
 
 public:
 
-	std::map<std::string, std::string> getExternalURLS();
-	std::string getHref();
+	TrackLink(nlohmann::json trackLinkJson);
+
 	std::string getID();
-	std::string getType();
 	std::string getURI();
+	std::string getHref();
+	std::string getType();
+	std::map<std::string, std::string> getExternalURLS();
 
 };
 

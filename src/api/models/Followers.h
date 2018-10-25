@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../utils/json.h"
+#include "../utils/json/json.hpp"
 
 class Followers {
 
@@ -14,7 +14,8 @@ private:
 
 public:
 
-	Followers(nlohmann::json json);
+	Followers(nlohmann::json followersJson);
+	Followers();
 
 	int getTotal();
 	std::string getHref();

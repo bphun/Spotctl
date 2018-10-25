@@ -19,9 +19,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	curl = curl_easy_init();
 	if (!curl) {
-		//	Throw error
 		throw CurlException("Error: Could not initialize cURL");
-		// return curl;
 	}
 
 	std::string url = "https://api.spotify.com" + endpoint;
@@ -44,11 +42,21 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	if (!authorizationToken.empty()) {
 		std::string authHeader = "Authorization: Bearer " + authorizationToken;
-		std::string contentHeader = "Content-Length: 0";
-		// printf("%s", header.c_str());
 		struct curl_slist* headers = NULL;
 		headers = curl_slist_append(headers, authHeader.c_str());
-		headers = curl_slist_append(headers, contentHeader.c_str());
+
+		// if (request == "POST") {
+			// std::string contentTypeHeader = "Content-Type: application/json";
+			// std::string contentLengthHeader = "Content-Length: 0";
+			// headers = curl_slist_append(headers, contentTypeHeader.c_str());
+			// headers = curl_slist_append(headers, contentLengthHeader.c_str());
+		// }
+
+		if (request == "PUT") {
+			std::string contentLengthHeader = "Content-Length: 0";
+			headers = curl_slist_append(headers, contentLengthHeader.c_str());
+		}
+
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 	}
 
@@ -58,7 +66,6 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	int responseCode = curl_easy_perform(curl);
 	if (responseCode != CURLE_OK) {
-		//	Throw curl exception
 		throw CurlException("Error: \n" + std::to_string(responseCode));
 	}
 

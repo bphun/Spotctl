@@ -5,42 +5,47 @@
 #include <vector>
 #include <string>
 
-#include "User.h"
-#include "PlaylistTrack.h"
 #include "Pager.h"
 #include "Followers.h"
+#include "UserPublic.h"
+#include "PlaylistTrack.h"
+
+#include "../utils/json/json.hpp"
 
 class Playlist {
 
 private:
 
-	User owner;
-	bool isPublic;
-	bool isCollaborative;
+	bool collaborative;
+	bool publicPlaylist;
 	std::string id;
 	std::string uri;
 	std::string type;
 	std::string name;
 	std::string href;
 	std::string snapshotId;
+	std::string description;
+	UserPublic owner;
+	Followers followers;
 	Pager<PlaylistTrack> tracks;
 	std::map<std::string, std::string> externalUrls;
 
-
-
 public:
-	bool isPublic();
+
+	Playlist(nlohmann::json playlistJson);
+
 	bool isCollaborative();
+	bool isPublic();
 	std::string getID();
 	std::string getURI();
-	std::string getHref();
-	std::string getName();
 	std::string getType();
-	std::string getOwner();
+	std::string getName();
+	std::string getHref();
 	std::string getSnapshotID();
+	std::string getDescription();
+	UserPublic getOwner();
 	Pager<PlaylistTrack> getTracks();
 	std::map<std::string, std::string> getExternalUrls();
-
 
 };
 

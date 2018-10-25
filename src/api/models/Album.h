@@ -4,11 +4,12 @@
 #include <vector>
 #include <string>
 
+#include "Pager.h"
 #include "Track.h"
 #include "Artist.h"
 #include "Copyright.h"
-#include "../utils/json.h"
-#include "Pager.h"
+
+#include "../utils/json/json.hpp"
 
 class Album {
 
@@ -26,6 +27,7 @@ private:
 
 public:
 	
+	Album();
 	Album(nlohmann::json albumJson);
 	~Album();
 
@@ -33,7 +35,7 @@ public:
 	std::string getName();
 	std::string getHref();
 	std::string getReleaseDate();
-	std::vector<Track> getTracks();
+	Pager<Track> getTracks();
 	std::vector<Artist> getArtists();
 	std::vector<std::string> getGenres();
 	std::vector<std::string> getAvailableMarkets();

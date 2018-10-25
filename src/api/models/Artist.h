@@ -1,17 +1,18 @@
-#ifndef  ARTIST_H
+#ifndef ARTIST_H
 #define ARTIST_H
 
 #include <string>
 #include <vector>
 
 #include "Followers.h"
-#include "../utils/json.h"
+
+#include "../utils/json/json.hpp"
 
 class Artist {
 
 private:
 
-	int popularity;
+	// int popularity;
 	std::string id;
 	std::string name;
 	Followers followers;
@@ -19,9 +20,9 @@ private:
 
 public:
 
-	Artist(nlohmann::json json);
+	Artist(nlohmann::json artistJson);
 
-	int getPopularity();
+	// int getPopularity();
 	std::string getID();
 	std::string getName();
 	Followers getFollowers();

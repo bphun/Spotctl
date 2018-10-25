@@ -5,25 +5,26 @@
 
 #include "User.h"
 #include "Track.h"
-#include "../utils/json.h"
+
+#include "../utils/json/json.hpp"
 
 class PlaylistTrack {
 
 private:
 
+	bool local;
 	std::string addedAt;
-	UserPublic addedBy;
-	bool isLocal;
 	Track track;
+	UserPublic addedBy;
 
 public:
 
 	PlaylistTrack(nlohmann::json trackJson);
 
-	std::string getAddedAt();
-	User getAddedBy();
 	bool isLocal();
-	std::shared_ptr<Track> getTrack();
+	std::string getAddedAt();
+	Track getTrack();
+	UserPublic getAddedBy();
 
 };
 

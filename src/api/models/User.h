@@ -3,23 +3,25 @@
 
 #include <string>
 
-#include "../utils/json.h"
+#include "UserPublic.h"
 
-class User {
+#include "../utils/json/json.hpp"
+
+class User: public UserPublic {
 
 private:
 
-	std::string country;
 	std::string email;
 	std::string product;
+	std::string country;
 
 public:
 
-	User(nlohmann::json json);
+	User(nlohmann::json userJson);
 
-	std::string getCountry();
 	std::string getEmail();
 	std::string getProduct();
+	std::string getCountry();
 
 };
 

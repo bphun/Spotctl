@@ -3,14 +3,15 @@
 
 #include <curl/curl.h>
 
-#include "json.h"
+// #include <nlohmann/json.hpp>
+
+#include "json/json.hpp"
 #include "SpotifyException.h"
 #include "CurlException.h"
 
 class CurlUtils {
 private:
-
-	std::string replaceAll(std::string str, const std::string& from, const std::string& to);
+	std::string replaceAll(std::string& str, const std::string from, const std::string to);
 
 public:
 	static size_t writeCallback(void *contents, size_t size, size_t nmemb, void *userp);

@@ -1,11 +1,15 @@
 #include "Album.h"
 
+Album::Album() = default;
+
 Album::Album(nlohmann::json albumJson) {
+	// std::cout << albumJson.dump(4) << std::endl;
+
 	for (nlohmann::json artistJson : albumJson["artists"]) {
 		artists.push_back(Artist(artistJson));
 	}
 	for (std::string market : albumJson["available_markets"]) {
-		available_markets.push_back(market);
+		availableMarkets.push_back(market);
 	}
 	for (nlohmann::json copyrightJson : albumJson["copyrights"]) {
 		copyrights.push_back(Copyright(copyrightJson));
@@ -16,20 +20,14 @@ Album::Album(nlohmann::json albumJson) {
 
 	this->href = albumJson["href"];
 	this->name = albumJson["name"];
-	this->popularity = albumJson["popularity"];
+	if (!albumJson["popularity"].is_null()) {
+		this->popularity = albumJson["popularity"];
+	}
 	this->releaseDate = albumJson["release_date"];
-	this->tracks = Pager<Track>(albumJson("tracks"));
+	this->tracks = Pager<Track>(albumJson["tracks"]);
 }
 
-Album::~Album() {
-	this->popularity = 0;
-	this->name.clear();
-	this->releaseDate.clear();
-	this->artists.clear();
-	this->tracks.clear();
-	this->genres.clear();
-	this->copyrights->clear();
-}
+Album::~Album() = default;
 
 int Album::getPopularity() {
 	return this->popularity;
@@ -51,7 +49,7 @@ std::vector<Artist> Album::getArtists() {
 	return this->artists;
 }
 
-std::vector<Track> Album::getTracks() {
+Pager<Track> Album::getTracks() {
 	return this->tracks;
 }
 
@@ -60,7 +58,7 @@ std::vector<std::string> Album::getGenres() {
 }
 
 std::vector<std::string> Album::getAvailableMarkets() {
-	return availableMarkets;
+	return this->availableMarkets;
 }
 
 std::vector<Copyright> Album::getCopyrights() {

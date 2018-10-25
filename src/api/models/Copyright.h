@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../utils/json.h"
+#include "../utils/json/json.hpp"
 
 class Copyright {
 
@@ -14,8 +14,7 @@ private:
 
 public:
 
-	Copyright(nlohmann::json json);
-	~Copyright();
+	Copyright(nlohmann::json copyrightJson);
 
 	std::string getType();
 	std::string getDescription();
