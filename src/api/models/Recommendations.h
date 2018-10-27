@@ -6,7 +6,7 @@
 #include "Track.h"
 #include "RecommendationsSeed.h"
 
-#include "../utils/json/json.hpp"
+#include "../utils/json.h"
 
 class Recommendations {
 

@@ -9,7 +9,7 @@
 #include "Artist.h"
 #include "Copyright.h"
 
-#include "../utils/json/json.hpp"
+#include "../utils/json.h"
 
 class Album {
 

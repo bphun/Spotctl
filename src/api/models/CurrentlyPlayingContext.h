@@ -5,7 +5,7 @@
 #include "Device.h"
 #include "Context.h"
 
-#include "../utils/json/json.hpp"
+#include "../utils/json.h"
 
 class CurrentlyPlayingContext {
 

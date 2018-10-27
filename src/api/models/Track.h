@@ -11,7 +11,7 @@
 #include "Artist.h"
 // #include "TrackLink.h"
 
-#include "../utils/json/json.hpp"
+#include "../utils/json.h"
 
 class Track {
 

@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "../utils/json/json.hpp"
+#include "../utils/json.h"
 
 class Cursor {
 	
@@ -13,6 +13,7 @@ private:
 
 public:
 
+	Cursor();
 	Cursor(nlohmann::json cursorJson);
 
 	std::string GetAfter();
