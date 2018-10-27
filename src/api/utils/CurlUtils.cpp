@@ -21,8 +21,6 @@ void CurlUtils::addKeyServerConfig(CURL* curl) {
 	// curl_easy_setopt(curl, CURLOPT_SSLCERTTYPE, "PEM");
 	// curl_easy_setopt(curl, CURLOPT_SSLCERT, certFilePath);
 
-	// curl_easy_setopt(curl, CURLOPT_KEYPASSWD, "62391Bphun");
-
 	// curl_easy_setopt(curl, CURLOPT_SSLKEYTYPE, "key");
 	// curl_easy_setopt(curl, CURLOPT_SSLKEY, certKeyPath);
 
