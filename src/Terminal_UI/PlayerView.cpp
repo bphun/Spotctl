@@ -49,7 +49,12 @@ private:
 		int highlight = 0;
 
 		std::vector<std::string> playlists;
-		spotifyAPI.fetchUserPlaylists(playlists);
+		playlists.push_back("asdf");
+		playlists.push_back("asdf");
+		playlists.push_back("asdf");
+		playlists.push_back("asdf");
+		playlists.push_back("asdf");
+		// spotifyAPI.fetchUserPlaylists(playlists);
 		int y = 1;
 
 		// printf("%lu\n", playlists.size());

@@ -1,14 +1,20 @@
 #include "SpotifyAPI.h"
 
-SpotifyAPI::SpotifyAPI() {												//-----
-	this->clientID = readFileAt("src/api/vars/id.txt");             	//     |
-	this->clientSecret = readFileAt("src/api/vars/secret.txt");     	//     |--- This is temporary, will write a server to serve this data
-	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");	//     |
-																		//-----
+SpotifyAPI::SpotifyAPI() {				
 	curl_global_init(CURL_GLOBAL_ALL);
-
+	
+	this->clientID = curlUtils.GET("/static/clientid.json")["id"];
+	this->clientSecret = curlUtils.GET("/static/clientsecret.json")["secret"];
+																		//-----|
+	// this->clientID = readFileAt("src/api/vars/id.txt");             	//     |
+	// this->clientSecret = readFileAt("src/api/vars/secret.txt");     	//     |--- This is temporary, will write a server to serve this data
+	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");	//     |
+																		//-----|
 	if (refreshToken != "") {
-		requestAccessToken("refresh_token");
+		requestTokensWithType("refresh_token");
+
+		// options_t options;
+		// this->accessToken = curlUtils.POST("/api/token", options, "", "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientID + "&client_secret=" + clientSecret);
 	} else {
 		// requestAccessToken("authorization_code");
 		// requestAccessToken("refresh_token");
@@ -41,13 +47,15 @@ void SpotifyAPI::requestAccessToken(std::string grantType) {
 	curl = curl_easy_init();
 
 	if(!curl) {
-		std::cerr << "Could not initiate cURL" << std::endl;
-		return;
+		throw CurlException("Could not initiate cURL");
 	}
 
 	std::string postData;
 	if (grantType == "refresh_token") {
 		postData = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientID + "&client_secret=" + clientSecret;
+		// curlUtils.setPostData(postData);
+		// this->accessToken = curlUtils.POST("/api/token")["access_token"];
+		// curlUtils.clearPostData();
 	} else {
 		postData = "grant_type=authorization_code&code=" + refreshToken + "&client_id=" + clientID + "&client_secret=" + clientSecret;
 	}
@@ -63,7 +71,7 @@ void SpotifyAPI::requestAccessToken(std::string grantType) {
 
     int responseCode = curl_easy_perform(curl);
     if (responseCode != CURLE_OK) {
-    	throw CurlException("Error: \n" + std::to_string(responseCode));
+    	throw CurlException("Error: " + std::to_string(responseCode));
     }
     curl_easy_cleanup(curl);
 
@@ -348,15 +356,20 @@ std::vector<Track> SpotifyAPI::fetchTracks(std::vector<std::string> trackIDs, op
 //	playback
 
 CursorPager<PlayHistory> SpotifyAPI::fetchUserRecentlyPlayed(options_t options) {
-
+	return CursorPager<PlayHistory>(curlUtils.GET("/v1/me/player/recently-played", options, accessToken));
 }
 
 CurrentlyPlayingContext SpotifyAPI::fetchUserCurrentPlayback(options_t options) {
-
+	return CurrentlyPlayingContext(curlUtils.GET("/v1/me/player", options, accessToken));
 }
 
 std::vector<Device> SpotifyAPI::fetchUserDevices(options_t options) {
-
+	std::vector<Device> devices;
+	nlohmann::json devicesJson = curlUtils.GET("/v1/me/player/devices", options, accessToken);
+	for (nlohmann::json deviceJson : devicesJson["devices"]) {
+		devices.push_back(Device(deviceJson));
+	}
+	return devices;
 }
 
 

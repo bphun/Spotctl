@@ -14,7 +14,24 @@ std::string CurlUtils::replaceAll(std::string& str, const std::string from, cons
     return str;
 }
 
-nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
+void CurlUtils::addKeyServerConfig(CURL* curl) {
+	const char* caCertPath = "cert/selfCA.pem";
+	// std::string certKeyPath = "cert/selfCA.key";
+
+	// curl_easy_setopt(curl, CURLOPT_SSLCERTTYPE, "PEM");
+	// curl_easy_setopt(curl, CURLOPT_SSLCERT, certFilePath);
+
+	// curl_easy_setopt(curl, CURLOPT_KEYPASSWD, "62391Bphun");
+
+	// curl_easy_setopt(curl, CURLOPT_SSLKEYTYPE, "key");
+	// curl_easy_setopt(curl, CURLOPT_SSLKEY, certKeyPath);
+
+	// curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+	curl_easy_setopt(curl, CURLOPT_CAINFO, caCertPath);
+	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+}
+
+nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body, std::string baseURL) {
 	CURL* curl;
 
 	curl = curl_easy_init();
@@ -22,17 +39,22 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		throw CurlException("Error: Could not initialize cURL");
 	}
 
-	std::string url = "https://api.spotify.com" + endpoint;
+	std::string url = baseURL + endpoint;
+
+	if (baseURL != "https://api.spotify.com") {
+		addKeyServerConfig(curl);
+	}
 
 	if (!options.empty()) {
 		url += "?";
 		for (auto option : options) {
 			url += option.first + "=" + option.second + "&";
 		}
+		replaceAll(url, " ", "%20");
 	}
-	replaceAll(url, " ", "%20");
 
 	std::string readBuffer;
+
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
@@ -64,9 +86,14 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
 	}
 
+		if (!postData.empty()) {
+		// printf("asdfadfasdfasdfasdfad\n");
+		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postData.c_str());
+	}
+
 	int responseCode = curl_easy_perform(curl);
 	if (responseCode != CURLE_OK) {
-		throw CurlException("Error: \n" + std::to_string(responseCode));
+		throw CurlException("Error: " + std::to_string(responseCode));
 	}
 
 	long statusCode = 0;
@@ -84,8 +111,16 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 	return nlohmann::json::parse(readBuffer);
 }
 
+void CurlUtils::setPostData(std::string postData) {
+	this->postData = postData;
+}
+
+void CurlUtils::clearPostData() {
+	this->postData = "";
+}
+
 nlohmann::json CurlUtils::GET(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
-	return runRequest("GET", endpoint, options, authorizationToken, body);
+	return runRequest("GET", endpoint, options, authorizationToken, body, endpoint.find("/static/") == std::string::npos ? "https://api.spotify.com" : "https://localhost:3000");
 }
 
 nlohmann::json CurlUtils::POST(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {

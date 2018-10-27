@@ -26,7 +26,7 @@
 #include "models/CurrentlyPlayingTrack.h"
 #include "models/CurrentlyPlayingContext.h"
 
-#include "utils/json/json.hpp"
+#include "utils/json.h"
 #include "utils/CurlUtils.h"
 #include "utils/CurlException.h"
 #include "utils/SpotifyException.h"

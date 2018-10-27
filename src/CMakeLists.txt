@@ -10,8 +10,18 @@ find_package(Curses REQUIRED)
 include_directories(${CURSES_LIBRARIES})
 
 set(PANEL_LIBRARIES panel)
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${spotifycli_SOURCE_DIR})
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${spotifyclient_SOURCE_DIR})
 
-add_executable(spotifycli ${EXEC_SRC})
+file(GLOB_RECURSE LIB_SRC
+     "api/*.h"
+     "api/*.cpp"
+     )
 
-target_link_libraries(spotifycli ${CURL_LIBRARIES} ${CURSES_LIBRARIES} ${PANEL_LIBRARIES})
+add_library(spotifyapilib ${LIB_SRC})
+target_link_libraries(spotifyapilib ${CURL_LIBRARIES} ${CURSES_LIBRARIES} ${PANEL_LIBRARIES})
+# add_executable(spotifyclient spotifyclientlib)
+
+add_executable(spotifyclient ${EXEC_SRC})
+
+target_link_libraries(spotifyclient ${CURL_LIBRARIES} ${CURSES_LIBRARIES} ${PANEL_LIBRARIES})
+# target_link_libraries (spotifyclient LINK_PUBLIC spotifyclientlib)
