@@ -1,0 +1,3 @@
+*.DS_Store*
+src/api/utils/cert/
+src/api/vars
