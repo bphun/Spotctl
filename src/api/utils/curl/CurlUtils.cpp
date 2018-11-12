@@ -16,17 +16,12 @@ std::string CurlUtils::replaceAll(std::string& str, const std::string from, cons
 
 void CurlUtils::addKeyServerConfig(CURL* curl) {
 	const char* caCertPath = "cert/selfCA.pem";
-	// std::string certKeyPath = "cert/selfCA.key";
-
-	// curl_easy_setopt(curl, CURLOPT_SSLCERTTYPE, "PEM");
-	// curl_easy_setopt(curl, CURLOPT_SSLCERT, certFilePath);
-
-	// curl_easy_setopt(curl, CURLOPT_SSLKEYTYPE, "key");
-	// curl_easy_setopt(curl, CURLOPT_SSLKEY, certKeyPath);
 
 	// curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 	curl_easy_setopt(curl, CURLOPT_CAINFO, caCertPath);
 	curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+
+	isKeyServerRequest = true;
 }
 
 nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body, std::string baseURL) {
@@ -34,7 +29,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	curl = curl_easy_init();
 	if (!curl) {
-		throw CurlException("Error: Could not initialize cURL");
+		throw CurlException("Could not initialize cURL");
 	}
 
 	std::string url = baseURL + endpoint;
@@ -64,14 +59,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		std::string authHeader = "Authorization: Bearer " + authorizationToken;
 		struct curl_slist* headers = NULL;
 		headers = curl_slist_append(headers, authHeader.c_str());
-
-		// if (request == "POST") {
-			// std::string contentTypeHeader = "Content-Type: application/json";
-			// std::string contentLengthHeader = "Content-Length: 0";
-			// headers = curl_slist_append(headers, contentTypeHeader.c_str());
-			// headers = curl_slist_append(headers, contentLengthHeader.c_str());
-		// }
-
+		
 		if (request == "PUT") {
 			std::string contentLengthHeader = "Content-Length: 0";
 			headers = curl_slist_append(headers, contentLengthHeader.c_str());
@@ -84,20 +72,15 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
 	}
 
-		if (!postData.empty()) {
-		// printf("asdfadfasdfasdfasdfad\n");
-		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postData.c_str());
-	}
-
 	int responseCode = curl_easy_perform(curl);
 	if (responseCode != CURLE_OK) {
-		throw CurlException("Error: " + std::to_string(responseCode));
+		throw CurlException(responseCode, isKeyServerRequest);
 	}
 
 	long statusCode = 0;
 	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
 	if (statusCode < 200 || statusCode > 204) {
-		throw SpotifyException("Error: \n" + readBuffer);
+		throw SpotifyException("\n" + readBuffer);
 	}
 
 	curl_easy_cleanup(curl);
@@ -109,20 +92,20 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 	return nlohmann::json::parse(readBuffer);
 }
 
-void CurlUtils::setPostData(std::string postData) {
-	this->postData = postData;
-}
-
-void CurlUtils::clearPostData() {
-	this->postData = "";
-}
-
 nlohmann::json CurlUtils::GET(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
-	return runRequest("GET", endpoint, options, authorizationToken, body, endpoint.find("/static/") == std::string::npos ? "https://api.spotify.com" : "https://localhost:3000");
+	return runRequest("GET", endpoint, options, authorizationToken, body/*, endpoint.find("/static/") == std::string::npos ? "https://api.spotify.com" : "https://localhost:3000"*/);
+}
+
+nlohmann::json CurlUtils::GET(std::string endpoint, std::string baseURL, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
+	return runRequest("GET", endpoint, options, authorizationToken, body, baseURL);
 }
 
 nlohmann::json CurlUtils::POST(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {
 	return runRequest("POST", endpoint, options, authorizationToken, body);
+}
+
+nlohmann::json CurlUtils::POST(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body, std::string baseURL) {
+	return runRequest("POST", endpoint, options, authorizationToken, body, baseURL);
 }
 
 nlohmann::json CurlUtils::PUT(std::string endpoint, std::map<std::string, std::string> options, std::string authorizationToken, std::string body) {

@@ -6,10 +6,21 @@ int main() {
 	// viewManager.presentView(authenticationViewIdentifier);
 	// viewManager.refreshView(authenticationViewIdentifier);
 	SpotifyAPI api;
+	SocketUtils socketUtils("guc3-accesspoint-b-sh25.ap.spotify.com", 4070);
 
-	User user = api.fetchUser();
+	socketUtils.connectToHost();
 
-	printf("%s\n", user.getID().c_str());
+	// CurlUtils curlUtils;
+
+	// Album album = api.fetchAlbum("5lXgrzp3xcFdYCQXtsS6dG");
+
+	// for (Track track : album.getTracks().getItems()) {
+	// 	printf("%s\n", track.getURI().c_str());
+	// }
+
+	// Track track = api.fetchTrack("0CZ8lquoTX2Dkg7Ak2inwA");
+
+	// printf("%s\n", track.getHref().c_str());
 
 	// Playlist playlist = api.createPlaylist(user.getID(), "test");
 
@@ -21,7 +32,6 @@ int main() {
 	// viewManager.refreshView(playerViewIdentifier);
 
 	// init();
-
 	// WINDOW* loginWindow = newwin(10, 36,( (screenHeight / 2) - 5) - 10, (screenWidth / 2) - 13);
 
 	// box(loginWindow, 0, 0);

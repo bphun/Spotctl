@@ -10,6 +10,8 @@
 #include "Constants.h"
 #include "Terminal_UI/ViewManager.h"
 
+
+#include "api/utils/sockets/SocketUtils.h"
 // ViewManager viewManager;
 
 unsigned int screenWidth;

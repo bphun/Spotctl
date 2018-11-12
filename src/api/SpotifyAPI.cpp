@@ -3,36 +3,47 @@
 SpotifyAPI::SpotifyAPI() {				
 	curl_global_init(CURL_GLOBAL_ALL);
 	
-	this->clientID = curlUtils.GET("/static/clientid.json")["id"];
-	this->clientSecret = curlUtils.GET("/static/clientsecret.json")["secret"];
-																		//-----|
-	// this->clientID = readFileAt("src/api/vars/id.txt");             	//     |
-	// this->clientSecret = readFileAt("src/api/vars/secret.txt");     	//     |--- This is temporary, will write a server to serve this data
-	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");	//     |
-																		//-----|
-	if (refreshToken != "") {
-		requestTokensWithType("refresh_token");
+	this->clientID = curlUtils.GET("/static/clientid.json", "https://localhost:3000")["client_id"];
+	this->clientSecret = curlUtils.GET("/static/clientsecret.json", "https://localhost:3000")["client_secret"];
+	
+	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");
 
-		// options_t options;
-		// this->accessToken = curlUtils.POST("/api/token", options, "", "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientID + "&client_secret=" + clientSecret);
+	if (refreshToken != "") {
+		requestAccessToken();
 	} else {
 		// requestAccessToken("authorization_code");
-		// requestAccessToken("refresh_token");
-		exit(-1);
+		requestRefreshToken();
+		requestAccessToken();
 	}
-
-	// options_t options;
-	// nlohmann::json albumJSON = curlUtils.GET("/v1/me", options, accessToken);
-	// std::cout << albumJSON << std::endl;
 }
 
-std::string SpotifyAPI::readFileAt(std::string path) {
+void SpotifyAPI::requestAccessToken() {
+	options_t options;
+	std::string postData = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientID + "&client_secret=" + clientSecret;
+	
+	this->accessToken = curlUtils.POST("/api/token", options, "", postData, "https://accounts.spotify.com")["access_token"];
+}
+
+void SpotifyAPI::requestRefreshToken() {
+	options_t options;
+	options["client_id"] = clientID;
+	options["response_type"] = "code";
+	options["redirect_uri"] = "https://bphun.github.io";
+	options["scope"] = "user-read-private%20user-read-email%20playlist-read-private%20playlist-read-collaborative%20qplaylist-modify-public%20playlist-modify-private%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-birthdate%20user-read-email%20user-top-read%20ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20user-read-recently-played";
+		
+	std::cout << curlUtils.GET("/authorize/", "https://accounts.spotify.com", options) << std::endl;
+
+	// this->refreshToken = curlUtils.GET("/authorize/", "https://accounts.spotify.com", options)["refresh_token"];
+	// writeStringToFile(this->refreshToken, "vars/refreshToken.txt");
+}
+
+std::string SpotifyAPI::readFileAt(std::string filePath) {
 	std::ifstream file;
 	std::string str;
 
-	file.open(path);
+	file.open(filePath);
 	if (!file) {
-		printf("Error opening file\n");
+		printf("Error opening file at %s\n", filePath.c_str());
 		exit(-1);
 	}
 
@@ -40,6 +51,19 @@ std::string SpotifyAPI::readFileAt(std::string path) {
 
 	file.close();
 	return str;
+}
+
+void SpotifyAPI::writeStringToFile(std::string str, std::string filePath) {
+	std::ofstream file;
+	file.open(filePath);
+
+	if (!file) {
+		printf("Error opening file %s\n", filePath.c_str());
+		exit(-1);
+	}
+
+	file << str;
+	file.close();
 }
 
 void SpotifyAPI::requestAccessToken(std::string grantType) {
@@ -71,7 +95,7 @@ void SpotifyAPI::requestAccessToken(std::string grantType) {
 
     int responseCode = curl_easy_perform(curl);
     if (responseCode != CURLE_OK) {
-    	throw CurlException("Error: " + std::to_string(responseCode));
+    	throw CurlException(responseCode);
     }
     curl_easy_cleanup(curl);
 
@@ -326,9 +350,9 @@ Recommendations SpotifyAPI::fetchRecommendations(options_t options) {
 	return Recommendations(curlUtils.GET("/v1/recommendations", options, accessToken));
 }
 
-CurrentlyPlayingTrack SpotifyAPI::fetchUserCurrentPlayingTrack(options_t options) {
+// CurrentlyPlayingTrack SpotifyAPI::fetchUserCurrentPlayingTrack(options_t options) {
 
-}
+// }
 
 Pager<SavedTrack> SpotifyAPI::fetchSavedTracks(options_t options) {
 	return Pager<SavedTrack>(curlUtils.GET("/v1/me/tracks", options, accessToken));

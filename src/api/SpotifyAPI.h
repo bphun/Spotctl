@@ -27,9 +27,10 @@
 #include "models/CurrentlyPlayingContext.h"
 
 #include "utils/json.h"
-#include "utils/CurlUtils.h"
-#include "utils/CurlException.h"
-#include "utils/SpotifyException.h"
+#include "utils/curl/CurlUtils.h"
+#include "utils/exceptions/CurlException.h"
+#include "utils/exceptions/SpotifyException.h"
+#include "utils/sockets/SocketUtils.h"
 
 typedef std::map<std::string, std::string> options_t;
 
@@ -42,17 +43,21 @@ private:
 	std::string refreshToken;
 	std::string clientSecret;
 	std::string authorizationCode;
+
 	CurlUtils curlUtils;
 
+	void requestAccessToken();
+	void requestRefreshToken();
 	void requestAccessToken(std::string grantType);
+	void writeStringToFile(std::string str, std::string filePath);
 	void insertOptions(std::vector<std::string> source, std::string key, options_t &destination);
+
 	std::string replaceAll(std::string& str, const std::string from, const std::string to);
 	std::string readFileAt(std::string path);
 
 public:
 
 	SpotifyAPI();
-
 
 	//	Album 
 
