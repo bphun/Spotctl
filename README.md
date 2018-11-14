@@ -1,6 +1,5 @@
 # Terminal Based Spotify Client
 
-___
 This is a basic Spotify client that runs in a terminal.
 ___
 
