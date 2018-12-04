@@ -3,3 +3,4 @@
 src/api/utils/cert/
 src/api/vars
 build/*
+tests/.DS_Store
