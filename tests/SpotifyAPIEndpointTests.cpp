@@ -134,32 +134,32 @@ TEST_F(SpotifyAPIEndpointTests, fetchArtistTopTracks) {
 
 TEST_F(SpotifyAPIEndpointTests, createPlaylist) {
 	User user = api.fetchUser();
-	Playlist newPlaylist = api.createPlaylist(user.getID().c_str(), "test");
-	Playlist retreivedPlaylist = api.fetchPlaylist(user.getID(), newPlaylist.getID());
+	Playlist newPlaylist = api.createPlaylist(user.getid().c_str(), "test");
+	Playlist retreivedPlaylist = api.fetchPlaylist(user.getid(), newPlaylist.getid());
 
 	ASSERT_STREQ(retreivedPlaylist.getName().c_str(), "test");
-	ASSERT_TRUE(api.checkUserFollowingPlaylist(user.getID(), retreivedPlaylist.getID(), {user.getID()}));
+	ASSERT_TRUE(api.checkUserFollowingPlaylist(user.getid(), retreivedPlaylist.getid(), {user.getid()}));
 
-	api.unfollowPlaylist(user.getID(), retreivedPlaylist.getID());
+	api.unfollowPlaylist(user.getid(), retreivedPlaylist.getid());
 
-	ASSERT_FALSE(api.checkUserFollowingPlaylist(user.getID(), retreivedPlaylist.getID(), {user.getID()}));
+	ASSERT_FALSE(api.checkUserFollowingPlaylist(user.getid(), retreivedPlaylist.getid(), {user.getid()}));
 }
 
 // TEST_F(SpotifyAPIEndpointTests, editPlaylist) {
 // 	User user = api.fetchUser();
 
-// 	Playlist playlist = api.createPlaylist(user.getID(), "test");
+// 	Playlist playlist = api.createPlaylist(user.getid(), "test");
 
 // 	ASSERT_STREQ(playlist.getName().c_str(), "test");
-// 	ASSERT_TRUE(api.checkUserFollowingPlaylist(user.getID(), playlist.getID(), {user.getID()}));
+// 	ASSERT_TRUE(api.checkUserFollowingPlaylist(user.getid(), playlist.getid(), {user.getid()}));
 
-// 	api.addTracksToPlaylist(user.getID(), playlist.getID(), {"spotify:track:7reiSieFbRTo9KHbT39BZh", "spotify:track:1ObZ6sMWPeI56b74WaULRk"});
-// 	Pager<PlaylistTrack> tracks = api.fetchPlaylistTracks(user.getID(), playlist.getID());
+// 	api.addTracksToPlaylist(user.getid(), playlist.getid(), {"spotify:track:7reiSieFbRTo9KHbT39BZh", "spotify:track:1ObZ6sMWPeI56b74WaULRk"});
+// 	Pager<PlaylistTrack> tracks = api.fetchPlaylistTracks(user.getid(), playlist.getid());
 // 	ASSERT_STREQ(tracks.getItems()[0].getTrack().getURI().c_str(), "spotify:track:7reiSieFbRTo9KHbT39BZh");
 // 	ASSERT_STREQ(tracks.getItems()[0].getTrack().getURI().c_str(), "spotify:track:1ObZ6sMWPeI56b74WaULRk");
 
-// 	api.unfollowPlaylist(user.getID(), playlist.getID());
-// 	ASSERT_FALSE(api.checkUserFollowingPlaylist(user.getID(), playlist.getID(), {user.getID()}));
+// 	api.unfollowPlaylist(user.getid(), playlist.getid());
+// 	ASSERT_FALSE(api.checkUserFollowingPlaylist(user.getid(), playlist.getid(), {user.getid()}));
 // }
 
 TEST_F(SpotifyAPIEndpointTests, saveTracks) {
@@ -204,8 +204,8 @@ TEST_F(SpotifyAPIEndpointTests, searchTracks) {
 
 TEST_F(SpotifyAPIEndpointTests, fetchTracks) {
 	std::vector<Track> tracks = api.fetchTracks({"7reiSieFbRTo9KHbT39BZh", "1ObZ6sMWPeI56b74WaULRk"});
-	ASSERT_STREQ(tracks[0].getID().c_str(), "7reiSieFbRTo9KHbT39BZh");
-	ASSERT_STREQ(tracks[1].getID().c_str(), "1ObZ6sMWPeI56b74WaULRk");
+	ASSERT_STREQ(tracks[0].getid().c_str(), "7reiSieFbRTo9KHbT39BZh");
+	ASSERT_STREQ(tracks[1].getid().c_str(), "1ObZ6sMWPeI56b74WaULRk");
 }
 
 TEST_F(SpotifyAPIEndpointTests, fetchUserCurrentPlayback) {
@@ -227,7 +227,7 @@ TEST_F(SpotifyAPIEndpointTests, followUser) {
 TEST_F(SpotifyAPIEndpointTests, fetchUser) {
 	User user = api.fetchUser();
 
-	ASSERT_STREQ(user.getID().c_str(), "aymsies");
+	ASSERT_STREQ(user.getid().c_str(), "aymsies");
 }
 
 // TEST_F(SpotifyAPIEndpointTests, play) {
