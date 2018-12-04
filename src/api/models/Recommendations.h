@@ -8,6 +8,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Recommendation Object
+ *
+ * Stores a user's recommended tracks
+ *
+ */
+
 class Recommendations {
 
 private:

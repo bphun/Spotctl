@@ -6,6 +6,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Play history object
+ * 
+ * Contains a user's play history 
+ *
+ */
+
 class PlayHistory {
 
 private:

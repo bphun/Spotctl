@@ -5,6 +5,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Recommendation Seed Object
+ * 
+ * Object containing 
+ *
+ */
+
 class RecommendationsSeed {
 
 private:
@@ -23,7 +30,7 @@ public:
     int getInitialPoolSize();
     int getAfterFilteringSize();
     int getAfterRelinkingSize();
-    std::string getId();
+    std::string getid();
     std::string getHref();
     std::string getType();
 

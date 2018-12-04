@@ -1,12 +1,17 @@
 #include "RecommendationsSeed.h"
 
-RecommendationsSeed::RecommendationsSeed(nlohmann::json reccomendationsJson) {
-    afterFilteringSize = reccomendationsJson["afterFilteringSize"];
-    afterRelinkingSize = reccomendationsJson["afterRelinkingSize"];
-    href = reccomendationsJson["href"];
-    id = reccomendationsJson["id"];
-    initialPoolSize = reccomendationsJson["initialPoolSize"];
-    type = reccomendationsJson["type"];
+/**
+ * Initializes the reccommendations seed with data in the given JSON
+ *
+ * @param recomendationsSeedJson JSON containing seed data
+ */
+RecommendationsSeed::RecommendationsSeed(nlohmann::json recomendationsSeedJson) {
+    afterFilteringSize = recomendationsSeedJson["afterFilteringSize"];
+    afterRelinkingSize = recomendationsSeedJson["afterRelinkingSize"];
+    href = recomendationsSeedJson["href"];
+    id = recomendationsSeedJson["id"];
+    initialPoolSize = recomendationsSeedJson["initialPoolSize"];
+    type = recomendationsSeedJson["type"];
 }
 
 int RecommendationsSeed::getAfterFilteringSize() {
@@ -21,7 +26,7 @@ std::string RecommendationsSeed::getHref() {
     return this->href;
 }
 
-std::string RecommendationsSeed::getId() {
+std::string RecommendationsSeed::getid() {
     return this->id;
 }
 

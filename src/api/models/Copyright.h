@@ -5,6 +5,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * A copyright object
+ *
+ * Stores copyright information that associated with an album or song
+ *
+ */
+
 class Copyright {
 
 private:

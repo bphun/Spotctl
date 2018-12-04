@@ -5,13 +5,17 @@
 #include <vector>
 #include <string>
 
-// #include <iostream>
-
 #include "User.h"
 #include "Artist.h"
-// #include "TrackLink.h"
 
 #include "../utils/json.h"
+
+/**
+ * Track Object
+ *
+ * Stores track data received from Spotify when a track is requested 
+ *
+ */
 
 class Track {
 
@@ -31,7 +35,6 @@ private:
 	std::vector<Artist> artists;
 	std::vector<std::string> availableMarkets;
 	std::map<std::string, std::string> externalUrls;
-	// TrackLink linkedFrom;
 
 public:
 
@@ -43,7 +46,7 @@ public:
 	int getDurationMs();
 	int getDiscNumber();
 	int getTrackNumber();
-	std::string getID();
+	std::string getid();
 	std::string getURI();
 	std::string getHref();
 	std::string getName();
@@ -52,7 +55,6 @@ public:
 	std::vector<Artist> getArtists();
 	std::vector<std::string> getAvailableMarkets();
 	std::map<std::string, std::string> getExternalUrls();
-	// TrackLink getLinkedFrom();
 	
 };
 

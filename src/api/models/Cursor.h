@@ -5,6 +5,14 @@
 
 #include "../utils/json.h"
 
+/**
+ * Cursor object
+ *
+ * Represents the current item
+ * Honestly, idk what this is used for
+ *
+ */
+
 class Cursor {
 	
 private:

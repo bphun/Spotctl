@@ -5,6 +5,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Device object
+ *
+ * Contains data associated with devices linked with a user's spotify account
+ *
+ */
+
 class Device {
 
 private:
@@ -24,7 +31,7 @@ public:
     bool isActive();
     bool isRestricted();
     int getVolumePercent();
-    std::string getId();
+    std::string getid();
     std::string getName();
     std::string getType();
     

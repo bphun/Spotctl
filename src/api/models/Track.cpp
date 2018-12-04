@@ -2,11 +2,14 @@
 
 Track::Track() = default;
 
+/**
+ * Initializes the track with the data in the provided JSON
+ * 
+ * @param trackJson JSON containing track data
+ */
 Track::Track(nlohmann::json trackJson) {
-	// std::cout << trackJson.dump(4) << std::endl;
 
 	explicitSong = trackJson["explicit"];
-	// playable = trackJson["is_playable"]
 	durationMs = trackJson["duration_ms"];
 	discNumber = trackJson["disc_number"];
 	trackNumber = trackJson["track_number"];
@@ -18,7 +21,6 @@ Track::Track(nlohmann::json trackJson) {
 	if (!trackJson["preview_url"].is_null()) {
 		previewUrl = trackJson["preview_url"];
 	}
-	// linkedFrom = TrackLink()
 	for (nlohmann::json artist : trackJson["artists"]) {
 		artists.push_back(Artist(artist));
 	}
@@ -31,62 +33,100 @@ Track::Track(nlohmann::json trackJson) {
 	}
 }
 
+/**
+ * @return Whether or not this track is explicit
+ */
 bool Track::isExplicit() {
 	return this->explicitSong;
 }
 
+/**
+ * @return Whether or not the track is currently playable
+ */
 bool Track::isPlayable() {
 	return this->playable;
 }
 
+/**
+ * @return The disc number (usually 1 unless the album consists of more than one disc)
+ */
 int Track::getDiscNumber() {
 	return this->discNumber;
 }
 
+/**
+ * @return The length of the track in milliseconds
+ */
 int Track::getDurationMs() {
 	return this->durationMs;
 }
 
+/**
+ * @return The track's position in an album
+ */
 int Track::getTrackNumber() {
 	return this->trackNumber;
 }
 
-std::string Track::getID() {
+/**
+ * @return The track's spotify ID
+ */
+std::string Track::getid() {
 	return this->id;
 }
 
+/**
+ * @return The Tracks Spotify URI
+ */
 std::string Track::getURI() {
 	return this->uri;
 }
 
+/**
+ * @return The track's href
+ */
 std::string Track::getHref() {
 	return this->href;
 }
 
+/**
+ * @return The track's name
+ */
 std::string Track::getName() {
 	return this->name;
 }
 
+/**
+ * @return A generic Spotify track (Always "track")
+ */
 std::string Track::getType() {
 	return this->type;
 }
 
+/**
+ * @return URL where a preview of the track can be played
+ */
 std::string Track::getPreviewUrl() {
 	return this->previewUrl;
 }
 
-// TrackLink Track::getLinkedFrom() {
-// 	return this->getLinkedFrom
-// }
-
+/**
+ * @return Vector of artists that worked on this track
+ */
 std::vector<Artist> Track::getArtists() {
 	return this->artists;
 }
 
+/**
+ * @return Vector of markets where this track is available
+ */
 std::vector<std::string> Track::getAvailableMarkets() {
 	return this->availableMarkets;
 }
 
+/**
+ * @return Map of known external Urls where this track is available
+ */
 std::map<std::string, std::string> Track::getExternalUrls() {
 	return externalUrls;
 }

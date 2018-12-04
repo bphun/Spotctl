@@ -7,6 +7,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Saved Album Object
+ *
+ * This is essentially and Album object but it includes the date that the album was added
+ *
+ */
+
 class SavedAlbum {
 
 private:

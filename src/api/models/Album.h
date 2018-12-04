@@ -1,6 +1,5 @@
 #ifndef ALBUM_H
 #define ALBUM_H
-
 #include <vector>
 #include <string>
 
@@ -10,6 +9,14 @@
 #include "Copyright.h"
 
 #include "../utils/json.h"
+
+/**
+ *
+ * Album object
+ * 
+ * Stores data received from Spotify when an album is requested
+ *
+ */
 
 class Album {
 

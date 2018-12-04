@@ -2,7 +2,7 @@
 #define VIEW_MANAGER_H
 
 #include "View.h"
-#include "PlayerView.cpp"
+#include "PlayerView/PlayerView.h"
 #include "../Constants.h"
 // #include "AuthenticationView.cpp"
 

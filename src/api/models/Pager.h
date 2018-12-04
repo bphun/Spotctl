@@ -6,6 +6,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Pager Object
+ *
+ * This is essentially a list of a desired type but with some aids
+ *
+ */
+
 template <class T> class Pager {
 
 private:
@@ -59,30 +66,51 @@ template <typename T> Pager<T>::Pager(nlohmann::json pagerJson) {
 	}
 }
 
+/**
+ * @return Pager's href
+ */
 template <typename T> std::string Pager<T>::getHref() {
 	return href;
 }
 
+/**
+ * @return Vector of items in the pager
+ */
 template <typename T> std::vector<T> Pager<T>::getItems() {
 	return items;
 }
 
+/**
+ * @return Maximum number of item that are in this pager
+ */
 template <typename T> int Pager<T>::getLimit() {
 	return limit;
 }
 
+/**
+ * @return Next item in the pager
+ */
 template <typename T> std::string Pager<T>::getNext() {
 	return next;
 }
 
+/**
+ * @return Pager's offset
+ */
 template <typename T> int Pager<T>::getOffset() {
 	return offset;
 }
 
+/**
+ * @return previous item in the pager
+ */
 template <typename T> std::string Pager<T>::getPrevious() {
 	return previous;
 }
 
+/**
+ * @return total number of items in the pager
+ */
 template <typename T> int Pager<T>::getTotal() {
 	return total;
 }

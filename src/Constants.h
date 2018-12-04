@@ -5,7 +5,7 @@
 const int authenticationViewInputFrameWidth = 50;
 const int authenticationViewInputFrameHeight = 10;
 
-const int playerViewSideBarWidth = 25;
+const int playerViewSideBarWidth = 35;
 const int playerViewMediaControllerHeight = 7;
 const int playerViewMediaControllerProgressBarStringLength = 80;
 const int playerViewMediaControllerProgressBarMaxNumEqualSigns = 80;

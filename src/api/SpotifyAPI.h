@@ -34,6 +34,15 @@
 
 typedef std::map<std::string, std::string> options_t;
 
+/**
+ * 
+ * A C++ wrapper for the Spotify Web API. This API supports
+ * all current API requests made publicly available to the general public.
+ * To use this API, you will need a Spotify Premium account and your Client ID and Client Secret
+ * to be able to make Web API requets.
+ * 
+ */
+
 class SpotifyAPI {
 
 private:
@@ -44,11 +53,17 @@ private:
 	std::string clientSecret;
 	std::string authorizationCode;
 
+	#ifdef LOCALTEST
+	std::string backendURL = "https://localhost:3000";
+	#else 
+	std::string backendURL = "https://13.57.247.79:3000";
+	#endif
+
 	CurlUtils curlUtils;
 
 	void requestAccessToken();
 	void requestRefreshToken();
-	void requestAccessToken(std::string grantType);
+	
 	void writeStringToFile(std::string str, std::string filePath);
 	void insertOptions(std::vector<std::string> source, std::string key, options_t &destination);
 
@@ -58,8 +73,9 @@ private:
 public:
 
 	SpotifyAPI();
+	SpotifyAPI(std::string cliendID, std::string clientSecret);
 
-	//	Album 
+	/* Album */
 
 	void saveAlbums(std::vector<std::string> albumIds, options_t options = options_t());
 	void removeSavedAlbums(std::vector<std::string> albumIds, options_t options = options_t());
@@ -73,7 +89,7 @@ public:
 	std::vector<Album> fetchAlbums(std::vector<std::string> albumIDs, options_t options = options_t());
 
 
-	//	Artist
+	/* Artist */
 
 	void followArtist(std::string artistID, options_t options = options_t());
 	bool checkFollowingArtist(std::string artistID, options_t options = options_t());
@@ -85,7 +101,7 @@ public:
 	std::vector<Track> fetchArtistTopTracks(std::string artistID, std::string country, options_t options = options_t());
 
 
-	//	Playlist
+	/* Playlist */
 
 	void editPlaylist(std::string userId, std::string playlistId, options_t options = options_t());
 	void followPlaylist(std::string ownerID, std::string playlistdID, options_t options = options_t());
@@ -104,7 +120,7 @@ public:
 	Pager<Playlist> fetchUserPlaylists(std::string userId, options_t options = options_t());
 
 
-	//	Tracks
+	/* Tracks */
 
 	void saveTracks(std::vector<std::string> trackIDs, options_t options = options_t());
 	void unsaveTracks(std::vector<std::string> trackIDs, options_t options = options_t());
@@ -118,14 +134,14 @@ public:
 	std::vector<Track> fetchTracks(std::vector<std::string> trackIds, options_t options = options_t());
 
 
-	//	playback
+	/* playback */
 
 	CursorPager<PlayHistory> fetchUserRecentlyPlayed(options_t options = options_t());
 	CurrentlyPlayingContext fetchUserCurrentPlayback(options_t options = options_t());
 	std::vector<Device> fetchUserDevices(options_t options = options_t());
 
 
-	//	User
+	/* User */
 
 	void followUser(std::string userID, options_t options = options_t());
 	void unfollowUser(std::string userID, options_t options = options_t());
@@ -133,7 +149,7 @@ public:
 	User fetchUser(options_t options = options_t());
 
 
-	//	Stream Control
+	/* Stream Control */
 
 	void pause(options_t options = options_t());
 	void play(options_t options = options_t());

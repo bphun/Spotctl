@@ -7,6 +7,13 @@
 
 #include "../utils/json.h"
 
+/**
+ *  User Object
+ *
+ * Stores general data associated with a user
+ *
+ */
+
 class User: public UserPublic {
 
 private:

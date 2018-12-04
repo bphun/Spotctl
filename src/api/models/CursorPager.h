@@ -8,6 +8,12 @@
 
 #include "../utils/json.h"
 
+/**
+ * Cursor Pager object
+ *
+ * Stores list of items encased in a Cursor pager object
+ *
+ */
 
 template <class T> class CursorPager {
 
@@ -36,6 +42,11 @@ public:
 
 template<typename T> CursorPager<T>::CursorPager() = default;
 
+/**
+ * Initializes the cursor pager with the provided JSON
+ *
+ * @param pagerJson JSON containing the pager's data
+ */
 template<typename T> CursorPager<T>::CursorPager(nlohmann::json pagerJson) {
     href = pagerJson["href"];
     limit = pagerJson["limit"];
@@ -51,26 +62,44 @@ template<typename T> CursorPager<T>::CursorPager(nlohmann::json pagerJson) {
     }
 }
 
+/**
+ * @return Cursor Pager's href
+ */
 template<typename T> std::string CursorPager<T>::getHref() {
     return this->href;
 }
 
+/**
+ * @return Vector containing the pager's data
+ */
 template<typename T> std::vector<T> CursorPager<T>::getItems() {
     return this->items;
 }
 
+/**
+ * @return Maximum number of items in this pager
+ */
 template<typename T> int CursorPager<T>::getLimit() {
     return this->limit;
 }
 
+/**
+ * @return The next item in the pager
+ */
 template<typename T> std::string CursorPager<T>::getNext() {
     return this->next;
 }
 
+/**
+ * @return Cursors in the pager
+ */
 template<typename T> Cursor CursorPager<T>::getCursors() {
     return this->cursors;
 }
 
+/**
+ * @return Total number of items in the pager
+ */
 template<typename T> int CursorPager<T>::getTotal() {
     return this->total;
 }

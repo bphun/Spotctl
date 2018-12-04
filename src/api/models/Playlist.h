@@ -12,6 +12,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Playlist Object
+ *
+ * Stores playlist data received from Spotify when a playlist is requested
+ *
+ */
+
 class Playlist {
 
 private:
@@ -36,7 +43,7 @@ public:
 
 	bool isCollaborative();
 	bool isPublic();
-	std::string getID();
+	std::string getid();
 	std::string getURI();
 	std::string getType();
 	std::string getName();

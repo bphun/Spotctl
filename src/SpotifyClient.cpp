@@ -2,33 +2,33 @@
 #include "SpotifyClient.h"
 #endif
 
+/**
+ * Ignore this, i'm still testing stuffs so this is just random stuff
+ */
 int main() {
 	// viewManager.presentView(authenticationViewIdentifier);
-	// viewManager.refreshView(authenticationViewIdentifier);
 	SpotifyAPI api;
-	SocketUtils socketUtils("guc3-accesspoint-b-sh25.ap.spotify.com", 4070);
-
-	socketUtils.connectToHost();
+	// std::vector<Playlist> playlists = api.fetchUserPlaylists(api.fetchUser().getid()).getItems();
+	// for (Playlist p : playlists) {
+	// 	printf("%s\n", p.getName().c_str());
+	// }
 
 	// CurlUtils curlUtils;
 
-	// Album album = api.fetchAlbum("5lXgrzp3xcFdYCQXtsS6dG");
+	// api.pause();
+	// api.skipToNext();
 
-	// for (Track track : album.getTracks().getItems()) {
-	// 	printf("%s\n", track.getURI().c_str());
-	// }
+	// std::string accessPoint = curlUtils.GET("", "http://apresolve.spotify.com")["ap_list"][0];
 
-	// Track track = api.fetchTrack("0CZ8lquoTX2Dkg7Ak2inwA");
+	// int colonIndex = accessPoint.find(":");
+	// SocketUtils socketUtils(accessPoint.substr(0, colonIndex).c_str(), stoi(accessPoint.substr(colonIndex + 1, accessPoint.size())));
 
-	// printf("%s\n", track.getHref().c_str());
+	// unsigned char nonce[0x10]; //	16 byte
+	
 
-	// Playlist playlist = api.createPlaylist(user.getID(), "test");
+	// socketUtils.connectToHost();
 
-	// api.addTracksToPlaylist(user.getID(), playlist.getID(), {"spotify:track:7reiSieFbRTo9KHbT39BZh", "spotify:track:1ObZ6sMWPeI56b74WaULRk"});
-	// Pager<PlaylistTrack> tracks = api.fetchPlaylistTracks(user.getID(), playlist.getID());
-
-	// api.unfollowPlaylist(user.getID(), playlist.getID());
- 	// viewManager.presentView(playerViewIdentifier);
+ // 	viewManager.presentView(playerViewIdentifier);
 	// viewManager.refreshView(playerViewIdentifier);
 
 	// init();

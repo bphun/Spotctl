@@ -7,6 +7,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Current Playing Context
+ * 
+ * Current state of the user's player i.e if they are currently playing a song, shuffle is enabled, and their current track
+ *
+ */
+
 class CurrentlyPlayingContext {
 
 private:

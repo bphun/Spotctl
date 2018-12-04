@@ -13,6 +13,13 @@
 
 #include "../exceptions/SocketException.h"
 
+/**
+ * Socket Utilities
+ *
+ * A wrapper for the Unix socket library
+ * 
+ */
+
 class SocketUtils {
 
 private:
@@ -24,12 +31,14 @@ private:
 
 public:
 
-	SocketUtils();
+	SocketUtils(int port);
 	SocketUtils(const char* hostname, int port);
+
+	~SocketUtils();
 
 	void connectToHost();
 	void sendData(const char* data);
-	void receiveData(const char* data, int size, char buffer[size]);
+	void receiveData(int size, char buffer[size]);
 
 };
 

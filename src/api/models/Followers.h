@@ -5,6 +5,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Followers Object
+ *
+ * Contains a user's or album's followers
+ *
+ */
+
 class Followers {
 
 private:

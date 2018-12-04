@@ -8,6 +8,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Playlist Track Object
+ *
+ * Stores a track that is associated with a playlist
+ *
+ */
+
 class PlaylistTrack {
 
 private:

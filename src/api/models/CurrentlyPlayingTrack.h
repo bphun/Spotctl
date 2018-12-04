@@ -6,6 +6,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Currently Playing Track object
+ *
+ * The track that the user is currently playing
+ *
+ */
+
 class CurrentlyPlayingTrack {
 
 private:

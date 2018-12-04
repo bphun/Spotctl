@@ -13,26 +13,31 @@
 
 #include "../exceptions/SocketException.h"
 
+/*
+ * Domain Socket Utilities
+ *
+ * A basic utility to faciliate domain socket communications with a Node.JS backend.
+ * Not sure if this will actually be usefull in the future; I misread the Spotify documentation 
+ * and thought I could use this method to stream audio.
+ *
+ */
 
 class DomainSocketUtils {
 
 private:
-
-	const char* killServerCmd = "pkill -f 'node webApiInterface.js'";
 
 	int socketfd;
 	std::string domainSocketPath;
 	struct sockaddr_un domainSocket;
 
 	void loadConfig();
-	void connectToServer();
 
 public:
 
 	DomainSocketUtils();
 	~DomainSocketUtils();
 
-	void killNodeJsServer();
+	void killNodeJsServer(const char* killcmd);
 	void writeData(const char* Data);
 };
 

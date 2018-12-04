@@ -8,6 +8,14 @@
 
 #include "../utils/json.h"
 
+/**
+ *
+ * Artist object
+ *
+ * Stores data received from Spotify when an artist is requested 
+ *
+ */
+
 class Artist {
 
 private:
@@ -23,7 +31,7 @@ public:
 	Artist(nlohmann::json artistJson);
 
 	// int getPopularity();
-	std::string getID();
+	std::string getid();
 	std::string getName();
 	Followers getFollowers();
 	std::vector<std::string> getGenres();

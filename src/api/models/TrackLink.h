@@ -6,6 +6,12 @@
 
 #include "../utils/json.h"
 
+/**
+ * Track Link Object
+ * 
+ * No idea what this does 
+ */
+
 class TrackLink {
 
 private:
@@ -20,7 +26,7 @@ public:
 
 	TrackLink(nlohmann::json trackLinkJson);
 
-	std::string getID();
+	std::string getid();
 	std::string getURI();
 	std::string getHref();
 	std::string getType();

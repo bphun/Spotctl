@@ -7,6 +7,13 @@
 
 #include "../utils/json.h"
 
+/**
+ * Saved Track Object
+ *
+ * Stores a track with the date and time it was added
+ *
+ */
+
 class SavedTrack {
 
 private:

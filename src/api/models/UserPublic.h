@@ -10,6 +10,12 @@
 
 #include "../utils/json.h"
 
+/**
+ * User Public Object
+ *
+ * Stores information that allows for access of public user data
+ *
+ */
 class UserPublic {
 
 private:
@@ -27,7 +33,7 @@ public:
 	UserPublic();
 	UserPublic(nlohmann::json userJson);
 
-	std::string getID();
+	std::string getid();
 	std::string getURI();
 	std::string getHref();
 	std::string getType();
