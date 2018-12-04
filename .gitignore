@@ -1,4 +1,5 @@
 *.DS_Store*
+.vscode
 src/api/utils/cert/
 src/api/vars
 build/*
