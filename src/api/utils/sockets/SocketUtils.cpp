@@ -88,7 +88,14 @@ void SocketUtils::connectToHost() {
 	if (connect(socketfd, (struct sockaddr*)&sock, sizeof(sock)) < 0) {
 		throw SocketException("Could not connect to host");
 		exit(1);
+	} else {
+		printf("Connected to host\n");
 	}
+}
+
+void SocketUtils::disconnectFromHost() {
+	close(socketfd);
+	printf("Disconnected from host\n");
 }
 
 /**

@@ -37,6 +37,8 @@ public:
 	~SocketUtils();
 
 	void connectToHost();
+	void disconnectFromHost();
+	
 	void sendData(const char* data);
 	void receiveData(int size, char buffer[size]);
 
