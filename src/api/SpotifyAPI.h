@@ -28,9 +28,9 @@
 
 #include "utils/json.h"
 #include "utils/curl/CurlUtils.h"
+#include "utils/sockets/Socket.h"
 #include "utils/exceptions/CurlException.h"
 #include "utils/exceptions/SpotifyException.h"
-#include "utils/sockets/SocketUtils.h"
 
 typedef std::map<std::string, std::string> options_t;
 
@@ -47,23 +47,25 @@ class SpotifyAPI {
 
 private:
 
-	std::string clientID;
+	std::string spotifyClientID;
 	std::string accessToken;
 	std::string refreshToken;
-	std::string clientSecret;
+	std::string spotifyClientSecret;
 	std::string authorizationCode;
 
 	#ifdef LOCALTEST
 	std::string backendURL = "https://localhost:3000";
 	#else 
-	std::string backendURL = "https://13.57.247.79:3000";
+	std::string backendURL = "http://13.57.247.79:8080";
 	#endif
 
 	CurlUtils curlUtils;
 
 	void requestAccessToken();
 	void requestRefreshToken();
-	
+	void requestClientConfigStrings();
+	void requestSecrets(std::string clientId);		
+
 	void writeStringToFile(std::string str, std::string filePath);
 	void insertOptions(std::vector<std::string> source, std::string key, options_t &destination);
 

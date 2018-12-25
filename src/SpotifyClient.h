@@ -11,7 +11,7 @@
 #include "Terminal_UI/ViewManager.h"
 
 #include "api/utils/json.h"
-#include "api/utils/sockets/SocketUtils.h"
+#include "api/utils/sockets/Socket.h"
 
 // ViewManager viewManager;
 

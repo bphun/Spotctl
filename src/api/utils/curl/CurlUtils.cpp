@@ -30,7 +30,7 @@ std::string CurlUtils::replaceAll(std::string& str, const std::string from, cons
  *
  */
 void CurlUtils::addKeyServerConfig(CURL* curl) {
-	#ifdef DEBUG
+	#ifdef CLIENT_DEBUG
 	curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 	#endif
 	curl_easy_setopt(curl, CURLOPT_CAINFO, caCertPath);
@@ -77,6 +77,8 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		replaceAll(url, " ", "%20");
 	}
 
+	// printf("%s\n", url);
+
 	std::string readBuffer;
 
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
@@ -95,11 +97,12 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 			std::string contentLengthHeader = "Content-Length: 0";
 			headers = curl_slist_append(headers, contentLengthHeader.c_str());
 		}
-
+		
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 	}
 
 	if (!body.empty()) {
+		// printf("%s\n", body.c_str());
 		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
 	}
 
@@ -110,8 +113,10 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	long statusCode = 0;
 	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
-	if (statusCode < 200 || statusCode > 204) {
+	if (statusCode < 200 || statusCode > 204 && !isKeyServerRequest) {
 		throw SpotifyException("\n" + readBuffer);
+	} else if (statusCode < 200 || statusCode > 204 && isKeyServerRequest) {
+		throw CurlException(statusCode, "\n" + readBuffer, true);
 	}
 
 	curl_easy_cleanup(curl);

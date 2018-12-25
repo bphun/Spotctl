@@ -6,10 +6,11 @@
  */
 SpotifyAPI::SpotifyAPI() {				
 	curl_global_init(CURL_GLOBAL_ALL);
-	
-	this->clientID = curlUtils.GET("/static/clientid.json", backendURL)["client_id"];
-	this->clientSecret = curlUtils.GET("/static/clientsecret.json", backendURL)["client_secret"];
-	
+
+	//	Lines 12 and 14 can be executed concurrently, will improve construction times moderately
+
+	requestClientConfigStrings();
+
 	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");
 
 	if (refreshToken != "") {
@@ -20,21 +21,21 @@ SpotifyAPI::SpotifyAPI() {
 		requestAccessToken();
 	}
 
-	std::string postData = "user=" + fetchUser().getid();
-	curlUtils.POST("/api/logging", backendURL, postData);
-}
+	// std::string postData = "user=" + fetchUser().getid();
+	// curlUtils.POST("/api/logging", backendURL, postData);
+} 
 
 /**
  * Initializes the Spotify API and prepares it for requests to the Web API
  *
- * @param clientID Client ID given to you when you create an application in the Spotify developer portal
- * @param clientSecret Client secret given to you when you create an application in the Spotify developer portal
+ * @param spotifyClientID Client ID given to you when you create an application in the Spotify developer portal
+ * @param spotifyClientSecret Client secret given to you when you create an application in the Spotify developer portal
  */
-SpotifyAPI::SpotifyAPI(std::string cliendID, std::string clientSecret) {				
+SpotifyAPI::SpotifyAPI(std::string cliendID, std::string spotifyClientSecret) {				
 	curl_global_init(CURL_GLOBAL_ALL);
 	
-	this->clientID = clientID;
-	this->clientSecret = clientSecret;
+	this->spotifyClientID = spotifyClientID;
+	this->spotifyClientSecret = spotifyClientSecret;
 
 	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");
 
@@ -51,7 +52,7 @@ SpotifyAPI::SpotifyAPI(std::string cliendID, std::string clientSecret) {
  * Requests an access token from Spotify with an already obtained refresh token
  */
 void SpotifyAPI::requestAccessToken() {
-	std::string postData = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientID + "&client_secret=" + clientSecret;
+	std::string postData = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + spotifyClientID + "&client_secret=" + spotifyClientSecret;
 	this->accessToken = curlUtils.POST("/api/token", "https://accounts.spotify.com", postData)["access_token"];
 }
 
@@ -60,15 +61,50 @@ void SpotifyAPI::requestAccessToken() {
  */
 void SpotifyAPI::requestRefreshToken() {
 	options_t options;
-	options["client_id"] = clientID;
+	options["client_id"] = spotifyClientID;
 	options["response_type"] = "code";
 	options["redirect_uri"] = "https://bphun.github.io";
 	options["scope"] = "user-read-private%20user-read-email%20playlist-read-private%20playlist-read-collaborative%20qplaylist-modify-public%20playlist-modify-private%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-birthdate%20user-read-email%20user-top-read%20ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20user-read-recently-played";
-		
+
 	std::cout << curlUtils.GET("/authorize/", "https://accounts.spotify.com", options) << std::endl;
 
 	// this->refreshToken = curlUtils.GET("/authorize/", "https://accounts.spotify.com", options)["refresh_token"];
 	// writeStringToFile(this->refreshToken, "vars/refreshToken.txt");
+}
+
+/**
+ * Fetch the Spotify client secrete and ID from a remote server. The request
+ * will be made if the client sends a known UUID string. If the client does not have one
+ * then it will request for a UUID before requesting for the client ID and secrete again.
+ */
+void SpotifyAPI::requestClientConfigStrings() {
+	std::string clientId = readFileAt("src/api/vars/clientId.txt");
+
+	if (clientId != "") {
+		requestSecrets(clientId);
+	} else {
+		Socket* socket = new Socket("http://13.57.247.79", "7080");
+		std::string request = "id_request";
+		socket->emit("ClientHello", request);
+
+		clientId = "clientID=" + socket->getReceivedData();
+		std::string response = "received_key";
+
+		socket->emit("ClientResponsePlaintext", response);
+		// socket->closeSocketConnection();
+
+		// writeStringToFile(clientId, "src/api/vars/clientId.txt");
+		requestSecrets(clientId);
+
+		printf("spotifyClientID: %s\n", this->spotifyClientID.c_str());
+		printf("spotifyClientSecret: %s\n", this->spotifyClientSecret.c_str());
+	}
+}
+
+void SpotifyAPI::requestSecrets(std::string clientId) {
+	nlohmann::json clientConfigStrings = curlUtils.POST("/api/auth", backendURL, clientId);
+	this->spotifyClientID = clientConfigStrings["client_id"];
+	this->spotifyClientSecret = clientConfigStrings["client_secret"];
 }
 
 /**
@@ -228,7 +264,7 @@ Pager<Track> SpotifyAPI::fetchAlbumTracks(std::string albumID, options_t options
 }
 
 /**
- * Runs a query through Spotify's search engine
+ * Searches Spotify for albums with the specified query
  *
  * @param query Search query that will be sent to Spotify's search engine
  * @param options Options that will be sent to Spotify in the request header
@@ -330,7 +366,7 @@ Pager<Artist> SpotifyAPI::fetchUserTopArtists(options_t options) {
 }
 
 /**
- * Runs a query through Spotify's search engine
+ * Searches Spotify for an artists that match a query
  *
  * @param query Search query that will be sent to Spotify's search engine
  * @param options Options that will be sent to Spotify in the request header
@@ -601,7 +637,7 @@ Pager<Playlist> SpotifyAPI::fetchFeaturedPlaylists(options_t options) {
 }
 
 /**
- * Runs a query through Spotify's search engine
+ * Searches Spotify for playlists that match a query
  *
  * @param query Search query that will be sent to Spotify's search engine
  * @param options Options that will be sent to Spotify in the request header
@@ -720,7 +756,7 @@ Pager<Track> SpotifyAPI::fetchUserTopTracks(options_t options) {
 }
 
 /**
- * Runs a query through Spotify's search engine
+ * Searches Spotify for tracks that match a query
  *
  * @param query Search query that will be sent to Spotify's search engine
  * @param options Options that will be sent to Spotify in the request header

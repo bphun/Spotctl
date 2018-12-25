@@ -27,6 +27,12 @@ private:
 			case 7:
 			message = "Could not connect to host";
 			break;
+			case 52:
+			message = "An internal server error occured";
+			break;
+			case 429:
+			message = "Server is currently receiving too many requests. Try again later";
+			break;
 			default:
 			message = "Received unknown error code" + std::to_string(errorCode);
 			break;
@@ -43,7 +49,7 @@ private:
 	void generateErrorMessage(int errorCode, std::string &message, bool isKeyServerRequest) {
 		switch (errorCode) {
 			case 3:
-			message = "Host URL net specified";
+			message = "Host URL not specified";
 			break;
 			case 7:
 			message = "Could not connect to key server";
@@ -53,6 +59,9 @@ private:
 			break;
 			case 52:
 			message = "An internal server error occured";
+			break;
+			case 429:
+			message = "Server is currently receiving too many requests. Try again later";
 			break;
 			default:
 			message = "Received unknown error code " + std::to_string(errorCode);
@@ -87,6 +96,10 @@ public:
 	 * @param message A description of the exception that occured
 	 */
 	explicit CurlException(const std::string &message): _message(message) {}
+
+	explicit CurlException(int errorCode, const std::string &message, bool isKeyServerRequest): _message(message) {
+		generateErrorMessage(errorCode, _message, isKeyServerRequest);
+	}
 
 	/**
 	 * @return A description of the exception that occured
