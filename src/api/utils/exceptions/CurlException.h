@@ -28,10 +28,16 @@ private:
 			message = "Could not connect to host";
 			break;
 			case 52:
-			message = "An internal server error occured";
+			message = "(52) An internal server error occured";
+			break;
+			case 404:
+			message = "(404) The requested file could not be found";
 			break;
 			case 429:
-			message = "Server is currently receiving too many requests. Try again later";
+			message = "(429) Server is currently receiving too many requests. Try again later";
+			break;
+			case 502:
+			message = "(502) Bad Gateway";
 			break;
 			default:
 			message = "Received unknown error code" + std::to_string(errorCode);
@@ -60,8 +66,14 @@ private:
 			case 52:
 			message = "An internal server error occured";
 			break;
+			case 404:
+			message = "(404) The requested file could not be found";
+			break;
 			case 429:
-			message = "Server is currently receiving too many requests. Try again later";
+			message = "(429) Server is currently receiving too many requests. Try again later";
+			break;
+			case 502:
+			message = "(502) Bad Gateway";
 			break;
 			default:
 			message = "Received unknown error code " + std::to_string(errorCode);
