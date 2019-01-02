@@ -5,8 +5,7 @@
 int main(int argc, char* argv[]) {
 	if (argc > 1) {
 		SpotifyApi api;
-		User user = api.fetchUser();
-		api.createPlaylist(user.getid().c_str(), "test");
+
 		if (!api.userAuthenticated()) {
 			std::string authorizationCode = "";
 			printf("You have not yet authorized this application to access your spotify account.\nPlease visit this link (https://goo.gl/SGcGGJ) and copy/paste the text seen in the browser once you've been redirected below\n");
@@ -87,6 +86,11 @@ void parseArguments(SpotifyApi api, int argc, char* argv[]) {
 		}
 	} else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
 		displayHelpDialogue(false);
+	} else if (strcmp(argv[1], "--logout") == 0) {
+		api.logout();
+	} else if (strcmp(argv[1], "--status") == 0) {
+		CurrentlyPlayingContext status = api.fetchUserCurrentPlayback();
+		printf("%s\n", status.getAlbum().getName().c_str());
 	} else {
 		displayHelpDialogue(true);
 	}
@@ -104,6 +108,8 @@ void displayHelpDialogue(bool unknownArgs) {
 	printf("-m, --mix \t\tSets shuffle to the specified mode (1: on, 0: off)\n\t");
 	printf("-l, --loop\t\tSets repeat to the specified mode (track, context, off)\n\t");
 	printf("-i, --interactive       Enter an interactive mode with enhanced graphics\n\t");
+	printf("--logout\t\tLogout\n\t");
+	// printf("--status\t\tView current status of your listening session\n\t");
 	printf("-h, --help\t\tDisplays the help dialogue\n");
 }
 

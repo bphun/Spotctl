@@ -6,14 +6,21 @@
  * @param currentlyPlayingJson JSON containing a user's current player state
  */
 CurrentlyPlayingContext::CurrentlyPlayingContext(nlohmann::json currentlyPlayingJson) {
+	if (currentlyPlayingJson.empty()) { 
+		fprintf(stderr, "No current Spotify session\n"); 
+		return;
+	}
+	std::cout << currentlyPlayingJson.dump(4) << std::endl;
+
 	device = Device(currentlyPlayingJson["device"]);
 	repeatState = currentlyPlayingJson["repeat_state"];
 	shuffleState = currentlyPlayingJson["shuffle_state"];
-	context = Context(currentlyPlayingJson["context"]);
+	// context = Context(currentlyPlayingJson["context"]);
 	timestamp = currentlyPlayingJson["timestamp"];
 	progressMs = currentlyPlayingJson["progress_ms"];
-	playing = currentlyPlayingJson["playing"];
-	track = Track(currentlyPlayingJson["track"]);
+	// playing = currentlyPlayingJson["playing"];
+	album = Album(currentlyPlayingJson["item"]["album"]);
+
 }
 
 /**
@@ -57,6 +64,13 @@ int CurrentlyPlayingContext::getTimestamp() {
  */
 int CurrentlyPlayingContext::getProgressMs() {
 	return this->progressMs;
+}
+
+/**
+ * @return Current album that is being played
+ */
+Album CurrentlyPlayingContext::getAlbum() {
+	return this->album;
 }
 
 /**

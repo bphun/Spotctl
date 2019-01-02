@@ -4,6 +4,7 @@
 #include "Track.h"
 #include "Device.h"
 #include "Context.h"
+#include "Album.h"
 
 /**
  * Current Playing Context
@@ -20,6 +21,7 @@ private:
     bool shuffleState;
     int timestamp;
     int progressMs;
+    Album album;
     std::string repeatState;
     Track track;
     Device device;
@@ -33,6 +35,7 @@ public:
     bool getShuffleState();
     int getTimestamp();
     int getProgressMs();
+    Album getAlbum();
     std::string getRepeatState();
     Track getTrack();
     Device getDevice();
