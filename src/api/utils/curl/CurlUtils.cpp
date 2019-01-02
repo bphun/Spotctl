@@ -65,7 +65,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	std::string url = baseURL + endpoint;
 
-	if (baseURL != "https://api.spotify.com") {
+	if (baseURL == "https://13.57.247.79") {
 		addKeyServerConfig(curl);
 	}
 
@@ -76,8 +76,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		}
 		replaceAll(url, " ", "%20");
 	}
-
-	// printf("%s\n", url);
+	// printf("%s\n", url.c_str());
 
 	std::string readBuffer;
 
@@ -93,11 +92,9 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		struct curl_slist* headers = NULL;
 		headers = curl_slist_append(headers, authHeader.c_str());
 
-		if (request == "PUT") {
-			std::string contentLengthHeader = "Content-Length: 0";
-			headers = curl_slist_append(headers, contentLengthHeader.c_str());
-		}
-		
+		std::string contentLengthHeader = "Content-Length: 0";
+		headers = curl_slist_append(headers, contentLengthHeader.c_str());
+
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 	}
 
@@ -108,15 +105,13 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 
 	int responseCode = curl_easy_perform(curl);
 	if (responseCode != CURLE_OK) {
-		throw CurlException(responseCode, isKeyServerRequest);
+		throw CurlException(responseCode);
 	}
 
 	long statusCode = 0;
-	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);
-	if (statusCode < 200 || statusCode > 204 && !isKeyServerRequest) {
-		throw SpotifyException("\n" + readBuffer);
-	} else if (statusCode < 200 || statusCode > 204 && isKeyServerRequest) {
-		throw CurlException(statusCode, "\n" + readBuffer, true);
+	curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &statusCode);	
+	if (statusCode < 200 || statusCode > 204) {
+		throw CurlException(statusCode, readBuffer);
 	}
 
 	curl_easy_cleanup(curl);
@@ -125,6 +120,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		return nlohmann::json();
 	}
 
+	isKeyServerRequest = false;
 	return nlohmann::json::parse(readBuffer);
 }
 

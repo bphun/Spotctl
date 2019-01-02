@@ -1,11 +1,7 @@
 #ifndef USER_H
 #define USER_H
 
-#include <string>
-
 #include "UserPublic.h"
-
-#include "../utils/json.h"
 
 /**
  *  User Object

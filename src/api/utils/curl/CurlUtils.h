@@ -3,10 +3,6 @@
 
 #include <curl/curl.h>
 
-// #include <nlohmann/json.hpp>
-
-#include "../json.h"
-#include "../exceptions/SpotifyException.h"
 #include "../exceptions/CurlException.h"
 
 /**
@@ -31,7 +27,7 @@ private:
 
 	void addKeyServerConfig(CURL* curl);
 
-	bool isKeyServerRequest;
+	bool isKeyServerRequest = false;
 
 public:
 

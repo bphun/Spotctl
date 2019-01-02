@@ -3,9 +3,8 @@
 /**
  * Initilaizes the connection listener  
  */
-ConnectionListener::ConnectionListener(sio::client &h)/*:handler(h)*/ {
+ConnectionListener::ConnectionListener(sio::client &h) {
 	connect_finish = false;
-	// socketBusy = false;
 }
 
 /**
@@ -14,7 +13,6 @@ ConnectionListener::ConnectionListener(sio::client &h)/*:handler(h)*/ {
  */
 void ConnectionListener::onConnected() {
 	_lock.lock();
-	// socketBusy = true;
 	connect_finish = true;
 	_cond.notify_all();
 	_lock.unlock();
@@ -27,9 +25,9 @@ void ConnectionListener::onConnected() {
  */
 void ConnectionListener::onClose(sio::client::close_reason const& reason) {
 	if (reason == sio::client::close_reason_normal) {
-		std::cout << "Socket closed by user" << std::endl;
+		fprintf(stdout, "Socket closed by user\n");
 	} else if (reason == sio::client::close_reason_drop) {
-		std::cout << "Socket connection was dropped" << std::endl;
+		throw SocketException("Socket connection was dropped");
 	}
 }
 
@@ -37,6 +35,6 @@ void ConnectionListener::onClose(sio::client::close_reason const& reason) {
  * Called when a socket operation fails 
  */
 void ConnectionListener::onFail() {
-	std::cout << "Socket failed" << std::endl;
+	throw SocketException("Socket failed");
 	exit(0);
 }

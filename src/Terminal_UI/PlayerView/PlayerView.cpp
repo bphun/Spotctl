@@ -27,7 +27,7 @@ void PlayerView::initializePanels() {
 void PlayerView::displaySidebarContents(int key) {
 	int highlight = 0;
 
-	 std::vector<Playlist> playlists = spotifyAPI.fetchUserPlaylists().getItems();
+	 std::vector<Playlist> playlists = spotifyApi.fetchUserPlaylists().getItems();
 
 	int y = 1;
 	switch (key) {
@@ -92,7 +92,7 @@ PlayerView::PlayerView(int terminalScreenWidth, int terminalScreenHeight) {
 	View::terminalScreenWidth = terminalScreenWidth;
 	View::terminalScreenHeight = terminalScreenHeight;
 
-	mediaPlayer = new MediaPlayer(spotifyAPI);
+	mediaPlayer = new MediaPlayer(spotifyApi);
 }
 
 void PlayerView::initialize() {

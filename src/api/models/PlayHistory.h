@@ -4,8 +4,6 @@
 #include "Track.h"
 #include "Context.h"
 
-#include "../utils/json.h"
-
 /**
  * Play history object
  * 

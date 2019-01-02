@@ -1,12 +1,8 @@
 #ifndef RECCOMENDATIONS_H
 #define RECCOMENDATIONS_H
 
-#include <vector>
-
 #include "Track.h"
 #include "RecommendationsSeed.h"
-
-#include "../utils/json.h"
 
 /**
  * Recommendation Object

@@ -4,14 +4,14 @@
 #include <ncurses.h>
 #include <string>
 
-#include "../api/SpotifyAPI.h"
+#include "../api/SpotifyApi.h"
 
 class View {
 
 protected:
 	WINDOW* parentWindow;
 
-	SpotifyAPI spotifyAPI;
+	SpotifyApi spotifyApi;
 
 	int terminalScreenWidth, terminalScreenHeight;
 

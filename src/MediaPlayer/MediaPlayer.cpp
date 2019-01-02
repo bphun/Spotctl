@@ -1,14 +1,14 @@
 #include "MediaPlayer.h"
 
-MediaPlayer::MediaPlayer(SpotifyAPI spotifyAPI) {
-	this->spotifyAPI = spotifyAPI;
+MediaPlayer::MediaPlayer(SpotifyApi spotifyApi) {
+	this->spotifyApi = spotifyApi;
 
 	this->duration = 223.0;
 	this->position = 220.0;
 }
 
-MediaPlayer::MediaPlayer(SpotifyAPI spotifyAPI, std::string streamURL) {
-	this->spotifyAPI = spotifyAPI;
+MediaPlayer::MediaPlayer(SpotifyApi spotifyApi, std::string streamURL) {
+	this->spotifyApi = spotifyApi;
 	this->streamURL = streamURL;
 }
 

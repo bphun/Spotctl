@@ -1,9 +1,6 @@
 #ifndef PAGER_H
 #define PAGER_H
 
-#include <string>
-#include <vector>
-
 #include "../utils/json.h"
 
 /**

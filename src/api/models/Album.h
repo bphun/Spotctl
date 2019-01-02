@@ -1,11 +1,8 @@
 #ifndef ALBUM_H
 #define ALBUM_H
-#include <vector>
-#include <string>
 
 #include "Pager.h"
 #include "Track.h"
-#include "Artist.h"
 #include "Copyright.h"
 
 #include "../utils/json.h"

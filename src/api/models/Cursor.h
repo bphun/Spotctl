@@ -1,8 +1,6 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
-#include <string>
-
 #include "../utils/json.h"
 
 /**

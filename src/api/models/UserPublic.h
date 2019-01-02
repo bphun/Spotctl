@@ -1,14 +1,7 @@
 #ifndef USER_PUBLIC_H
 #define USER_PUBLIC_H
 
-#include <map>
-#include <string>
-#include <vector>
-#include <iostream>
-
 #include "Followers.h"
-
-#include "../utils/json.h"
 
 /**
  * User Public Object

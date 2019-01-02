@@ -1,15 +1,14 @@
 #ifndef CONNECTION_LISTENER
 #define CONNECTION_LISTENER
 
-#include <mutex>
-#include <iostream>
 #include <sio_client.h>
 #include <condition_variable>
+
+#include "../exceptions/SocketException.h"
 
 extern std::mutex _lock;
 extern std::condition_variable_any _cond;
 extern bool connect_finish;
-// extern bool socketBusy;
 
 /**
  * A collection of methods that are called by Socket.IO when certain events occur.

@@ -3,19 +3,19 @@
 
 #include <string>
 
-#include "../api/SpotifyAPI.h"
+#include "../api/SpotifyApi.h"
 
 class MediaPlayer {
 private:
 
 	bool playing;
-	SpotifyAPI spotifyAPI;
+	SpotifyApi spotifyApi;
 	double duration, position;	//	in seconds
 	std::string streamURL, currSongId;
 
 public:
-	MediaPlayer(SpotifyAPI spotifyAPI);
-	MediaPlayer(SpotifyAPI spotifyAPI, std::string streamURL);
+	MediaPlayer(SpotifyApi spotifyAPI);
+	MediaPlayer(SpotifyApi spotifyAPI, std::string streamURL);
 	~MediaPlayer();
 
 	void play();

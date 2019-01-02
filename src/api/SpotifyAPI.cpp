@@ -1,13 +1,11 @@
-#include "SpotifyAPI.h"
+#include "SpotifyApi.h"
 
 /**
  * Initializes the Spotify API and prepares it for requests to the Web API.
  * Connects to remote server to fetch the client ID and secret.
  */
-SpotifyAPI::SpotifyAPI() {				
-	curl_global_init(CURL_GLOBAL_ALL);
-
-	//	Lines 12 and 14 can be executed concurrently, will improve construction times moderately
+SpotifyApi::SpotifyApi() {				
+	// curl_global_init(CURL_GLOBAL_ALL);
 
 	requestClientConfigStrings();
 
@@ -15,10 +13,9 @@ SpotifyAPI::SpotifyAPI() {
 
 	if (refreshToken != "") {
 		requestAccessToken();
+		isUserAuthenticated = true;
 	} else {
-		// requestAccessToken("authorization_code");
-		requestRefreshToken();
-		requestAccessToken();
+		isUserAuthenticated = false;
 	}
 
 	// std::string postData = "user=" + fetchUser().getid();
@@ -26,50 +23,42 @@ SpotifyAPI::SpotifyAPI() {
 } 
 
 /**
- * Initializes the Spotify API and prepares it for requests to the Web API
- *
- * @param spotifyClientID Client ID given to you when you create an application in the Spotify developer portal
- * @param spotifyClientSecret Client secret given to you when you create an application in the Spotify developer portal
+ * Authenticates a user using the provided authorization code by executing a POST request to the /api/token endpoint of spotify's account service
+ * @param authorizationCode string given to user by opening the accounts endpoint
  */
-SpotifyAPI::SpotifyAPI(std::string cliendID, std::string spotifyClientSecret) {				
-	curl_global_init(CURL_GLOBAL_ALL);
-	
-	this->spotifyClientID = spotifyClientID;
-	this->spotifyClientSecret = spotifyClientSecret;
+void SpotifyApi::authenticateUser(std::string authorizationCode) {
+	nlohmann::json data = curlUtils.POST("/api/token/", "https://accounts.spotify.com", "client_id=" + spotifyClientID + 
+	                                     "&client_secret=" + spotifyClientSecret + "&code=" + authorizationCode + 
+	                                     "&grant_type=authorization_code" + "&redirect_uri=" + "https://13.57.247.79/api/spotifycallback");
+	this->accessToken = data["access_token"];
+	this->refreshToken = data["refresh_token"];
 
-	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");
+	writeStringToFile(refreshToken, "src/api/vars/refreshToken.txt");
+}
 
-	if (refreshToken != "") {
-		requestAccessToken();
-	} else {
-		// requestAccessToken("authorization_code");
-		requestRefreshToken();
-		requestAccessToken();
-	}
+/**
+ * Logouts the current user by clearing the user's refresh token
+ */
+void SpotifyApi::logout() {
+	writeStringToFile("", "src/api/vars/refreshToken.txt");
+}
+
+/**
+ * Used to determine if the user has been successfully authenticated through the spotify web API
+ * @return true if user has been authenticated and false if the user has not been authenticated
+ */
+bool SpotifyApi::userAuthenticated() {
+	return isUserAuthenticated;
 }
 
 /**
  * Requests an access token from Spotify with an already obtained refresh token
  */
-void SpotifyAPI::requestAccessToken() {
-	std::string postData = "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + spotifyClientID + "&client_secret=" + spotifyClientSecret;
+void SpotifyApi::requestAccessToken() {
+	std::string postData = "grant_type=refresh_token&refresh_token=" + refreshToken + 
+	"&client_id=" + spotifyClientID + 
+	"&client_secret=" + spotifyClientSecret;
 	this->accessToken = curlUtils.POST("/api/token", "https://accounts.spotify.com", postData)["access_token"];
-}
-
-/**
- *  Requests a refresh token from Spotify with an already obtained acess token
- */
-void SpotifyAPI::requestRefreshToken() {
-	options_t options;
-	options["client_id"] = spotifyClientID;
-	options["response_type"] = "code";
-	options["redirect_uri"] = "https://bphun.github.io";
-	options["scope"] = "user-read-private%20user-read-email%20playlist-read-private%20playlist-read-collaborative%20qplaylist-modify-public%20playlist-modify-private%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-birthdate%20user-read-email%20user-top-read%20ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20user-read-recently-played";
-
-	std::cout << curlUtils.GET("/authorize/", "https://accounts.spotify.com", options) << std::endl;
-
-	// this->refreshToken = curlUtils.GET("/authorize/", "https://accounts.spotify.com", options)["refresh_token"];
-	// writeStringToFile(this->refreshToken, "vars/refreshToken.txt");
 }
 
 /**
@@ -77,7 +66,7 @@ void SpotifyAPI::requestRefreshToken() {
  * will be made if the client sends a known UUID string. If the client does not have one
  * then it will request for a UUID before requesting for the client ID and secrete again.
  */
-void SpotifyAPI::requestClientConfigStrings() {
+void SpotifyApi::requestClientConfigStrings() {
 	std::string clientId = readFileAt("src/api/vars/clientId.txt");
 
 	if (clientId != "") {
@@ -91,17 +80,17 @@ void SpotifyAPI::requestClientConfigStrings() {
 		std::string response = "received_key";
 
 		socket->emit("ClientResponsePlaintext", response);
-		// socket->closeSocketConnection();
 
-		// writeStringToFile(clientId, "src/api/vars/clientId.txt");
+		writeStringToFile(clientId, "src/api/vars/clientId.txt");
 		requestSecrets(clientId);
-
-		printf("spotifyClientID: %s\n", this->spotifyClientID.c_str());
-		printf("spotifyClientSecret: %s\n", this->spotifyClientSecret.c_str());
 	}
 }
 
-void SpotifyAPI::requestSecrets(std::string clientId) {
+/**
+ * Request for the Spotify client ID and client secret from the key server using the client's unique identifier
+ * @param clientId The client's unique identifier used to request for the spotify ID and secret
+ */
+void SpotifyApi::requestSecrets(std::string clientId) {
 	nlohmann::json clientConfigStrings = curlUtils.POST("/api/auth", backendURL, clientId);
 	this->spotifyClientID = clientConfigStrings["client_id"];
 	this->spotifyClientSecret = clientConfigStrings["client_secret"];
@@ -115,7 +104,7 @@ void SpotifyAPI::requestSecrets(std::string clientId) {
  * @return Contents of the designated file
  * 
  */
-std::string SpotifyAPI::readFileAt(std::string filePath) {
+std::string SpotifyApi::readFileAt(std::string filePath) {
 	std::ifstream file;
 	std::string str;
 
@@ -139,7 +128,7 @@ std::string SpotifyAPI::readFileAt(std::string filePath) {
  * @param filePath Path of the file that will be written to
  * 
  */
-void SpotifyAPI::writeStringToFile(std::string str, std::string filePath) {
+void SpotifyApi::writeStringToFile(std::string str, std::string filePath) {
 	std::ofstream file;
 	file.open(filePath);
 
@@ -160,7 +149,7 @@ void SpotifyAPI::writeStringToFile(std::string str, std::string filePath) {
  * @param destination A type alias of std::map<std::string, std::string> that stores options that will be aprsed by CurlUtils
  * 
  */
-void SpotifyAPI::insertOptions(std::vector<std::string> source, std::string key, options_t &destination) {
+void SpotifyApi::insertOptions(std::vector<std::string> source, std::string key, options_t &destination) {
 	std::stringstream ss;
 
 	for (int i = 0; i < source.size(); i++) {
@@ -183,7 +172,7 @@ void SpotifyAPI::insertOptions(std::vector<std::string> source, std::string key,
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::saveAlbums(std::vector<std::string> albumIds, options_t options) {
+void SpotifyApi::saveAlbums(std::vector<std::string> albumIds, options_t options) {
 	insertOptions(albumIds, "ids", options);
 	curlUtils.PUT("/v1/me/albums", options, accessToken);
 }
@@ -195,7 +184,7 @@ void SpotifyAPI::saveAlbums(std::vector<std::string> albumIds, options_t options
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::removeSavedAlbums(std::vector<std::string> albumIds, options_t options) {
+void SpotifyApi::removeSavedAlbums(std::vector<std::string> albumIds, options_t options) {
 	insertOptions(albumIds, "ids", options);
 	curlUtils.DELETE("/v1/me/albums", options, accessToken);
 }
@@ -209,7 +198,7 @@ void SpotifyAPI::removeSavedAlbums(std::vector<std::string> albumIds, options_t 
  * @return boolean representing all of the albums' save status
  * 
  */
-bool SpotifyAPI::checkSavedAlbums(std::vector<std::string> albumIds, options_t options) {
+bool SpotifyApi::checkSavedAlbums(std::vector<std::string> albumIds, options_t options) {
 	insertOptions(albumIds, "ids", options);
 	return curlUtils.GET("/v1/me/albums/contains", options, accessToken)[0];
 }
@@ -223,7 +212,7 @@ bool SpotifyAPI::checkSavedAlbums(std::vector<std::string> albumIds, options_t o
  * @return The requested album
  * 
  */
-Album SpotifyAPI::fetchAlbum(std::string albumID, options_t options) {
+Album SpotifyApi::fetchAlbum(std::string albumID, options_t options) {
 	return Album(curlUtils.GET("/v1/albums/" + albumID, options, accessToken));
 }
 
@@ -235,7 +224,7 @@ Album SpotifyAPI::fetchAlbum(std::string albumID, options_t options) {
  * @return Pager of latest albums on Spotify
  * 
  */
-Pager<Album> SpotifyAPI::fetchNewReleases(options_t options) {
+Pager<Album> SpotifyApi::fetchNewReleases(options_t options) {
 	return Pager<Album>(curlUtils.GET("/v1/browse/new-releases", options, accessToken)["albums"]);
 }
 
@@ -246,7 +235,7 @@ Pager<Album> SpotifyAPI::fetchNewReleases(options_t options) {
  *
  * @return Pager of the user's saved albums
  */
-Pager<SavedAlbum> SpotifyAPI::fetchSavedAlbums(options_t options) {
+Pager<SavedAlbum> SpotifyApi::fetchSavedAlbums(options_t options) {
 	return Pager<SavedAlbum>(curlUtils.GET("/v1/me/albums", options, accessToken));
 }
 
@@ -259,7 +248,7 @@ Pager<SavedAlbum> SpotifyAPI::fetchSavedAlbums(options_t options) {
  * @return Pager of the album's tracks
  * 
  */
-Pager<Track> SpotifyAPI::fetchAlbumTracks(std::string albumID, options_t options) {
+Pager<Track> SpotifyApi::fetchAlbumTracks(std::string albumID, options_t options) {
 	return Pager<Track>(curlUtils.GET("/v1/albums/" + albumID + "/tracks", options, accessToken));
 }
 
@@ -272,7 +261,7 @@ Pager<Track> SpotifyAPI::fetchAlbumTracks(std::string albumID, options_t options
  * @return Pager of albums returned from the spotify search engine
  * 
  */
-Pager<Album> SpotifyAPI::searchAlbums(std::string query, options_t options) {
+Pager<Album> SpotifyApi::searchAlbums(std::string query, options_t options) {
 	options["type"] = "album";
 	replaceAll(query, " ", "%20");
 	options["q"] = query;
@@ -288,7 +277,7 @@ Pager<Album> SpotifyAPI::searchAlbums(std::string query, options_t options) {
  * @return Pager of the artist's albums
  * 
  */
-Pager<Album> SpotifyAPI::fetchArtistAlbums(std::string artistID, options_t options) {
+Pager<Album> SpotifyApi::fetchArtistAlbums(std::string artistID, options_t options) {
 	return Pager<Album>(curlUtils.GET("/v1/artists/" + artistID + "/albums", options, accessToken));
 }
 
@@ -301,7 +290,7 @@ Pager<Album> SpotifyAPI::fetchArtistAlbums(std::string artistID, options_t optio
  * @return Vector of the requested albums
  * 
  */
-std::vector<Album> SpotifyAPI::fetchAlbums(std::vector<std::string> albumIDs, options_t options) {
+std::vector<Album> SpotifyApi::fetchAlbums(std::vector<std::string> albumIDs, options_t options) {
 	std::vector<Album> albums;
 	for (std::string albumID : albumIDs) {
 		albums.push_back(fetchAlbum(albumID, options));
@@ -319,7 +308,7 @@ std::vector<Album> SpotifyAPI::fetchAlbums(std::vector<std::string> albumIDs, op
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::followArtist(std::string artistID, options_t options) {
+void SpotifyApi::followArtist(std::string artistID, options_t options) {
 	options["type"] = "artist";
 	options["ids"] = artistID;
 	curlUtils.PUT("/v1/me/following", options, accessToken);
@@ -334,7 +323,7 @@ void SpotifyAPI::followArtist(std::string artistID, options_t options) {
  * @return boolean that denotes if the user is following the artist
  * 
  */
-bool SpotifyAPI::checkFollowingArtist(std::string artistID, options_t options) {
+bool SpotifyApi::checkFollowingArtist(std::string artistID, options_t options) {
 	options["type"] = "artist";
 	options["ids"] = artistID;
 	return curlUtils.GET("/v1/me/following/contains", options, accessToken)[0];
@@ -349,7 +338,7 @@ bool SpotifyAPI::checkFollowingArtist(std::string artistID, options_t options) {
  * @return The requested artist
  * 
  */
-Artist SpotifyAPI::fetchArtist(std::string artistID, options_t options) {
+Artist SpotifyApi::fetchArtist(std::string artistID, options_t options) {
 	return Artist(curlUtils.GET("/v1/artists/" + artistID, options, accessToken));
 }
 
@@ -361,7 +350,7 @@ Artist SpotifyAPI::fetchArtist(std::string artistID, options_t options) {
  * @return A pager of the user's top artists
  * 
  */
-Pager<Artist> SpotifyAPI::fetchUserTopArtists(options_t options) {
+Pager<Artist> SpotifyApi::fetchUserTopArtists(options_t options) {
 	return Pager<Artist>(curlUtils.GET("/v1/me/top/artists", options, accessToken));
 }
 
@@ -374,7 +363,7 @@ Pager<Artist> SpotifyAPI::fetchUserTopArtists(options_t options) {
  * @return Pager of artists returned from the spotify search engine
  * 
  */
-Pager<Artist> SpotifyAPI::searchArtists(std::string query, options_t options) {
+Pager<Artist> SpotifyApi::searchArtists(std::string query, options_t options) {
 	options["type"] = "artist";
 	options["q"] = query;
 	return Pager<Artist>(curlUtils.GET("/v1/search", options, accessToken)["artists"]);
@@ -389,7 +378,7 @@ Pager<Artist> SpotifyAPI::searchArtists(std::string query, options_t options) {
  * @return vector of related artists
  * 
  */
-std::vector<Artist> SpotifyAPI::fetchArtistRelatedArtists(std::string artistID, options_t options) {
+std::vector<Artist> SpotifyApi::fetchArtistRelatedArtists(std::string artistID, options_t options) {
 	std::vector<Artist> artists;
 	nlohmann::json json = curlUtils.GET("/v1/artists/" + artistID + "/related-artists", options, accessToken);
 	for(nlohmann::json artistJson : json["artists"]) {
@@ -407,7 +396,7 @@ std::vector<Artist> SpotifyAPI::fetchArtistRelatedArtists(std::string artistID, 
  * @return vector of requested artists
  * 
  */
-std::vector<Artist> SpotifyAPI::fetchArtists(std::vector<std::string> artistIDs, options_t options) {
+std::vector<Artist> SpotifyApi::fetchArtists(std::vector<std::string> artistIDs, options_t options) {
 	std::vector<Artist> artists;
 	for (std::string artistID : artistIDs) {
 		artists.push_back(fetchArtist(artistID));
@@ -425,7 +414,7 @@ std::vector<Artist> SpotifyAPI::fetchArtists(std::vector<std::string> artistIDs,
  * @return vector of the artist's top tracks
  * 
  */
-std::vector<Track> SpotifyAPI::fetchArtistTopTracks(std::string artistID, std::string country, options_t options) {
+std::vector<Track> SpotifyApi::fetchArtistTopTracks(std::string artistID, std::string country, options_t options) {
 	std::vector<Track> tracks;
 	options["country"] = country;
 	nlohmann::json json = curlUtils.GET("/v1/artists/" + artistID + "/top-tracks", options, accessToken);
@@ -446,7 +435,7 @@ std::vector<Track> SpotifyAPI::fetchArtistTopTracks(std::string artistID, std::s
  * @param options Edits that will be made to the the playlist
  * 
  */
-void SpotifyAPI::editPlaylist(std::string userID, std::string playlistId, options_t options) {
+void SpotifyApi::editPlaylist(std::string userID, std::string playlistId, options_t options) {
 	nlohmann::json bodyJson;
 	for (auto option : options) {
 		bodyJson[option.first] = option.second;
@@ -463,7 +452,7 @@ void SpotifyAPI::editPlaylist(std::string userID, std::string playlistId, option
  * @param options Options that will be sent to Spotify in the request header
  *
  */
-void SpotifyAPI::followPlaylist(std::string ownerID, std::string playlistdID, options_t options) {
+void SpotifyApi::followPlaylist(std::string ownerID, std::string playlistdID, options_t options) {
 	curlUtils.PUT("/v1/users/" + ownerID + "/playlists/" + playlistdID + "/followers", options, accessToken);
 }
 
@@ -475,7 +464,7 @@ void SpotifyAPI::followPlaylist(std::string ownerID, std::string playlistdID, op
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::unfollowPlaylist(std::string ownerID, std::string playlistdID, options_t options) {
+void SpotifyApi::unfollowPlaylist(std::string ownerID, std::string playlistdID, options_t options) {
 	curlUtils.DELETE("/v1/users/" + ownerID + "/playlists/" + playlistdID + "/followers", options, accessToken);
 }
 
@@ -488,7 +477,7 @@ void SpotifyAPI::unfollowPlaylist(std::string ownerID, std::string playlistdID, 
  * @param snapshotID The modified playlist's snapshotID
  * 
  */
-void SpotifyAPI::removeTracksFromPlaylist(std::string userID, std::string playlistId, std::vector<std::string> trackIDs, std::string snapshotID) {
+void SpotifyApi::removeTracksFromPlaylist(std::string userID, std::string playlistId, std::vector<std::string> trackIDs, std::string snapshotID) {
 	nlohmann::json bodyJson;
 	for (std::string trackID : trackIDs) {
 		nlohmann::json uriJson;
@@ -512,7 +501,7 @@ void SpotifyAPI::removeTracksFromPlaylist(std::string userID, std::string playli
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::addTracksToPlaylist(std::string userID, std::string playlistID, std::vector<std::string> trackUris, options_t options) {
+void SpotifyApi::addTracksToPlaylist(std::string userID, std::string playlistID, std::vector<std::string> trackUris, options_t options) {
 	insertOptions(trackUris, "uris", options);
 	curlUtils.POST("/v1/users/" + userID + "/playlists/" + playlistID + "/tracks", options, accessToken);
 }
@@ -527,7 +516,7 @@ void SpotifyAPI::addTracksToPlaylist(std::string userID, std::string playlistID,
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::reorderPlaylistTracks(std::string userID, std::string playlistID, int rangeStart, int insertBefore, options_t options) {
+void SpotifyApi::reorderPlaylistTracks(std::string userID, std::string playlistID, int rangeStart, int insertBefore, options_t options) {
 	nlohmann::json bodyJson;
 	bodyJson["range_start"] = rangeStart;
 	bodyJson["insert_before"] = insertBefore;
@@ -547,7 +536,7 @@ void SpotifyAPI::reorderPlaylistTracks(std::string userID, std::string playlistI
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::replacePlaylistTracks(std::string userID, std::string playlistID, std::vector<std::string> trackUris, options_t options) {
+void SpotifyApi::replacePlaylistTracks(std::string userID, std::string playlistID, std::vector<std::string> trackUris, options_t options) {
 	insertOptions(trackUris, "uris", options);
 	curlUtils.PUT("/v1/users/" + userID + "/playlists/" + playlistID + "/tracks", options, accessToken);
 }
@@ -563,7 +552,7 @@ void SpotifyAPI::replacePlaylistTracks(std::string userID, std::string playlistI
  * @return boolean denoting if all the users are following a playlist
  * 
  */
-bool SpotifyAPI::checkUserFollowingPlaylist(std::string userID, std::string playlistID, std::vector<std::string> userIDs, options_t options) {
+bool SpotifyApi::checkUserFollowingPlaylist(std::string userID, std::string playlistID, std::vector<std::string> userIDs, options_t options) {
 	insertOptions(userIDs, "ids", options);
 	return curlUtils.GET("/v1/users/" + userID + "/playlists/" + playlistID + "/followers/contains", options, accessToken)[0];
 }
@@ -578,13 +567,14 @@ bool SpotifyAPI::checkUserFollowingPlaylist(std::string userID, std::string play
  * @return The newly created playlist
  * 
  */
-Playlist SpotifyAPI::createPlaylist(std::string userID, std::string name, options_t options) {
+Playlist SpotifyApi::createPlaylist(std::string userID, std::string name, options_t options) {
 	nlohmann::json bodyJson;
 	bodyJson["name"] = name;
 	for (auto option : options) {
 		bodyJson[option.first] = option.second;
 	}
-	return Playlist(curlUtils.POST("/v1/users/" + userID + "/playlists", options_t(), accessToken, bodyJson.dump(4)));
+	std::cout << bodyJson.dump() << std::endl;
+	return Playlist(curlUtils.POST("/v1/users/" + userID + "/playlists", options_t(), accessToken, bodyJson.dump()));
 }
 
 /**
@@ -597,7 +587,7 @@ Playlist SpotifyAPI::createPlaylist(std::string userID, std::string name, option
  * @return The playlist that was fetched
  * 
  */
-Playlist SpotifyAPI::fetchPlaylist(std::string userID, std::string playlistID, options_t options) {
+Playlist SpotifyApi::fetchPlaylist(std::string userID, std::string playlistID, options_t options) {
 	return Playlist(curlUtils.GET("/v1/users/" + userID + "/playlists/" + playlistID, options, accessToken));
 }
 
@@ -610,7 +600,7 @@ Playlist SpotifyAPI::fetchPlaylist(std::string userID, std::string playlistID, o
  *
  * @return Pager of the playlist's tracks represented as a 'PlaylistTrack'
  */
-Pager<PlaylistTrack> SpotifyAPI::fetchPlaylistTracks(std::string userID, std::string playlistID, options_t options) {
+Pager<PlaylistTrack> SpotifyApi::fetchPlaylistTracks(std::string userID, std::string playlistID, options_t options) {
 	return Pager<PlaylistTrack>(curlUtils.GET("/v1/users/" + userID + "/playlists/" + playlistID + "/tracks", options, accessToken));
 }
 
@@ -622,7 +612,7 @@ Pager<PlaylistTrack> SpotifyAPI::fetchPlaylistTracks(std::string userID, std::st
  * @return Pager of the user's playlists
  * 
  */
-Pager<Playlist> SpotifyAPI::fetchUserPlaylists(options_t options) {
+Pager<Playlist> SpotifyApi::fetchUserPlaylists(options_t options) {
 	return Pager<Playlist>(curlUtils.GET("/v1/me/playlists", options, accessToken));
 }
 
@@ -632,7 +622,7 @@ Pager<Playlist> SpotifyAPI::fetchUserPlaylists(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-Pager<Playlist> SpotifyAPI::fetchFeaturedPlaylists(options_t options) {
+Pager<Playlist> SpotifyApi::fetchFeaturedPlaylists(options_t options) {
 	return Pager<Playlist>(curlUtils.GET("/v1/browse/featured-playlists", options, accessToken)["playlists"]);
 }
 
@@ -645,7 +635,7 @@ Pager<Playlist> SpotifyAPI::fetchFeaturedPlaylists(options_t options) {
  * @return Pager of playlist returned from the spotify search engine
  * 
  */
-Pager<Playlist> SpotifyAPI::searchPlaylists(std::string query, options_t options) {
+Pager<Playlist> SpotifyApi::searchPlaylists(std::string query, options_t options) {
 	options["type"] = "playlist";
 	options["q"] = query;
 	return Pager<Playlist>(curlUtils.GET("/v1/search", options, accessToken)["playlists"]);
@@ -660,7 +650,7 @@ Pager<Playlist> SpotifyAPI::searchPlaylists(std::string query, options_t options
  * @return Pager of the user's playlists
  * 
  */
-Pager<Playlist> SpotifyAPI::fetchUserPlaylists(std::string userID, options_t options) {
+Pager<Playlist> SpotifyApi::fetchUserPlaylists(std::string userID, options_t options) {
 	return Pager<Playlist>(curlUtils.GET("/v1/users/" + userID + "/playlists", options, accessToken));
 }
 
@@ -674,7 +664,7 @@ Pager<Playlist> SpotifyAPI::fetchUserPlaylists(std::string userID, options_t opt
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::saveTracks(std::vector<std::string> trackIDs, options_t options) {
+void SpotifyApi::saveTracks(std::vector<std::string> trackIDs, options_t options) {
 	insertOptions(trackIDs, "ids", options);
 	curlUtils.PUT("/v1/me/tracks", options, accessToken);
 }
@@ -686,7 +676,7 @@ void SpotifyAPI::saveTracks(std::vector<std::string> trackIDs, options_t options
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::unsaveTracks(std::vector<std::string> trackIDs, options_t options) {
+void SpotifyApi::unsaveTracks(std::vector<std::string> trackIDs, options_t options) {
 	insertOptions(trackIDs, "ids", options);
 	curlUtils.DELETE("/v1/me/tracks", options, accessToken);
 }
@@ -700,7 +690,7 @@ void SpotifyAPI::unsaveTracks(std::vector<std::string> trackIDs, options_t optio
  * @return boolean denoting the user's follow status of all the playlists
  * 
  */
-bool SpotifyAPI::checkSavedTracks(std::vector<std::string> trackIDs, options_t options) {
+bool SpotifyApi::checkSavedTracks(std::vector<std::string> trackIDs, options_t options) {
 	insertOptions(trackIDs, "ids", options);
 	return curlUtils.GET("/v1/me/tracks/contains", options, accessToken)[0];
 }
@@ -714,7 +704,7 @@ bool SpotifyAPI::checkSavedTracks(std::vector<std::string> trackIDs, options_t o
  * @return The fetched track
  * 
  */
-Track SpotifyAPI::fetchTrack(std::string trackID, options_t options) {
+Track SpotifyApi::fetchTrack(std::string trackID, options_t options) {
 	return Track(curlUtils.GET("/v1/tracks/" + trackID, options, accessToken));
 }
 
@@ -725,11 +715,11 @@ Track SpotifyAPI::fetchTrack(std::string trackID, options_t options) {
  * 
  * @return The user's recommended tracks
  */
-Recommendations SpotifyAPI::fetchRecommendations(options_t options) {
+Recommendations SpotifyApi::fetchRecommendations(options_t options) {
 	return Recommendations(curlUtils.GET("/v1/recommendations", options, accessToken));
 }
 
-// CurrentlyPlayingTrack SpotifyAPI::fetchUserCurrentPlayingTrack(options_t options) {
+// CurrentlyPlayingTrack SpotifyApi::fetchUserCurrentPlayingTrack(options_t options) {
 
 // }
 
@@ -741,7 +731,7 @@ Recommendations SpotifyAPI::fetchRecommendations(options_t options) {
  * @return Pager of the user's saved tracks
  * 
  */
-Pager<SavedTrack> SpotifyAPI::fetchSavedTracks(options_t options) {
+Pager<SavedTrack> SpotifyApi::fetchSavedTracks(options_t options) {
 	return Pager<SavedTrack>(curlUtils.GET("/v1/me/tracks", options, accessToken));
 }
 
@@ -751,7 +741,7 @@ Pager<SavedTrack> SpotifyAPI::fetchSavedTracks(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-Pager<Track> SpotifyAPI::fetchUserTopTracks(options_t options) {
+Pager<Track> SpotifyApi::fetchUserTopTracks(options_t options) {
 	return Pager<Track>(curlUtils.GET("/v1/me/top/tracks", options, accessToken));
 }
 
@@ -764,7 +754,7 @@ Pager<Track> SpotifyAPI::fetchUserTopTracks(options_t options) {
  * @return Pager of tracks returned from the spotify search engine
  * 
  */
-Pager<Track> SpotifyAPI::searchTracks(std::string query, options_t options) {
+Pager<Track> SpotifyApi::searchTracks(std::string query, options_t options) {
 	options["type"] = "track";
 	options["q"] = query;
 	return Pager<Track>(curlUtils.GET("/v1/search", options, accessToken)["tracks"]);
@@ -778,7 +768,7 @@ Pager<Track> SpotifyAPI::searchTracks(std::string query, options_t options) {
  * @return vector of the requested tracks
  * 
  */
-std::vector<Track> SpotifyAPI::fetchTracks(std::vector<std::string> trackIDs, options_t options) {
+std::vector<Track> SpotifyApi::fetchTracks(std::vector<std::string> trackIDs, options_t options) {
 	std::vector<Track> tracks;
 	for(std::string trackID : trackIDs) {
 		tracks.push_back(fetchTrack(trackID, options));
@@ -797,7 +787,7 @@ std::vector<Track> SpotifyAPI::fetchTracks(std::vector<std::string> trackIDs, op
  * @return Cursor pager of the user's play history
  * 
  */
-CursorPager<PlayHistory> SpotifyAPI::fetchUserRecentlyPlayed(options_t options) {
+CursorPager<PlayHistory> SpotifyApi::fetchUserRecentlyPlayed(options_t options) {
 	return CursorPager<PlayHistory>(curlUtils.GET("/v1/me/player/recently-played", options, accessToken));
 }
 
@@ -809,7 +799,7 @@ CursorPager<PlayHistory> SpotifyAPI::fetchUserRecentlyPlayed(options_t options) 
  * @return User's current playing context
  * 
  */
-CurrentlyPlayingContext SpotifyAPI::fetchUserCurrentPlayback(options_t options) {
+CurrentlyPlayingContext SpotifyApi::fetchUserCurrentPlayback(options_t options) {
 	return CurrentlyPlayingContext(curlUtils.GET("/v1/me/player", options, accessToken));
 }
 
@@ -819,7 +809,7 @@ CurrentlyPlayingContext SpotifyAPI::fetchUserCurrentPlayback(options_t options) 
  * @return vector of the user's authenticated devices
  * 
  */
-std::vector<Device> SpotifyAPI::fetchUserDevices(options_t options) {
+std::vector<Device> SpotifyApi::fetchUserDevices(options_t options) {
 	std::vector<Device> devices;
 	nlohmann::json devicesJson = curlUtils.GET("/v1/me/player/devices", options, accessToken);
 	for (nlohmann::json deviceJson : devicesJson["devices"]) {
@@ -837,7 +827,7 @@ std::vector<Device> SpotifyAPI::fetchUserDevices(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::followUser(std::string userID, options_t options) {
+void SpotifyApi::followUser(std::string userID, options_t options) {
 	options["type"] = "user";
 	options["ids"] = userID;
 	curlUtils.PUT("/v1/me/following", options, accessToken);
@@ -850,7 +840,7 @@ void SpotifyAPI::followUser(std::string userID, options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::unfollowUser(std::string userID, options_t options) {
+void SpotifyApi::unfollowUser(std::string userID, options_t options) {
 	options["type"] = "user";
 	options["ids"] = userID;
 	curlUtils.DELETE("/v1/me/following", options, accessToken);
@@ -865,7 +855,7 @@ void SpotifyAPI::unfollowUser(std::string userID, options_t options) {
  * @return boolean denoting whether or not the current user is following the specified user
  * 
  */
-bool SpotifyAPI::checkFollowingUser(std::string userID, options_t options) {
+bool SpotifyApi::checkFollowingUser(std::string userID, options_t options) {
 	options["type"] = "user";
 	options["ids"] = userID;
 	return curlUtils.GET("/v1/me/following/contains", options, accessToken)[0];
@@ -879,7 +869,7 @@ bool SpotifyAPI::checkFollowingUser(std::string userID, options_t options) {
  * @return The currently authenticated user
  * 
  */
-User SpotifyAPI::fetchUser(options_t options) {
+User SpotifyApi::fetchUser(options_t options) {
 	return User(curlUtils.GET("/v1/me", options, accessToken));
 }
 
@@ -892,7 +882,7 @@ User SpotifyAPI::fetchUser(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::pause(options_t options) {
+void SpotifyApi::pause(options_t options) {
 	curlUtils.PUT("/v1/me/player/pause", options, accessToken);
 }
 
@@ -902,8 +892,8 @@ void SpotifyAPI::pause(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::play(options_t options) {
-	curlUtils.PUT("/v1/me/player/play", options, accessToken);
+void SpotifyApi::play(options_t options) {
+	curlUtils.PUT("/v1/me/player/play", options, accessToken, options["context_uri"]);
 }
 
 /**
@@ -912,7 +902,7 @@ void SpotifyAPI::play(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::skipToNext(options_t options) {
+void SpotifyApi::skipToNext(options_t options) {
 	curlUtils.POST("/v1/me/player/next", options, accessToken);
 }
 
@@ -922,7 +912,7 @@ void SpotifyAPI::skipToNext(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::skipToPrevious(options_t options) {
+void SpotifyApi::skipToPrevious(options_t options) {
 	curlUtils.POST("/v1/me/player/previous", options, accessToken);
 }
 
@@ -933,8 +923,8 @@ void SpotifyAPI::skipToPrevious(options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::toggleShuffle(bool state, options_t options) {
-	options["state"] = state;
+void SpotifyApi::toggleShuffle(bool state, options_t options) {
+	options["state"] = (state == true ? "true" : "false");
 	curlUtils.PUT("/v1/me/player/shuffle", options, accessToken);
 }
 
@@ -945,7 +935,7 @@ void SpotifyAPI::toggleShuffle(bool state, options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::setRepeat(std::string state, options_t options) {
+void SpotifyApi::setRepeat(std::string state, options_t options) {
 	options["state"] = state;
 	curlUtils.PUT("/v1/me/player/repeat", options, accessToken);
 }
@@ -957,7 +947,7 @@ void SpotifyAPI::setRepeat(std::string state, options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::setVolume(int volumePercent, options_t options) {
+void SpotifyApi::setVolume(int volumePercent, options_t options) {
 	options["volume_percent"] = volumePercent;
 	curlUtils.PUT("/v1/me/player/volume", options, accessToken);
 }
@@ -969,7 +959,7 @@ void SpotifyAPI::setVolume(int volumePercent, options_t options) {
  * @param options Options that will be sent to Spotify in the request header
  * 
  */
-void SpotifyAPI::transferUserPlayback(std::string deviceId, options_t options) {
+void SpotifyApi::transferUserPlayback(std::string deviceId, options_t options) {
 	options["device_ids"] = deviceId;
 	curlUtils.PUT("/v1/me/player", options, accessToken);
 }
@@ -983,7 +973,7 @@ void SpotifyAPI::transferUserPlayback(std::string deviceId, options_t options) {
  * @return A New string with instances of the undesired pattern are replaced with the specified string
  *
  */
-std::string SpotifyAPI::replaceAll(std::string& str, const std::string from, const std::string to) {
+std::string SpotifyApi::replaceAll(std::string& str, const std::string from, const std::string to) {
 	size_t start_pos = 0;
 	while ((start_pos = str.find(from, start_pos)) != std::string::npos) {
 		str.replace(start_pos, from.length(), to);

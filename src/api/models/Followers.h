@@ -1,8 +1,6 @@
 #ifndef FOLLOWERS_H
 #define FOLLOWERS_H
 
-#include <string>
-
 #include "../utils/json.h"
 
 /**

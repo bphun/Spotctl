@@ -1,14 +1,8 @@
 #ifndef TRACK_H
 #define TRACK_H
 
-#include <map>
-#include <vector>
-#include <string>
-
 #include "User.h"
 #include "Artist.h"
-
-#include "../utils/json.h"
 
 /**
  * Track Object

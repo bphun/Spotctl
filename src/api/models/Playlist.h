@@ -1,16 +1,8 @@
 #ifndef PLAYLIST_H
 #define PLAYLIST_H
 
-#include <map>
-#include <vector>
-#include <string>
-
 #include "Pager.h"
-#include "Followers.h"
-#include "UserPublic.h"
 #include "PlaylistTrack.h"
-
-#include "../utils/json.h"
 
 /**
  * Playlist Object

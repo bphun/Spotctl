@@ -1,12 +1,7 @@
 #ifndef CURSOR_PAGER_H
 #define CURSOR_PAGER_H
 
-#include <string>
-#include <vector>
-
 #include "Cursor.h"
-
-#include "../utils/json.h"
 
 /**
  * Cursor Pager object

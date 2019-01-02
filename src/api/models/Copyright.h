@@ -1,8 +1,6 @@
 #ifndef COPYRIGHT_H
 #define COPYRIGHT_H
 
-#include <string>
-
 #include "../utils/json.h"
 
 /**

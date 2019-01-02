@@ -1,12 +1,7 @@
 #ifndef ARTIST_H
 #define ARTIST_H
 
-#include <string>
-#include <vector>
-
 #include "Followers.h"
-
-#include "../utils/json.h"
 
 /**
  *

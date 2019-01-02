@@ -1,27 +1,17 @@
 #ifndef SPOTIFYCLI_H
 #define SPOTIFYCLI_H
 
-#include <string>
 #include <iostream>
-#include <ncurses.h>
+#include <readline/history.h>
+#include <readline/readline.h>
 
-#include "api/SpotifyAPI.h"
+#include "api/SpotifyApi.h"
 
-#include "Constants.h"
-#include "Terminal_UI/ViewManager.h"
+typedef std::map<std::string, std::string> options_t;
 
-#include "api/utils/json.h"
-#include "api/utils/sockets/Socket.h"
-
-// ViewManager viewManager;
-
-unsigned int screenWidth;
-unsigned int screenHeight;
-
-unsigned int loginWindowWidth;
-unsigned int loginWindowHeight;
-
-char email[64];
-char password[64];
+void displayHelpDialogue(bool unknownArgs);
+void enterInteractiveMode(SpotifyApi api);
+void parseArguments(SpotifyApi api, int argc, char* argv[]);
+void executeRequest(SpotifyApi api, char* request);
 
 #endif

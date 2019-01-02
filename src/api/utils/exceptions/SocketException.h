@@ -1,7 +1,7 @@
 #ifndef Socket_EXCEPTION_H
 #define Socket_EXCEPTION_H
 
-#include <exception>
+// #include <exception>
 
 /**
  * Socket Exception

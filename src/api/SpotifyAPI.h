@@ -1,36 +1,23 @@
 #ifndef SPOTIFY_API_H
 #define SPOTIFY_API_H
 
-#include <vector>
-#include <string>
 #include <fstream>
-#include <sstream>
-#include <stdio.h>
-#include <iostream>
-
-#include <curl/curl.h>
 
 #include "models/Pager.h"
-#include "models/Track.h"
 #include "models/Album.h"
 #include "models/Artist.h"
 #include "models/Device.h"
 #include "models/Playlist.h"
-#include "models/UserPublic.h"
 #include "models/SavedAlbum.h"
 #include "models/SavedTrack.h"
 #include "models/CursorPager.h"
 #include "models/PlayHistory.h"
-#include "models/PlaylistTrack.h"
 #include "models/Recommendations.h"
 #include "models/CurrentlyPlayingTrack.h"
 #include "models/CurrentlyPlayingContext.h"
 
-#include "utils/json.h"
 #include "utils/curl/CurlUtils.h"
 #include "utils/sockets/Socket.h"
-#include "utils/exceptions/CurlException.h"
-#include "utils/exceptions/SpotifyException.h"
 
 typedef std::map<std::string, std::string> options_t;
 
@@ -43,7 +30,7 @@ typedef std::map<std::string, std::string> options_t;
  * 
  */
 
-class SpotifyAPI {
+class SpotifyApi {
 
 private:
 
@@ -53,16 +40,17 @@ private:
 	std::string spotifyClientSecret;
 	std::string authorizationCode;
 
+	bool isUserAuthenticated;
+
 	#ifdef LOCALTEST
 	std::string backendURL = "https://localhost:3000";
 	#else 
-	std::string backendURL = "http://13.57.247.79:8080";
+	std::string backendURL = "https://13.57.247.79";
 	#endif
 
 	CurlUtils curlUtils;
 
 	void requestAccessToken();
-	void requestRefreshToken();
 	void requestClientConfigStrings();
 	void requestSecrets(std::string clientId);		
 
@@ -74,8 +62,12 @@ private:
 
 public:
 
-	SpotifyAPI();
-	SpotifyAPI(std::string cliendID, std::string clientSecret);
+	SpotifyApi();
+
+	bool userAuthenticated();
+
+	void logout();
+	void authenticateUser(std::string accessToken);
 
 	/* Album */
 

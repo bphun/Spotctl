@@ -35,46 +35,17 @@ Socket::Socket(std::string hostIP, std::string connectionPortNumber): listener(s
 	bindEvents();
 }
 
-
-// Socket::~Socket() {
-// 	if (!sock.opened()) { return; }
-
-// 	_lock.lock();
-// 	if (socketBusy) {
-// 		_cond.wait(_lock);
-// 	}
-// 	_lock.unlock();
-
-//     currentSocket->close();
-// 	currentSocket->off_all();
-// 	currentSocket->off_error();
-
-// 	sock.sync_close();
-//     sock.clear_con_listeners();
-// }
-
 /**
  * Binds socket events that are written within the method body
  */
 void Socket::bindEvents() {
 	currentSocket->on("ServerResponse", sio::socket::event_listener_aux([&](std::string const& name, sio::message::ptr const& data, bool isAck, sio::message::list &ack_resp) {
 		_lock.lock();
-		// std::cout << data->get_map()["uuid"]->get_string() << std::endl;
 		serverResponseMessage = data->get_map()["uuid"]->get_string();
 		dataAvailable = true;
 		_cond.notify_all();
 		_lock.unlock();
-
-		// currentSocket->off("ServerResponse");
 	})); 
-
-	// currentSocket->on("serverDone", sio::socket::event_listener_aux([&](std::string const& name, sio::message::ptr const& data, bool isAck, sio::message::list &ack_resp) {
-	// 	_lock.lock();
-	// 	// socketBusy = false;	//	This method is not desirable but it works for now
-	// 	_cond.notify_all();
-	// 	_lock.unlock();
-	// 	// currentSocket->off("serverDone");
-	// })); 
 }
 
 /**
@@ -111,18 +82,3 @@ std::string Socket::getReceivedData() {
 	
 	return serverResponseMessage;
 }
-
-// void Socket::closeSocketConnection() {
-// 	_lock.lock();
-// 	if (socketBusy) {
-// 		_cond.wait(_lock);
-// 	}
-// 	_lock.unlock();
-
-//     currentSocket->close();
-// 	currentSocket->off_all();
-// 	currentSocket->off_error();
-
-// 	sock.sync_close();
-//     sock.clear_con_listeners();
-// }

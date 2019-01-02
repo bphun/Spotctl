@@ -6,7 +6,9 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 set(Spotify_Client_VERSION_MAJOR 0)
 set(Spotify_Client_VERSION_MINOR 1)
 
-add_compile_options(-Wall -std=c++11 -Wno-logical-op-parentheses -Wno-expansion-to-defined)
+add_compile_options(-Wall -std=c++11 -Wno-logical-op-parentheses -Wno-expansion-to-defined -Wno-unused-command-line-argument)
+SET(GCC_COVERAGE_LINK_FLAGS "-lreadline")
+add_definitions(${GCC_COVERAGE_LINK_FLAGS})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 

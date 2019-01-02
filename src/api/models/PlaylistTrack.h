@@ -1,12 +1,7 @@
 #ifndef PLAYLIST_TRACK_H
 #define PLAYLIST_TRACK_H
 
-#include <string>
-
-#include "User.h"
 #include "Track.h"
-
-#include "../utils/json.h"
 
 /**
  * Playlist Track Object
