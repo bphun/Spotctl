@@ -102,7 +102,7 @@ nlohmann::json CurlUtils::runRequest(std::string request, std::string endpoint, 
 		// printf("%s\n", body.c_str());
 		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, body.c_str());
 	}
-
+	
 	int responseCode = curl_easy_perform(curl);
 	if (responseCode != CURLE_OK) {
 		throw CurlException(responseCode);

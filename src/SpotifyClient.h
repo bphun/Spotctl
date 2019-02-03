@@ -9,6 +9,7 @@
 
 typedef std::map<std::string, std::string> options_t;
 
+void authenticateUser(SpotifyApi api);
 void displayHelpDialogue(bool unknownArgs);
 void enterInteractiveMode(SpotifyApi api);
 void parseArguments(SpotifyApi api, int argc, char* argv[]);

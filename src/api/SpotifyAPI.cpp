@@ -72,7 +72,8 @@ void SpotifyApi::requestClientConfigStrings() {
 	if (clientId != "") {
 		requestSecrets(clientId);
 	} else {
-		Socket* socket = new Socket("http://13.57.247.79", "7080");
+		Socket* socket = new Socket(backendURL, "7080");
+
 		std::string request = "id_request";
 		socket->emit("ClientHello", request);
 
@@ -91,9 +92,16 @@ void SpotifyApi::requestClientConfigStrings() {
  * @param clientId The client's unique identifier used to request for the spotify ID and secret
  */
 void SpotifyApi::requestSecrets(std::string clientId) {
+
 	nlohmann::json clientConfigStrings = curlUtils.POST("/api/auth", backendURL, clientId);
-	this->spotifyClientID = clientConfigStrings["client_id"];
-	this->spotifyClientSecret = clientConfigStrings["client_secret"];
+
+	if (clientConfigStrings["error"] == "") {
+		this->spotifyClientID = clientConfigStrings["client_id"];
+		this->spotifyClientSecret = clientConfigStrings["client_secret"];
+		return;
+	}
+	printf("%s\n", clientConfigStrings["error"].get<std::string>().c_str());
+	exit(1);
 }
 
 /**

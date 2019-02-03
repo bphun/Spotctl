@@ -7,15 +7,8 @@ int main(int argc, char* argv[]) {
 		SpotifyApi api;
 
 		if (!api.userAuthenticated()) {
-			std::string authorizationCode = "";
-			printf("You have not yet authorized this application to access your spotify account.\nPlease visit this link (https://goo.gl/SGcGGJ) and copy/paste the text seen in the browser once you've been redirected below\n");
-			std::cin >> authorizationCode;
-			while (authorizationCode == "") {
-				printf("You did not enter an authorization code\n");
-				std::cin >> authorizationCode;
-			}
-			
-			api.authenticateUser(authorizationCode);
+			printf("You have not yet authorized this application to access your spotify account.\n");
+			authenticateUser(api);
 		}
 
 		if (strcmp(argv[0], "-i") == 0 || strcmp(argv[0], "--interactive") == 0) {
@@ -30,8 +23,16 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-void executeRequest(SpotifyApi api, char* request) {
+void authenticateUser(SpotifyApi api) {
+	std::string authorizationCode = "";
+	printf("Please visit this link (https://bit.ly/2AvyAeq) and copy/paste the text seen in the browser once you've been redirected below\n");
+	std::cin >> authorizationCode;
+	while (authorizationCode == "") {
+		printf("You did not enter an authorization code\n");
+		std::cin >> authorizationCode;
+	}
 
+	api.authenticateUser(authorizationCode);
 }
 
 void enterInteractiveMode(SpotifyApi api) {
@@ -53,8 +54,6 @@ void parseArguments(SpotifyApi api, int argc, char* argv[]) {
 		if (argc == 3) {
 			options_t options;
 			options["context_uri"] = argv[2];
-			// options["device_id"] = "28ad263e8724de47a81f419d1fd66039633191fd";
-			// printf("%s\n", options["context_uri"].c_str());
 			api.play(options);
 		} else {
 			api.play();
@@ -91,6 +90,8 @@ void parseArguments(SpotifyApi api, int argc, char* argv[]) {
 	} else if (strcmp(argv[1], "--status") == 0) {
 		CurrentlyPlayingContext status = api.fetchUserCurrentPlayback();
 		printf("%s\n", status.getAlbum().getName().c_str());
+	} else if (strcmp(argv[1], "--authenticate") == 0) {
+		authenticateUser(api);
 	} else {
 		displayHelpDialogue(true);
 	}
@@ -107,13 +108,10 @@ void displayHelpDialogue(bool unknownArgs) {
 	printf("-r, --rewind\t\tRewinds to the previous song in the play queue\n\t");
 	printf("-m, --mix \t\tSets shuffle to the specified mode (1: on, 0: off)\n\t");
 	printf("-l, --loop\t\tSets repeat to the specified mode (track, context, off)\n\t");
-	printf("-i, --interactive       Enter an interactive mode with enhanced graphics\n\t");
+	// printf("-i, --interactive       Enter an interactive mode with enhanced graphics\n\t");
 	printf("--logout\t\tLogout\n\t");
+	printf("--authenticate\t\tSign in to your spotify account\n\t");
 	// printf("--status\t\tView current status of your listening session\n\t");
 	printf("-h, --help\t\tDisplays the help dialogue\n");
 }
-
-// void loadRequestMappings() {
-
-// }
 

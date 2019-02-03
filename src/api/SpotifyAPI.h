@@ -45,7 +45,7 @@ private:
 	#ifdef LOCALTEST
 	std::string backendURL = "https://localhost:3000";
 	#else 
-	std::string backendURL = "https://13.57.247.79";
+	std::string backendURL = "http://192.168.1.150";
 	#endif
 
 	CurlUtils curlUtils;
