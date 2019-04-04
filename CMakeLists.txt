@@ -15,7 +15,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 #	Compile Definitions
 # add_compile_definitions(CLIENT_DEBUG)
 # add_compile_definitions(DEBUG)	# Enables Socket.IO debug logging
-# add_compile_definitions(LOCALTEST)
+add_compile_definitions(LOCALTEST)
 
 #	Boost
 # find_package(Boost COMPONENTS filesystem system REQUIRED)

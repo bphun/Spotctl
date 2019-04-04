@@ -11,11 +11,8 @@ int main(int argc, char* argv[]) {
 			authenticateUser(api);
 		}
 
-		if (strcmp(argv[0], "-i") == 0 || strcmp(argv[0], "--interactive") == 0) {
-			enterInteractiveMode(api);
-			return 0;
-		}
 		parseArguments(api, argc, argv);
+
 	} else {
 		displayHelpDialogue(false);
 	}
@@ -25,28 +22,41 @@ int main(int argc, char* argv[]) {
 
 void authenticateUser(SpotifyApi api) {
 	std::string authorizationCode = "";
-	printf("Please visit this link (https://bit.ly/2AvyAeq) and copy/paste the text seen in the browser once you've been redirected below\n");
+	printf("Please visit this link (https://bit.ly/2FXCr7i) and copy/paste the text seen in the browser once you've been redirected below\n");
 	std::cin >> authorizationCode;
 	while (authorizationCode == "") {
 		printf("You did not enter an authorization code\n");
 		std::cin >> authorizationCode;
 	}
+	api.authenticateSpotifyUser(authorizationCode);
 
-	api.authenticateUser(authorizationCode);
-}
+	std::string username = "";
+	std::string password = "";
+	std::string confirmedPassword = "";
 
-void enterInteractiveMode(SpotifyApi api) {
-	while (1) {
-		char* line = readline("> ");
-		if(!line) {
-			break;
-		}
-		if(*line) { add_history(line); }
+	printf("Please login to your Spotify client account. If you do not have an account, press your escape key.\n");
 
-		executeRequest(api, line);
+	while (username.empty() && password.empty()) {
+		printf("Username: ");
+		std::cin >> username;
 
-		free(line);
+		printf("Password: ");
+		std::cin >> password;
+
+		printf("Confirm Password: ");
+		std::cin >> confirmedPassword;
 	}
+
+	while (confirmedPassword != password) {
+		printf("The two passwords you entered do not match.\n");
+		printf("Password: ");
+		std::cin >> password;
+
+		printf("Confirm Password: ");
+		std::cin >> confirmedPassword;
+	}
+
+	api.createClientUser(username, password);
 }
 
 void parseArguments(SpotifyApi api, int argc, char* argv[]) {
@@ -108,7 +118,6 @@ void displayHelpDialogue(bool unknownArgs) {
 	printf("-r, --rewind\t\tRewinds to the previous song in the play queue\n\t");
 	printf("-m, --mix \t\tSets shuffle to the specified mode (1: on, 0: off)\n\t");
 	printf("-l, --loop\t\tSets repeat to the specified mode (track, context, off)\n\t");
-	// printf("-i, --interactive       Enter an interactive mode with enhanced graphics\n\t");
 	printf("--logout\t\tLogout\n\t");
 	printf("--authenticate\t\tSign in to your spotify account\n\t");
 	// printf("--status\t\tView current status of your listening session\n\t");

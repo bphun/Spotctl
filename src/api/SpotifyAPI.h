@@ -39,11 +39,12 @@ private:
 	std::string refreshToken;
 	std::string spotifyClientSecret;
 	std::string authorizationCode;
-
+	std::string clientAuthenticationCode;
+	
 	bool isUserAuthenticated;
 
 	#ifdef LOCALTEST
-	std::string backendURL = "https://localhost:3000";
+	std::string backendURL = "http://localhost";
 	#else 
 	std::string backendURL = "http://192.168.1.150";
 	#endif
@@ -67,7 +68,10 @@ public:
 	bool userAuthenticated();
 
 	void logout();
-	void authenticateUser(std::string accessToken);
+	void authenticateSpotifyUser(std::string accessToken);
+
+	bool createClientUser(std::string username, std::string password);
+	bool authenticateClientUser(std::string username, std::string password);
 
 	/* Album */
 

@@ -7,8 +7,8 @@
 SpotifyApi::SpotifyApi() {				
 	// curl_global_init(CURL_GLOBAL_ALL);
 
-	requestClientConfigStrings();
-
+	this->spotifyClientSecret = readFileAt("src/api/vars/spotifyClientSecret.txt");
+	this->spotifyClientID = readFileAt("src/api/vars/spotifyClientId.txt");
 	this->refreshToken = readFileAt("src/api/vars/refreshToken.txt");
 
 	if (refreshToken != "") {
@@ -17,19 +17,17 @@ SpotifyApi::SpotifyApi() {
 	} else {
 		isUserAuthenticated = false;
 	}
-
-	// std::string postData = "user=" + fetchUser().getid();
-	// curlUtils.POST("/api/logging", backendURL, postData);
 } 
 
 /**
  * Authenticates a user using the provided authorization code by executing a POST request to the /api/token endpoint of spotify's account service
  * @param authorizationCode string given to user by opening the accounts endpoint
  */
-void SpotifyApi::authenticateUser(std::string authorizationCode) {
+void SpotifyApi::authenticateSpotifyUser(std::string authorizationCode) {
 	nlohmann::json data = curlUtils.POST("/api/token/", "https://accounts.spotify.com", "client_id=" + spotifyClientID + 
 	                                     "&client_secret=" + spotifyClientSecret + "&code=" + authorizationCode + 
-	                                     "&grant_type=authorization_code" + "&redirect_uri=" + "https://13.57.247.79/api/spotifycallback");
+	                                     "&grant_type=authorization_code" + "&redirect_uri=" + "https://bphun.github.io/callback/index.html");
+	
 	this->accessToken = data["access_token"];
 	this->refreshToken = data["refresh_token"];
 
@@ -37,10 +35,48 @@ void SpotifyApi::authenticateUser(std::string authorizationCode) {
 }
 
 /**
+ * Creates a new Spotify Client user with the specified username and password
+ * 
+ * @param username Username of the user that will be created
+ * @param password Password of the user that will be created
+ * 
+ * @return boolean. True if the accounted was created successfully, false if account creation failed.
+ */
+bool SpotifyApi::createClientUser(std::string username, std::string password) {
+	std::string body = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
+
+	curlUtils.addHeader("Content-Type", "application/json");
+	nlohmann::json responseBody = curlUtils.POST("/signup", backendURL, body);
+
+	return responseBody["error"] == "";
+}
+
+/**
+ * Authenticate an existing Spotify Client user with the specified username and password
+ * 
+ * @param username Username of the user that is being authenticated
+ * @param password Password of the user that is being authenticated
+ * 
+ * @return boolean. True if authentication was successfull, false if authentication failed.
+ */
+bool SpotifyApi::authenticateClientUser(std::string username, std::string password) {
+	std::string body = "{\"username\":\"" + username + "\",\"password\":\"" + password + "\"}";
+
+	curlUtils.addHeader("Content-Type", "application/json");
+	nlohmann::json responseBody = curlUtils.POST("/authentication", backendURL, body);
+
+	clientAuthenticationCode = responseBody["authentication"];
+
+	return responseBody["error"] == "";
+}
+
+/**
  * Logouts the current user by clearing the user's refresh token
  */
 void SpotifyApi::logout() {
 	writeStringToFile("", "src/api/vars/refreshToken.txt");
+	// writeStringToFile("", "src/api/vars/spotifyClientId.txt");
+	// writeStringToFile("", "src/api/vars/refreshToken.txt");
 }
 
 /**
@@ -59,49 +95,6 @@ void SpotifyApi::requestAccessToken() {
 	"&client_id=" + spotifyClientID + 
 	"&client_secret=" + spotifyClientSecret;
 	this->accessToken = curlUtils.POST("/api/token", "https://accounts.spotify.com", postData)["access_token"];
-}
-
-/**
- * Fetch the Spotify client secrete and ID from a remote server. The request
- * will be made if the client sends a known UUID string. If the client does not have one
- * then it will request for a UUID before requesting for the client ID and secrete again.
- */
-void SpotifyApi::requestClientConfigStrings() {
-	std::string clientId = readFileAt("src/api/vars/clientId.txt");
-
-	if (clientId != "") {
-		requestSecrets(clientId);
-	} else {
-		Socket* socket = new Socket(backendURL, "7080");
-
-		std::string request = "id_request";
-		socket->emit("ClientHello", request);
-
-		clientId = "clientID=" + socket->getReceivedData();
-		std::string response = "received_key";
-
-		socket->emit("ClientResponsePlaintext", response);
-
-		writeStringToFile(clientId, "src/api/vars/clientId.txt");
-		requestSecrets(clientId);
-	}
-}
-
-/**
- * Request for the Spotify client ID and client secret from the key server using the client's unique identifier
- * @param clientId The client's unique identifier used to request for the spotify ID and secret
- */
-void SpotifyApi::requestSecrets(std::string clientId) {
-
-	nlohmann::json clientConfigStrings = curlUtils.POST("/api/auth", backendURL, clientId);
-
-	if (clientConfigStrings["error"] == "") {
-		this->spotifyClientID = clientConfigStrings["client_id"];
-		this->spotifyClientSecret = clientConfigStrings["client_secret"];
-		return;
-	}
-	printf("%s\n", clientConfigStrings["error"].get<std::string>().c_str());
-	exit(1);
 }
 
 /**

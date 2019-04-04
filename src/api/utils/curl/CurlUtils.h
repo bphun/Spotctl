@@ -25,13 +25,21 @@ private:
 	const char* caCertPath = "cert/selfCA.key";
 	#endif
 
+	CURL* curl;
+
+	struct curl_slist* headers = NULL;
+
 	void addKeyServerConfig(CURL* curl);
 
 	bool isKeyServerRequest = false;
 
 public:
 
+	CurlUtils();
+
 	static size_t writeCallback(void *contents, size_t size, size_t nmemb, void *userp);
+
+	void addHeader(std::string headerName, std::string headerValue);
 
 	nlohmann::json runRequest(std::string request, std::string endpoint, std::map<std::string, std::string> options = std::map<std::string, std::string>(), std::string authorizationToken = "", std::string body = "", std::string baseURL = "https://api.spotify.com");
 

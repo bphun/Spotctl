@@ -129,12 +129,15 @@ private:
 			case 511:
 				message = "The client needs to authenticate to gain network access.";
 				break;
+			default:
+				message = "Unknown error: " + std::to_string(statusCode);
+				break;
 		}
 
-		if (!errorMessageBuffer.empty()) {
-			nlohmann::json errorJson = nlohmann::json::parse(errorMessageBuffer);
-			message += errorJson["error"]["message"].dump();
-		}
+		// if (!errorMessageBuffer.empty()) {
+		// 	nlohmann::json errorJson = nlohmann::json::parse(errorMessageBuffer);
+		// 	message += errorJson["error"]["message"].dump();
+		// }
 	}
 
 public:
