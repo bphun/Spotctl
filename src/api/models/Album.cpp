@@ -68,7 +68,7 @@ std::vector<Artist> Album::getArtists() {
 }
 
 /**
- * @return Pager object wiht tracks included in the album
+ * @return Pager object with tracks included in the album
  */
 Pager<Track> Album::getTracks() {
 	return this->tracks;
