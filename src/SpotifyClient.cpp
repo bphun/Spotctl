@@ -13,6 +13,8 @@ int main(int argc, char* argv[]) {
 
 		parseArguments(api, argc, argv);
 
+		// runCommand();
+
 	} else {
 		displayHelpDialogue(false);
 	}
@@ -60,7 +62,7 @@ void authenticateUser(SpotifyApi api) {
 }
 
 void parseArguments(SpotifyApi api, int argc, char* argv[]) {
-	if (strcmp(argv[1], "-p") == 0 || strcmp(argv[1], "--play") == 0) {
+	if (strcmp(argv[1], "play") == 0) {
 		if (argc == 3) {
 			options_t options;
 			options["context_uri"] = argv[2];
@@ -68,39 +70,45 @@ void parseArguments(SpotifyApi api, int argc, char* argv[]) {
 		} else {
 			api.play();
 		}
-	} else if (strcmp(argv[1], "-s") == 0 || strcmp(argv[1], "--stop") == 0) {
+	} else if (strcmp(argv[1], "pause") == 0) {
 		api.pause();
-	} else if (strcmp(argv[1], "-n") == 0 || strcmp(argv[1], "--next") == 0) {
+	} else if (strcmp(argv[1], "next") == 0) {
 		api.skipToNext();
-	} else if (strcmp(argv[1], "-r") == 0 || strcmp(argv[1], "--rewind") == 0) {
+	} else if (strcmp(argv[1], "previous") == 0) {
 		api.skipToPrevious();
-	} else if (strcmp(argv[1], "-m") == 0 || strcmp(argv[1], "--mix") == 0) {
+	} else if (strcmp(argv[1], "shuffle") == 0) {
 		if (argc == 3) {
-			switch (atoi(argv[2])) {
-				case 0:
-				api.toggleShuffle(false);
-				break;
-				case 1:
-				api.toggleShuffle(true);
-				break;
-			}
+			api.toggleShuffle(atoi(argv[2]));
 		} else {
 			displayHelpDialogue(true);
 		}
-	} else if (strcmp(argv[1], "-l") == 0 || strcmp(argv[1], "--loop") == 0) {
+	} else if (strcmp(argv[1], "repeat") == 0) {
 		if (argc == 3) {
 			api.setRepeat(std::string(argv[2]));
 		} else {
 			displayHelpDialogue(true);
 		}
-	} else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0) {
+	} else if (strcmp(argv[1], "view") == 0) {
+		std::cout << argc << std::endl;
+		if (argc == 4) {
+
+			Pager<Album> albums = api.searchAlbums(argv[3]);
+			for (Album a : albums.getItems()) {
+				printf("%s %s\n", a.getArtists()[0].getName().c_str(), a.getName().c_str());
+				// std::cout << a.getArtists()[0] << " " << a.getName() << std::endl;
+				// std::cout << a.getArtists()[0] << " " << a.getName() << std::endl;
+			}
+		} else {
+			displayHelpDialogue(true);
+		}
+	} else if (strcmp(argv[1], "help") == 0) {
 		displayHelpDialogue(false);
-	} else if (strcmp(argv[1], "--logout") == 0) {
+	} else if (strcmp(argv[1], "logout") == 0) {
 		api.logout();
-	} else if (strcmp(argv[1], "--status") == 0) {
+	} else if (strcmp(argv[1], "status") == 0) {
 		CurrentlyPlayingContext status = api.fetchUserCurrentPlayback();
 		printf("%s\n", status.getAlbum().getName().c_str());
-	} else if (strcmp(argv[1], "--authenticate") == 0) {
+	} else if (strcmp(argv[1], "login") == 0) {
 		authenticateUser(api);
 	} else {
 		displayHelpDialogue(true);
@@ -112,15 +120,16 @@ void displayHelpDialogue(bool unknownArgs) {
 		printf("Unknown arguments were provided\n");
 	}
 	printf("Usage: spotifyClient <arg-name> [options]\n\t");
-	printf("-p, --play\t\tContinues playback of the current playing song\n\t"/* or begins playing a desired specified album, artist, or playlist\n\t"*/);
-	printf("-s, --stop\t\tPauses the current playing track\n\t");
-	printf("-n, --next\t\tSkips to the next song in the play queue\n\t");
-	printf("-r, --rewind\t\tRewinds to the previous song in the play queue\n\t");
-	printf("-m, --mix \t\tSets shuffle to the specified mode (1: on, 0: off)\n\t");
-	printf("-l, --loop\t\tSets repeat to the specified mode (track, context, off)\n\t");
-	printf("--logout\t\tLogout\n\t");
-	printf("--authenticate\t\tSign in to your spotify account\n\t");
+	printf("play\t\tContinues playback of the current playing song\n\t"/* or begins playing a desired specified album, artist, or playlist\n\t"*/);
+	printf("pause\t\tPauses the current playing track\n\t");
+	printf("next\t\tSkips to the next song in the play queue\n\t");
+	printf("previous\tRewinds to the previous song in the play queue\n\t");
+	printf("shuffle \tSets shuffle to the specified mode (1: on, 0: off)\n\t");
+	printf("view\t\t[item] View a playlist, song, artist, or album\n\t");
+	printf("login\t\tSign in to your spotify account\n\t");
+	printf("loop\t\tSets repeat to the specified mode (track, context, off)\n\t");
+	printf("logout\t\tLogout of your spotify account\n\t");
 	// printf("--status\t\tView current status of your listening session\n\t");
-	printf("-h, --help\t\tDisplays the help dialogue\n");
+	printf("help\t\tDisplays the help dialogue\n");
 }
 
