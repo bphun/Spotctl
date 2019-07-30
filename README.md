@@ -1,6 +1,7 @@
-# Terminal Based Spotify Client
+# Spotify-Connect-CLI
 
-This is a basic Spotify client that runs in a terminal.
+Terminal interface for the Spotify Connect API
+
 ___
 
 ###### API documentation is [here](https://bphun.github.io/spotify_client_documentation/index.html)
