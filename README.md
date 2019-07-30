@@ -1,4 +1,4 @@
-# Spotify-Connect-CLI
+# Spotify Connect CLI
 
 Terminal interface for the Spotify Connect API
 
